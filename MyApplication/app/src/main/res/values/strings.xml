@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="action_settings">Settings</string>
-    <string name="todo">TODO</string>
+    <string name="todo" translatable="false">TODO</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="csd_foundation">CSD Foundation</string>
+    <string name="tag_line">Children Skills Development Foundation</string>
+
 </resources>

@@ -13,18 +13,36 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="111dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/textTitle"
         app:srcCompat="@mipmap/ic_launcher_round"
-        tools:layout_editor_absoluteX="90dp" />
+        tools:layout_editor_absoluteX="90dp"
+        android:contentDescription="@string/todo" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="196dp"
-        android:layout_height="32dp"
+        android:id="@+id/textTitle"
+        android:layout_width="343dp"
+        android:layout_height="51dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="193dp"
-        android:text="TextViewlklklklk"
+        android:layout_marginStart="-88dp"
+        android:layout_marginBottom="212dp"
+        android:text="@string/csd_foundation"
+        android:textColor="@color/colorFont"
         tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="310dp" />
+        tools:layout_editor_absoluteY="310dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textTagLine"
+        android:layout_width="343dp"
+        android:layout_height="51dp"
+        android:layout_alignStart="@+id/textTitle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="140dp"
+        android:text="@string/tag_line"
+        android:textColor="@color/colorFont"
+        android:gravity="center"/>
+
 </RelativeLayout>
