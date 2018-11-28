@@ -25,7 +25,8 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="6dp"
         android:ems="10"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textLoginforFranchise"

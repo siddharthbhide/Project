@@ -8,6 +8,7 @@
     <string name="tag_line">Children Skills Development Foundation</string>
     <string name="franchise_name">User Name:</string>
     <string name="login_for_franchise">Login for Franchise</string>
-    <string name="franchise_Password">Password :</string>>
+    <string name="franchise_Password">Password :</string>
+    <string name="LogIn">Send</string>>
 
 </resources>
