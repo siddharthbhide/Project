@@ -9,6 +9,9 @@
     <string name="franchise_name">User Name:</string>
     <string name="login_for_franchise">Login for Franchise</string>
     <string name="franchise_Password">Password :</string>
-    <string name="LogIn">Send</string>>
+    <string name="homework">Home Work</string>
+    <string name="LogIn">Send</string>
+    <string name="competitionexam">Competition Exam</string>
+    <string name="regularexam">Regular Exam</string>
 
 </resources>

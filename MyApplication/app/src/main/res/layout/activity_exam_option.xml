@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ExamOptionActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btnHomeWork"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="255dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="@dimen/examoption_activity_start_margin"
+        android:layout_marginBottom="330dp"
+        android:background="@color/colorFont"
+        android:text="@string/homework"
+        android:textColor="#FFF"
+        android:onClick="OnClickHomeWork"/>
+
+    <Button
+        android:id="@+id/btnCompetitionExam"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="255dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="@dimen/examoption_activity_start_margin"
+        android:layout_marginBottom="227dp"
+        android:background="@color/colorFont"
+        android:text="@string/competitionexam"
+        android:textColor="#FFF"
+        android:onClick="OnClickCompetitionExam"/>
+
+    <Button
+        android:id="@+id/btnRegularExam"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="255dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="@dimen/examoption_activity_start_margin"
+        android:layout_marginBottom="130dp"
+        android:background="@color/colorFont"
+        android:text="@string/regularexam"
+        android:textColor="#FFF"
+        android:onClick="OnClickRegularExam"/>
+</RelativeLayout>

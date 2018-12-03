@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ExamOptionActivity"></activity>
+        <activity android:name=".ExamOptionActivity" />
+        <activity android:name=".ExamActivity"></activity>
     </application>
 
 </manifest>

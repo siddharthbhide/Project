@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="exam_activity_start_margin">19dp</dimen>
+    <dimen name="examoption_activity_start_margin">30dp</dimen>
 </resources>
