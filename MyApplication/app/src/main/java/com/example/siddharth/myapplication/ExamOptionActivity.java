@@ -25,5 +25,7 @@ public class ExamOptionActivity extends AppCompatActivity {
 
     public void OnClickHomeWork(View view)
     {
+        Intent objRegistrationFormActivity = new Intent(ExamOptionActivity.this,RegistrationFormActivity.class);
+        startActivity(objRegistrationFormActivity);
     }
 }
