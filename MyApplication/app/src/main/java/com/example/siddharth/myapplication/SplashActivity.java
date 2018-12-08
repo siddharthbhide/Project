@@ -1,12 +1,18 @@
 package com.example.siddharth.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity
+{
 
+    Intent objIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,12 +21,38 @@ public class SplashActivity extends AppCompatActivity {
 
 
             @Override
-            public void run() {
+            public void run()
+            {
                 // This method will be executed once the timer is over
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(i);
+                if(isNetworkAvailable())
+                {
+                    objIntent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(objIntent);
+
+                }
+                else
+                {
+                    objIntent = new Intent(SplashActivity.this, InterNetNotConnetedActivity.class);
+                    startActivity(objIntent);
+                }
                 finish();
             }
         }, 5000);
+    }
+
+    private boolean isNetworkAvailable()
+    {
+        boolean bRet = false;
+        try
+        {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            bRet = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        catch (Exception e)
+        {
+            Log.v("connectivity", e.toString());
+        }
+        return bRet;
     }
 }
