@@ -8,9 +8,14 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="298dp"
-        android:layout_height="98dp"
+        android:layout_width="247dp"
+        android:layout_height="32dp"
         android:text="Internet Disconnected."
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="83dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="45dp" />
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/nointernetconnection"/>
 </android.support.constraint.ConstraintLayout>
