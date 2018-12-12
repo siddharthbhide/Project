@@ -12,18 +12,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-public class RegistrationFormActivity extends AppCompatActivity
+import java.util.ArrayList;
+import java.util.List;
+
+public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    List<String> listOfFranchiseName = new ArrayList<String>();
+    private Spinner objSpinnerFranchiseName;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration_form);
+        setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +49,19 @@ public class RegistrationFormActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        InitSpinner();
+    }
+
+    private void InitSpinner()
+    {
+        Spinner spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
+        listOfFranchiseName.add("CSDFOUNDATION");
+        listOfFranchiseName.add("Shreyas Abacus Academy");
+        listOfFranchiseName.add("Desai Abacus Academy");
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfFranchiseName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOfFranchiseNameView.setAdapter(adapter);
+
     }
 
     @Override
@@ -55,7 +77,7 @@ public class RegistrationFormActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.registration_form, menu);
+        getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
 

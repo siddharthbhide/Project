@@ -3,6 +3,7 @@
     package="com.example.siddharth.myapplication">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +17,9 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </activity>
@@ -27,7 +30,11 @@
             android:name=".RegistrationFormActivity"
             android:label="@string/title_activity_registration_form"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".InterNetNotConnetedActivity"></activity>
+        <activity android:name=".InterNetNotConnetedActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

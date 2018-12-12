@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity
                 // This method will be executed once the timer is over
                 if(isNetworkAvailable())
                 {
-                    objIntent = new Intent(SplashActivity.this, MainActivity.class);
+                    objIntent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(objIntent);
 
                 }
@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity
                 }
                 finish();
             }
-        }, 5000);
+        }, 500);
     }
 
     private boolean isNetworkAvailable()

@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">CSD Foundation</string>
     <string name="action_settings">Settings</string>
     <string name="todo" translatable="false">TODO</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="csd_foundation">CSD Foundation</string>
     <string name="tag_line">Children Skills Development Foundation</string>
-    <string name="franchise_name">User Name:</string>
+    <string name="franchise_name">Franchise Name:</string>
     <string name="login_for_franchise">Login for Franchise</string>
     <string name="franchise_Password">Password :</string>
     <string name="homework">Home Work</string>
@@ -19,5 +19,6 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>
