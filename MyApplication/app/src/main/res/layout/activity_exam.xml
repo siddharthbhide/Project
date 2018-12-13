@@ -24,7 +24,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:text="TextView"
-        tools:text="@tools:sample/date/hhmm" />
+        tools:text="@tools:sample/date/hhmm"
+        android:textSize="@dimen/font_size"
+        android:textColor="@color/colorFont"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -114,7 +116,8 @@
         android:layout_marginEnd="-108dp"
         android:layout_marginBottom="16dp"
         android:layout_toStartOf="@+id/imageView2"
-        android:text="Save" />
+        android:text="Save"
+        android:onClick="OnClickSave"/>
 
     <Button
         android:id="@+id/btnNext"

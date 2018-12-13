@@ -1,5 +1,6 @@
 package com.example.siddharth.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity
 
     List<String> listOfFranchiseName = new ArrayList<String>();
     private Spinner objSpinnerFranchiseName;
+    Intent objIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         InitSpinner();
+        this.setTitle(R.string.login_for_franchise);
     }
 
     private void InitSpinner()
@@ -102,22 +105,51 @@ public class LoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_camera)
+        {
+           /* objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        }
+        else if (id == R.id.nav_gallery)
+        {
+            objIntent = new Intent(this,AboutUsActivity.class);
+            startActivity(objIntent);
+        }
+        else if (id == R.id.nav_slideshow)
+        {
+            /*objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        }
+        else if (id == R.id.nav_manage)
+        {
+            /*objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        }
+        else if (id == R.id.nav_share)
+        {
+            /*objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        }
+        else if (id == R.id.nav_send)
+        {
+           /* objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        }
+        else if (item.getTitle().equals("Contact Us"))
+        {
+            objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void OnClickSend(View v)
+    {
+        Intent objIntent = new Intent(this, ExamOptionActivity.class);
+        startActivity(objIntent);
     }
 }

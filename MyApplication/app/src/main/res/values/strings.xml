@@ -20,5 +20,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_contact_us">Contact Us</string>
+    <string name="title_activity_about_us">About Us</string>
+
+
 
 </resources>
