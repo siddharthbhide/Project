@@ -22,7 +22,12 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_contact_us">Contact Us</string>
     <string name="title_activity_about_us">About Us</string>
-
-
-
+    <string name="go_to_website">Go To Website</string>
+    <string name="practice_paper">Practice Paper</string>
+    <string name="level_exam">Level Exam</string>
+    <string name="online_exam">Online Exam</string>
+    <string name="report_history">Report History</string>
+    <string name="rule">Rules</string>
+    <string name="result">Result</string>
+    <string name="new_notification">New Notification</string>
 </resources>

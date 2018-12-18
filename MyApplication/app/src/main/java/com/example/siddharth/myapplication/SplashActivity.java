@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity
                 }
                 finish();
             }
-        }, 500);
+        }, 5000);
     }
 
     private boolean isNetworkAvailable()

@@ -1,9 +1,11 @@
 package com.example.siddharth.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,17 +16,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.Toast.makeText;
+
 public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+{
 
     List<String> listOfFranchiseName = new ArrayList<String>();
-    private Spinner objSpinnerFranchiseName;
+    //private Spinner objSpinnerFranchiseName;
     Intent objIntent;
+    EditText edittextFranchisPassword;
+    Spinner spinnerOfFranchiseNameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,17 +63,26 @@ public class LoginActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         InitSpinner();
         this.setTitle(R.string.login_for_franchise);
+        InitVariables();
+    }
+
+    private void InitVariables()
+    {
+        edittextFranchisPassword = (EditText) findViewById(R.id.editTextPassword);
+        Spinner spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
     }
 
     private void InitSpinner()
     {
-        Spinner spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
+        spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
+        listOfFranchiseName.add("Select Item from List");
         listOfFranchiseName.add("CSDFOUNDATION");
         listOfFranchiseName.add("Shreyas Abacus Academy");
         listOfFranchiseName.add("Desai Abacus Academy");
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfFranchiseName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfFranchiseNameView.setAdapter(adapter);
+
 
     }
 
@@ -105,6 +124,12 @@ public class LoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id == R.id.nav_gotowebsite)
+        {
+
+           objIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://csdfoundation.co.in/index.php"));
+           startActivity(objIntent);
+        }
         if (id == R.id.nav_camera)
         {
            /* objIntent = new Intent(this,ContactUsActivity.class);
@@ -149,6 +174,19 @@ public class LoginActivity extends AppCompatActivity
 
     public void OnClickSend(View v)
     {
+        String strFranchiseName = spinnerOfFranchiseNameView.getSelectedItem().toString();
+        if("Select Item from List" == strFranchiseName)
+        {
+            Toast.makeText(getApplicationContext(),"Select Franchise",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(edittextFranchisPassword.getText().toString().equals(""))
+        {
+            Toast.makeText(getApplicationContext(),"Enter Correct Password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent objIntent = new Intent(this, ExamOptionActivity.class);
         startActivity(objIntent);
     }

@@ -5,6 +5,38 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_gotowebsite"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/go_to_website" />
+        <item
+            android:id="@+id/nav_practice_paper"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/practice_paper" />
+        <item
+            android:id="@+id/nav_level_exam"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/level_exam" />
+        <item
+            android:id="@+id/nav_online_exam"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/online_exam" />
+        <item
+            android:id="@+id/nav_report_history"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/report_history" />
+        <item
+            android:id="@+id/nav_rule"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/rule" />
+        <item
+            android:id="@+id/nav_result"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/result" />
+        <item
+            android:id="@+id/nav_new_notification"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/new_notification" />
+        <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
             android:title="LogIn" />
