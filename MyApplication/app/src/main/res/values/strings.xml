@@ -30,4 +30,5 @@
     <string name="rule">Rules</string>
     <string name="result">Result</string>
     <string name="new_notification">New Notification</string>
+    <string name="report">Report</string>
 </resources>

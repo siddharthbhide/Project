@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity
         }
         if (id == R.id.nav_camera)
         {
-           /* objIntent = new Intent(this,ContactUsActivity.class);
+          /* objIntent = new Intent(this,RegistrationFormActivity.class);
             startActivity(objIntent);*/
             // Handle the camera action
         }
@@ -161,11 +161,33 @@ public class LoginActivity extends AppCompatActivity
            /* objIntent = new Intent(this,ContactUsActivity.class);
             startActivity(objIntent);*/
         }
+        else if (id == R.id.nav_level_exam)
+        {
+            objIntent = new Intent(this,ExamOptionActivity.class);
+            startActivity(objIntent);
+        }
+        else if (id == R.id.nav_practice_paper)
+        {
+            objIntent = new Intent(this,ExamOptionActivity.class);
+            startActivity(objIntent);
+        }
+        else if (id == R.id.nav_report_history)
+        {
+            objIntent = new Intent(this,ReportHistoryActivity.class);
+            startActivity(objIntent);
+        }
+        if (id == R.id.nav_result)
+        {
+            objIntent = new Intent(this,RegistrationFormActivity.class);
+            startActivity(objIntent);
+            // Handle the camera action
+        }
         else if (item.getTitle().equals("Contact Us"))
         {
             objIntent = new Intent(this,ContactUsActivity.class);
             startActivity(objIntent);
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

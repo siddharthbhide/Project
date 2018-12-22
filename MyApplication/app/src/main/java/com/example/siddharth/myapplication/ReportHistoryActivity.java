@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamOptionActivity extends AppCompatActivity
+public class ReportHistoryActivity extends AppCompatActivity
 {
     List<String> listOfCourse = new ArrayList<String>();
     List<String> listOfLevel = new ArrayList<String>();
@@ -21,30 +21,9 @@ public class ExamOptionActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam_option);
+        setContentView(R.layout.activity_report_history);
+        this.setTitle(R.string.report_history);
         InitSpinner();
-    }
-
-    /*public void OnClickRegularExam(View view)
-    {
-        Intent objExample = new Intent(ExamOptionActivity.this,ExamActivity.class);
-        startActivity(objExample);
-    }
-
-    public void OnClickCompetitionExam(View view)
-    {
-    }
-
-    public void OnClickHomeWork(View view)
-    {
-        Intent objRegistrationFormActivity = new Intent(ExamOptionActivity.this,RegistrationFormActivity.class);
-        startActivity(objRegistrationFormActivity);
-    }*/
-
-    public void onClickStart(View view)
-    {
-        /*Intent objRegistrationFormActivity = new Intent(ExamOptionActivity.this,RegistrationFormActivity.class);
-        startActivity(objRegistrationFormActivity);*/
     }
     private void InitSpinner()
     {
@@ -67,5 +46,10 @@ public class ExamOptionActivity extends AppCompatActivity
         spinnerOfLevel.setAdapter(adapterLevel);
 
 
+    }
+    public void onClickDisplayReport(View view)
+    {
+        Intent objIntent = new Intent(this,ReportActivity.class);
+        startActivity(objIntent);
     }
 }

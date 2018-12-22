@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReportHistoryActivity">
+
+    <Spinner
+        android:id="@+id/spinnerCourse"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="57dp" />
+
+    <Spinner
+        android:id="@+id/spinnerLavel_Category"
+        android:layout_width="252dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="133dp" />
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="333dp"
+        android:layout_height="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="200dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="113dp"
+        android:text="Display Report"
+        android:textColor="@color/colorPrimary"
+        android:onClick="onClickDisplayReport"/>
+
+</RelativeLayout>

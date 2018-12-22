@@ -37,10 +37,6 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/new_notification" />
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="LogIn" />
-        <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="About Us" />
