@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,14 +22,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.widget.Toast.makeText;
 
 public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
-{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     List<String> listOfFranchiseName = new ArrayList<String>();
     //private Spinner objSpinnerFranchiseName;
@@ -37,8 +45,7 @@ public class LoginActivity extends AppCompatActivity
     Spinner spinnerOfFranchiseNameView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,24 +68,78 @@ public class LoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        InitSpinner();
         this.setTitle(R.string.login_for_franchise);
         InitVariables();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String objCSDNetworkList;
+                    objCSDNetworkList = getCSDNetworkList();
+                    initFranchiseNameSpinner(objCSDNetworkList);
+                } catch (Exception objException) {
+                    initFranchiseNameSpinner("");
+                }
+            }
+        }).start();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        InitSpinner();
     }
 
-    private void InitVariables()
-    {
+    private void initFranchiseNameSpinner(String objCSDNetworkList) {
+        JSONArray jsonarray = null;
+        try {
+            listOfFranchiseName.add("Select Item from List");
+            jsonarray = new JSONArray(objCSDNetworkList);
+            for (int i = 0; i < jsonarray.length(); i++) {
+                JSONObject jsonobject = jsonarray.getJSONObject(i);
+                String strTitle = jsonobject.getString("title");
+                if(strTitle != null) {
+                    listOfFranchiseName.add(strTitle);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void InitVariables() {
         edittextFranchisPassword = (EditText) findViewById(R.id.editTextPassword);
-        Spinner spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
+        //Spinner spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
     }
 
+    protected String getCSDNetworkList() {
+        try {
+            URL url = new URL(getString(R.string.network_list));
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line).append("\n");
+                }
+                bufferedReader.close();
+                return stringBuilder.toString();
+            } finally {
+                urlConnection.disconnect();
+            }
+        } catch (Exception e) {
+            Log.e("ERROR", e.getMessage(), e);
+            return null;
+        }
+    }
     private void InitSpinner()
     {
         spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
-        listOfFranchiseName.add("Select Item from List");
+        /*listOfFranchiseName.add("Select Item from List");
         listOfFranchiseName.add("CSDFOUNDATION");
         listOfFranchiseName.add("Shreyas Abacus Academy");
-        listOfFranchiseName.add("Desai Abacus Academy");
+        listOfFranchiseName.add("Desai Abacus Academy");*/
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfFranchiseName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfFranchiseNameView.setAdapter(adapter);
@@ -124,67 +185,46 @@ public class LoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_gotowebsite)
-        {
+        if (id == R.id.nav_gotowebsite) {
 
-           objIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://csdfoundation.co.in/index.php"));
-           startActivity(objIntent);
+            objIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://csdfoundation.co.in/index.php"));
+            startActivity(objIntent);
         }
-        if (id == R.id.nav_camera)
-        {
+        if (id == R.id.nav_camera) {
           /* objIntent = new Intent(this,RegistrationFormActivity.class);
             startActivity(objIntent);*/
             // Handle the camera action
-        }
-        else if (id == R.id.nav_gallery)
-        {
-            objIntent = new Intent(this,AboutUsActivity.class);
+        } else if (id == R.id.nav_gallery) {
+            objIntent = new Intent(this, AboutUsActivity.class);
             startActivity(objIntent);
-        }
-        else if (id == R.id.nav_slideshow)
-        {
+        } else if (id == R.id.nav_slideshow) {
             /*objIntent = new Intent(this,ContactUsActivity.class);
             startActivity(objIntent);*/
-        }
-        else if (id == R.id.nav_manage)
-        {
+        } else if (id == R.id.nav_manage) {
             /*objIntent = new Intent(this,ContactUsActivity.class);
             startActivity(objIntent);*/
-        }
-        else if (id == R.id.nav_share)
-        {
+        } else if (id == R.id.nav_share) {
             /*objIntent = new Intent(this,ContactUsActivity.class);
             startActivity(objIntent);*/
-        }
-        else if (id == R.id.nav_send)
-        {
+        } else if (id == R.id.nav_send) {
            /* objIntent = new Intent(this,ContactUsActivity.class);
             startActivity(objIntent);*/
-        }
-        else if (id == R.id.nav_level_exam)
-        {
-            objIntent = new Intent(this,ExamOptionActivity.class);
+        } else if (id == R.id.nav_level_exam) {
+            objIntent = new Intent(this, ExamOptionActivity.class);
+            startActivity(objIntent);
+        } else if (id == R.id.nav_practice_paper) {
+            objIntent = new Intent(this, ExamOptionActivity.class);
+            startActivity(objIntent);
+        } else if (id == R.id.nav_report_history) {
+            objIntent = new Intent(this, ReportHistoryActivity.class);
             startActivity(objIntent);
         }
-        else if (id == R.id.nav_practice_paper)
-        {
-            objIntent = new Intent(this,ExamOptionActivity.class);
-            startActivity(objIntent);
-        }
-        else if (id == R.id.nav_report_history)
-        {
-            objIntent = new Intent(this,ReportHistoryActivity.class);
-            startActivity(objIntent);
-        }
-        if (id == R.id.nav_result)
-        {
-            objIntent = new Intent(this,RegistrationFormActivity.class);
+        if (id == R.id.nav_result) {
+            objIntent = new Intent(this, RegistrationFormActivity.class);
             startActivity(objIntent);
             // Handle the camera action
-        }
-        else if (item.getTitle().equals("Contact Us"))
-        {
-            objIntent = new Intent(this,ContactUsActivity.class);
+        } else if (item.getTitle().equals("Contact Us")) {
+            objIntent = new Intent(this, ContactUsActivity.class);
             startActivity(objIntent);
         }
 
@@ -194,18 +234,15 @@ public class LoginActivity extends AppCompatActivity
         return true;
     }
 
-    public void OnClickSend(View v)
-    {
+    public void OnClickSend(View v) {
         String strFranchiseName = spinnerOfFranchiseNameView.getSelectedItem().toString();
-        if("Select Item from List" == strFranchiseName)
-        {
-            Toast.makeText(getApplicationContext(),"Select Franchise",Toast.LENGTH_SHORT).show();
+        if ("Select Item from List" == strFranchiseName) {
+            Toast.makeText(getApplicationContext(), "Select Franchise", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(edittextFranchisPassword.getText().toString().equals(""))
-        {
-            Toast.makeText(getApplicationContext(),"Enter Correct Password",Toast.LENGTH_SHORT).show();
+        if (edittextFranchisPassword.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "Enter Correct Password", Toast.LENGTH_SHORT).show();
             return;
         }
 
