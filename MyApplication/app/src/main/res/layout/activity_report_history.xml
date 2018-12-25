@@ -44,7 +44,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginBottom="113dp"
         android:text="Display Report"
-        android:textColor="@color/colorPrimary"
+        android:background="@color/colorPrimary"
         android:onClick="onClickDisplayReport"/>
 
 </RelativeLayout>

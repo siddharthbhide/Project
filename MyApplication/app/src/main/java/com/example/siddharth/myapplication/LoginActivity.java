@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         this.setTitle(R.string.login_for_franchise);
         InitVariables();
-        new Thread(new Runnable() {
+/*        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         InitSpinner();
     }
 
@@ -136,10 +136,10 @@ public class LoginActivity extends AppCompatActivity
     private void InitSpinner()
     {
         spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
-        /*listOfFranchiseName.add("Select Item from List");
+        listOfFranchiseName.add("Select Item from List");
         listOfFranchiseName.add("CSDFOUNDATION");
         listOfFranchiseName.add("Shreyas Abacus Academy");
-        listOfFranchiseName.add("Desai Abacus Academy");*/
+        listOfFranchiseName.add("Desai Abacus Academy");
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfFranchiseName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfFranchiseNameView.setAdapter(adapter);
