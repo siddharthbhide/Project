@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="5"
         android:orientation="vertical">
 
         <LinearLayout
@@ -29,8 +29,7 @@
                 android:gravity="left"
                 android:text="Student Name :"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
-
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editStudentname"
@@ -38,7 +37,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -52,13 +53,12 @@
                 android:id="@+id/textRollno"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:text="Roll No :"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
-
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editRollno"
@@ -66,7 +66,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:numeric="integer"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -80,12 +83,12 @@
                 android:id="@+id/textCourseName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:text="Course Name :"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <Spinner
                 android:id="@+id/spinnerCourseName"
@@ -93,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -107,12 +110,12 @@
                 android:id="@+id/textCourseLevel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:text="Course Level :"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <Spinner
                 android:id="@+id/spinnerCourseLevel"
@@ -120,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -134,18 +137,18 @@
                 android:id="@+id/textAdmissionDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:text="Admission Date :"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:gravity="left"
             android:orientation="horizontal">
 
@@ -153,13 +156,13 @@
                 android:id="@+id/dateAdmissionDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
                 android:layout_marginStart="@dimen/exam_activity_start_margin"
+                android:layout_weight="1"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
+                android:gravity="left"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -173,17 +176,17 @@
                 android:id="@+id/textDateOfBirth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:text="Date of Birth :"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:gravity="left"
             android:orientation="horizontal">
 
@@ -191,10 +194,10 @@
                 android:id="@+id/dateDateOfBirth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
                 android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:calendarViewShown="false"
-                android:datePickerMode="spinner"/>
+                android:datePickerMode="spinner"
+                android:gravity="left" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,12 +211,12 @@
                 android:id="@+id/textSex"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:layout_marginStart="@dimen/exam_activity_start_margin"
                 android:text="Sex :"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <Spinner
                 android:id="@+id/spinnerSex"
@@ -221,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -240,7 +243,7 @@
                 android:gravity="left"
                 android:text="Name of Father:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editFatherName"
@@ -248,7 +251,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -268,7 +272,7 @@
                 android:gravity="left"
                 android:text="Residential Address:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editResidentialAddress"
@@ -276,7 +280,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -296,7 +301,7 @@
                 android:gravity="left"
                 android:text="Occupation:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editOccupation"
@@ -304,7 +309,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -324,7 +330,7 @@
                 android:gravity="left"
                 android:text="Name of Mother:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editMotherName"
@@ -332,7 +338,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -352,7 +359,7 @@
                 android:gravity="left"
                 android:text="Mobile Number:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editMobileNumber"
@@ -360,6 +367,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
+                android:numeric="integer"
+                android:singleLine="true"
                 android:textSize="@dimen/font_size" />
 
         </LinearLayout>
@@ -380,7 +389,7 @@
                 android:gravity="left"
                 android:text="Email:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editEmail"
@@ -388,7 +397,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -408,7 +418,7 @@
                 android:gravity="left"
                 android:text="Name of School:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editSchoolName"
@@ -416,7 +426,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -436,7 +447,7 @@
                 android:gravity="left"
                 android:text="Standard:"
                 android:textColor="@color/colorFont"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <EditText
                 android:id="@+id/editStandard"
@@ -444,7 +455,67 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textSize="@dimen/font_size"/>
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textUserName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="User Name:"
+                android:textColor="@color/colorFont"
+                android:textSize="@dimen/font_size" />
+
+            <EditText
+                android:id="@+id/editUserName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/exam_activity_start_margin"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Password:"
+                android:textColor="@color/colorFont"
+                android:textSize="@dimen/font_size" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size" />
 
         </LinearLayout>
 
@@ -460,10 +531,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="Send"
                 android:background="@color/colorPrimary"
-                android:textSize="@dimen/font_size"/>
+                android:gravity="center"
+                android:onClick="OnClickSend"
+                android:text="Send"
+                android:textSize="@dimen/font_size" />
         </LinearLayout>
 
     </LinearLayout>

@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity
 
     protected String getCSDNetworkList() {
         try {
-            URL url = new URL(getString(R.string.network_list));
+            URL url = new URL(getString(R.string.url_network_list));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity
             return null;
         }
     }
+
     private void InitSpinner()
     {
         spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
@@ -235,16 +236,24 @@ public class LoginActivity extends AppCompatActivity
     }
 
     public void OnClickSend(View v) {
+        CValidation objValidation = CValidation.getInstance();
         String strFranchiseName = spinnerOfFranchiseNameView.getSelectedItem().toString();
-        if ("Select Item from List" == strFranchiseName) {
+
+        if (objValidation.isSpinnerValueSelected(strFranchiseName))
+        {
             Toast.makeText(getApplicationContext(), "Select Franchise", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (edittextFranchisPassword.getText().toString().equals("")) {
+        if (objValidation.isStringEmpty(edittextFranchisPassword.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Enter Correct Password", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        /*if (edittextFranchisPassword.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "Enter Correct Password", Toast.LENGTH_SHORT).show();
+            return;
+        }*/
 
         Intent objIntent = new Intent(this, ExamOptionActivity.class);
         startActivity(objIntent);

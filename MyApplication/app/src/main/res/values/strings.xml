@@ -31,5 +31,6 @@
     <string name="result">Result</string>
     <string name="new_notification">New Notification</string>
     <string name="report">Report</string>
-    <string name="network_list">xxx</string>
+    <string name="url_network_list">xxx</string>
+    <string name="url_save_update_student_details">xxx</string>
 </resources>
