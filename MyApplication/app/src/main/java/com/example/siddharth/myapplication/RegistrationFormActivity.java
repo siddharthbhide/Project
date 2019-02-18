@@ -1,5 +1,6 @@
 package com.example.siddharth.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,12 +20,30 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class RegistrationFormActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,7 +52,8 @@ public class RegistrationFormActivity extends AppCompatActivity
     EditText editRollno;
     EditText editFatherName;
     EditText editResidentialAddress;
-    EditText editOccupation;
+    EditText editFatherOccupation;
+    EditText editMotherOccupation;
     EditText editMotherName;
     EditText editMobileNumber;
     EditText editEmail;
@@ -46,10 +66,10 @@ public class RegistrationFormActivity extends AppCompatActivity
     Spinner spinnerSex;
     DatePicker datePickerAdmissionDate;
     DatePicker datePickerDOB;
+    Spinner spinnerOfFranchiseNameView;
     List <String> listOfSex = new ArrayList<>();
     List<String> listOfCourse = new ArrayList<>();
     List<String> listOfCourseLevel = new ArrayList<>();
-    String strPostdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +96,7 @@ public class RegistrationFormActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         objValidation = CValidation.getInstance();
         initFields();
+
     }
 
     @Override
@@ -171,9 +192,14 @@ public class RegistrationFormActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Enter Residential Address", Toast.LENGTH_SHORT).show();
             return bReturn;
         }
-        if (objValidation.isStringEmpty(editOccupation.getText().toString()))
+        if (objValidation.isStringEmpty(editFatherOccupation.getText().toString()))
         {
-            Toast.makeText(getApplicationContext(), "Enter Occupation", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Enter Father Occupation", Toast.LENGTH_SHORT).show();
+            return bReturn;
+        }
+        if (objValidation.isStringEmpty(editMotherOccupation.getText().toString()))
+        {
+            Toast.makeText(getApplicationContext(), "Enter Mother Occupation", Toast.LENGTH_SHORT).show();
             return bReturn;
         }
         if (objValidation.isStringEmpty(editMotherName.getText().toString()))
@@ -262,7 +288,8 @@ public class RegistrationFormActivity extends AppCompatActivity
         editRollno = (EditText) findViewById(R.id.editRollno);
         editFatherName = (EditText) findViewById(R.id.editFatherName);
         editResidentialAddress = (EditText) findViewById(R.id.editResidentialAddress);
-        editOccupation = (EditText) findViewById(R.id.editOccupation);
+        editFatherOccupation = (EditText) findViewById(R.id.editFatherOccupation);
+        editMotherOccupation = (EditText) findViewById(R.id.editMotherOccupation);
         editMotherName = (EditText) findViewById(R.id.editMotherName);
         editMobileNumber = (EditText) findViewById(R.id.editMobileNumber);
         editEmail = (EditText) findViewById(R.id.editEmail);
@@ -272,6 +299,7 @@ public class RegistrationFormActivity extends AppCompatActivity
         editUserPassword = (EditText) findViewById(R.id.editStandard);
         spinnerCourseName = (Spinner) findViewById(R.id.spinnerCourseName);
         spinnerCourseLevel = (Spinner) findViewById(R.id.spinnerCourseLevel);
+        spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
         spinnerSex = (Spinner) findViewById(R.id.spinnerSex);
         datePickerAdmissionDate = (DatePicker) findViewById(R.id.dateAdmissionDate);
         datePickerDOB= (DatePicker) findViewById(R.id.dateDateOfBirth);
@@ -317,103 +345,61 @@ public class RegistrationFormActivity extends AppCompatActivity
 
     private void testsendInformationToServer()
     {
-
         try {
-            long intSpinnerSex = spinnerSex.getSelectedItemId()-1;
-            strPostdata = URLEncoder.encode("sex", "UTF-8")
-                    + "=" + URLEncoder.encode("0", "UTF-8");
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            String URL = "http://csdfoundation.co.in/online_exam/admin/webservices/validateLogin.php";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("uName", "Android Volley Demo");
+            jsonBody.put("passwd", "BNK");
+            final String requestBody = jsonBody.toString();
 
-            strPostdata += "&" + URLEncoder.encode("fatherName", "UTF-8") + "="
-                    + URLEncoder.encode("Test fatherName", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("address", "UTF-8") + "="
-                    + URLEncoder.encode("Test address", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("motherName", "UTF-8") + "="
-                    + URLEncoder.encode("Test motherName", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("fatherOccupation", "UTF-8") + "="
-                    + URLEncoder.encode("Test fatherOccupation", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("motherOccupation", "UTF-8") + "="
-                    + URLEncoder.encode("Test motherOccupation", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("mobileNo", "UTF-8") + "="
-                    + URLEncoder.encode("8087614678", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("motherOccupation", "UTF-8") + "="
-                    + URLEncoder.encode("Test motherOccupation", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("school", "UTF-8") + "="
-                    + URLEncoder.encode("AB High School", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("std", "UTF-8") + "="
-                    + URLEncoder.encode("5", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("courseId", "UTF-8") + "="
-                    + URLEncoder.encode("0", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("courseLevel", "UTF-8") + "="
-                    + URLEncoder.encode("FT-L1", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("email", "UTF-8") + "="
-                    + URLEncoder.encode("smart.ios.developer@gmail.com", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("franId", "UTF-8") + "="
-                    + URLEncoder.encode("63", "UTF-8");
-
-            String strCurrentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-            strPostdata += "&" + URLEncoder.encode("dateAdded", "UTF-8") + "="
-                    + URLEncoder.encode(strCurrentDate, "UTF-8");
-
-
-            StringBuilder stringBuilderAdmissionDate = new StringBuilder();            //month is 0 based
-            stringBuilderAdmissionDate.append("06-01-2019");
-            strPostdata += "&" + URLEncoder.encode("admissionDate", "UTF-8") + "="
-                    + URLEncoder.encode(stringBuilderAdmissionDate.toString(), "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("name", "UTF-8") + "="
-                    + URLEncoder.encode("Test address", "UTF-8");
-
-            StringBuilder stringBuilderDOB = new StringBuilder();
-            stringBuilderDOB.append("07-02-2019");
-
-            strPostdata += "&" + URLEncoder.encode("dob", "UTF-8") + "="
-                    + URLEncoder.encode(stringBuilderDOB.toString(), "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("uName", "UTF-8") + "="
-                    + URLEncoder.encode("Siddharth", "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("passwd", "UTF-8") + "="
-                    + URLEncoder.encode("siddharth", "UTF-8");
-
-            new Thread(new Runnable() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
-                public void run() {
-                    try {
-                        objValidation.PostDataToWebService(getString(R.string.url_save_update_student_details),strPostdata.toString());
-                    } catch (Exception objException) {
+                public void onResponse(String response) {
+                    Log.i("VOLLEY", response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
 
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
                     }
                 }
-            }).start();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                        // can get more details such as response.headers
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
 
-
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        catch (Exception objException)
-        {
-                Log.e("ERROR", objException.getMessage(), objException);
-        }
+
     }
 
     private void sendInformationToServer()
     {
+        String strPostdata;
         try {
             long intSpinnerSex = spinnerSex.getSelectedItemId()-1;
 
@@ -430,16 +416,13 @@ public class RegistrationFormActivity extends AppCompatActivity
                     + URLEncoder.encode(editMotherName.getText().toString(), "UTF-8");
 
             strPostdata += "&" + URLEncoder.encode("fatherOccupation", "UTF-8") + "="
-                    + URLEncoder.encode(editOccupation.getText().toString(), "UTF-8");
+                    + URLEncoder.encode(editFatherOccupation.getText().toString(), "UTF-8");
 
             strPostdata += "&" + URLEncoder.encode("motherOccupation", "UTF-8") + "="
-                    + URLEncoder.encode(editOccupation.getText().toString(), "UTF-8");
+                    + URLEncoder.encode(editMotherOccupation.getText().toString(), "UTF-8");
 
             strPostdata += "&" + URLEncoder.encode("mobileNo", "UTF-8") + "="
                     + URLEncoder.encode(editMobileNumber.getText().toString(), "UTF-8");
-
-            strPostdata += "&" + URLEncoder.encode("motherOccupation", "UTF-8") + "="
-                    + URLEncoder.encode(editOccupation.getText().toString(), "UTF-8");
 
             strPostdata += "&" + URLEncoder.encode("school", "UTF-8") + "="
                     + URLEncoder.encode(editSchoolName.getText().toString(), "UTF-8");
@@ -456,8 +439,9 @@ public class RegistrationFormActivity extends AppCompatActivity
             strPostdata += "&" + URLEncoder.encode("email", "UTF-8") + "="
                     + URLEncoder.encode(editEmail.getText().toString(), "UTF-8");
 
-          /*  strPostdata += "&" + URLEncoder.encode("franId", "UTF-8") + "="
-                    + URLEncoder.encode(editOccupation.getText().toString(), "UTF-8");*/
+            String strFranId = objValidation.GetFranchiseId(spinnerOfFranchiseNameView.getSelectedItem().toString());
+            strPostdata += "&" + URLEncoder.encode("franId", "UTF-8") + "="
+                    + URLEncoder.encode(strFranId, "UTF-8");
 
             String strCurrentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
             strPostdata += "&" + URLEncoder.encode("dateAdded", "UTF-8") + "="
@@ -488,21 +472,21 @@ public class RegistrationFormActivity extends AppCompatActivity
                     + URLEncoder.encode(editUserPassword.getText().toString(), "UTF-8");
 
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        objValidation.PostDataToWebService(getString(R.string.url_save_update_student_details),strPostdata.toString());
-                    } catch (Exception objException) {
-
-                    }
-                }
-            }).start();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        objValidation.PostDataToWebService(getString(R.string.url_save_update_student_details),strPostdata.toString());
+//                    } catch (Exception objException) {
+//
+//                    }
+//                }
+//            }).start();
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
         }
         catch (Exception objException)

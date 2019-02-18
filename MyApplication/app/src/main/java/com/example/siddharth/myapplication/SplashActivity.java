@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity
                 // This method will be executed once the timer is over
                 if(isNetworkAvailable())
                 {
-                   /* objIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                   /*objIntent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(objIntent);*/
                    objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
                    startActivity(objIntent);

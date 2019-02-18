@@ -32,5 +32,5 @@
     <string name="new_notification">New Notification</string>
     <string name="report">Report</string>
     <string name="url_network_list">xxx</string>
-    <string name="url_save_update_student_details">xxx</string>
+    <string name="url_save_update_student_details">http://csdfoundation.co.in/online_exam/admin/webservices/saveStudentDetails.php</string>
 </resources>

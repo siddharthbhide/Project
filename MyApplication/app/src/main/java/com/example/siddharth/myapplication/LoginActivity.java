@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity
     Intent objIntent;
     EditText edittextFranchisPassword;
     Spinner spinnerOfFranchiseNameView;
+    CValidation objCValidation = CValidation.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,19 +88,22 @@ public class LoginActivity extends AppCompatActivity
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        InitSpinner();
+        //InitSpinner();
     }
 
     private void initFranchiseNameSpinner(String objCSDNetworkList) {
         JSONArray jsonarray = null;
+        objCValidation.objHashMapOfFranchiseName.clear();
         try {
             listOfFranchiseName.add("Select Item from List");
             jsonarray = new JSONArray(objCSDNetworkList);
             for (int i = 0; i < jsonarray.length(); i++) {
                 JSONObject jsonobject = jsonarray.getJSONObject(i);
                 String strTitle = jsonobject.getString("title");
+                String strId = jsonobject.getString("id");
                 if(strTitle != null) {
                     listOfFranchiseName.add(strTitle);
+                    objCValidation.objHashMapOfFranchiseName.put(strId,strTitle);
                 }
             }
         } catch (JSONException e) {
@@ -144,6 +148,7 @@ public class LoginActivity extends AppCompatActivity
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfFranchiseName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfFranchiseNameView.setAdapter(adapter);
+
 
 
     }
