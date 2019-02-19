@@ -202,6 +202,11 @@ class ExamQuestions
     String optionD;
     String course;
     String answer;
+    String StudentAns;
+    String StartTime;
+    String EndTime;
+    String ExamId;
+    String LastQuestion;
 
     public String getId() {
         return id;
@@ -258,4 +263,142 @@ class ExamQuestions
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    public String getStudentAns() {
+        return StudentAns;
+    }
+    public void setStudentAns(String studentAns) {
+        StudentAns = studentAns;
+    }
+
+    public String getStartTime() {
+        return StartTime;
+    }
+    public void setStartTime(String startTime) {
+        StartTime = startTime;
+    }
+
+    public String getEndTime() {
+        return EndTime;
+    }
+    public void setEndTime(String endTime) {
+        EndTime = endTime;
+    }
+
+    public String getExamId() {
+        return ExamId;
+    }
+    public void setExamId(String examId) {
+        ExamId = examId;
+    }
+
+    public String getLastQuestion() {
+        return LastQuestion;
+    }
+    public void setLastQuestion(String lastQuestion) {
+        LastQuestion = lastQuestion;
+    }
+}
+
+class ResultDetails
+{
+    String id;
+    String CourseId;
+    String CourseLevel;
+    String ExamDate;
+    String ExamScore;
+    String TotalTime;
+    String TotalQuestion;
+    String AttemptedQuestion;
+    String NoAttemptedQuestion;
+    String CorrectAnswere;
+    String WrongAnswere;
+    String TimePerQuestion;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCourseId() {
+        return CourseId;
+    }
+    public void setCourseId(String courseId) {
+        CourseId = courseId;
+    }
+
+    public String getCourseLevel() {
+        return CourseLevel;
+    }
+    public void setCourseLevel(String courseLevel) {
+        CourseLevel = courseLevel;
+    }
+
+    public String getExamDate() {
+        return ExamDate;
+    }
+    public void setExamDate(String examDate) {
+        ExamDate = examDate;
+    }
+
+
+    public String getExamScore() {
+        return ExamScore;
+    }
+    public void setExamScore(String examScore) {
+        ExamScore = examScore;
+    }
+
+    public String getTotalTime() {
+        return TotalTime;
+    }
+    public void setTotalTime(String totalTime) {
+        TotalTime = totalTime;
+    }
+
+
+    public String getTotalQuestion() {
+        return TotalQuestion;
+    }
+    public void setTotalQuestion(String totalQuestion) {
+        TotalQuestion = totalQuestion;
+    }
+
+    public String getAttemptedQuestion() {
+        return AttemptedQuestion;
+    }
+    public void setAttemptedQuestion(String attemptedQuestion) {
+        AttemptedQuestion = attemptedQuestion;
+    }
+
+    public String getNoAttemptedQuestion() {
+        return NoAttemptedQuestion;
+    }
+    public void setNoAttemptedQuestion(String noAttemptedQuestion) {
+        NoAttemptedQuestion = noAttemptedQuestion;
+    }
+
+    public String getCorrectAnswere() {
+        return CorrectAnswere;
+    }
+    public void setCorrectAnswere(String correctAnswere) {
+        CorrectAnswere = correctAnswere;
+    }
+
+    public String getWrongAnswere() {
+        return WrongAnswere;
+    }
+    public void setWrongAnswere(String wrongAnswere) {
+        WrongAnswere = wrongAnswere;
+    }
+
+    public String getTimePerQuestion() {
+        return TimePerQuestion;
+    }
+    public void setTimePerQuestion(String tiimePerQuestion) {
+        TimePerQuestion = tiimePerQuestion;
+    }
+
 }
