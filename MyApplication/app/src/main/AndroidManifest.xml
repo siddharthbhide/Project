@@ -41,6 +41,7 @@
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".ReportHistoryActivity"></activity>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>

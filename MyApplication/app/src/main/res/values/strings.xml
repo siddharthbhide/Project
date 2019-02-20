@@ -33,4 +33,7 @@
     <string name="report">Report</string>
     <string name="url_network_list">xxx</string>
     <string name="url_save_update_student_details">xxx</string>
+    <string name="url_login_student_details">xxx</string>
+    <string name="url_exam_details">xxx</string>
+    <string name="url_questions_for_exam">xxx</string>
 </resources>

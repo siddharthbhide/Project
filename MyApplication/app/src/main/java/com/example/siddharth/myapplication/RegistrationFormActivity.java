@@ -70,6 +70,7 @@ public class RegistrationFormActivity extends AppCompatActivity
     List <String> listOfSex = new ArrayList<>();
     List<String> listOfCourse = new ArrayList<>();
     List<String> listOfCourseLevel = new ArrayList<>();
+    WebServiceManager objWebServiceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,7 +163,11 @@ public class RegistrationFormActivity extends AppCompatActivity
         /*if(false == ValidateString ())
             return;
         sendInformationToServer();*/
-        testsendInformationToServer();
+        //testsendInformationToServer();
+
+        objWebServiceManager = WebServiceManager.getInstance(getApplicationContext());
+        objWebServiceManager.sendStudentDetailsToServer(getString(R.string.url_network_list),this);
+
     }
 
     private boolean ValidateString() {
@@ -343,11 +348,71 @@ public class RegistrationFormActivity extends AppCompatActivity
 
     }
 
-    private void testsendInformationToServer()
+
+    public Map<String, String> getStudentInformation()
+    {
+        Map<String, String> params = new HashMap<String, String>();
+
+        try {
+
+            long intSpinnerSex = spinnerSex.getSelectedItemId()-1;
+            params.put("sex", Long.toString(intSpinnerSex));
+
+            params.put("fatherName", editFatherName.getText().toString());
+            params.put("address", editResidentialAddress.getText().toString());
+            params.put("motherName", editMotherName.getText().toString());
+            params.put("fatherOccupation", editFatherOccupation.getText().toString());
+            params.put("motherOccupation", editMotherOccupation.getText().toString());
+            params.put("mobileNo", editMobileNumber.getText().toString());
+            params.put("school", editSchoolName.getText().toString());
+            params.put("std", editSchoolName.getText().toString());
+            params.put("courseId", spinnerCourseName.getSelectedItem().toString());
+            params.put("courseLevel", spinnerCourseLevel.getSelectedItem().toString());
+            params.put("email", editEmail.getText().toString());
+
+            String strFranId = objValidation.GetFranchiseId(spinnerOfFranchiseNameView.getSelectedItem().toString());
+            params.put("franId", strFranId);
+
+            String strCurrentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            params.put("dateAdded", strCurrentDate);
+
+            StringBuilder stringBuilderAdmissionDate = new StringBuilder();            //month is 0 based
+            stringBuilderAdmissionDate.append(String.format("%02d",datePickerAdmissionDate.getDayOfMonth())+"-");
+            stringBuilderAdmissionDate.append(String.format("%02d",datePickerAdmissionDate.getMonth() + 1)+"-");
+            stringBuilderAdmissionDate.append(datePickerAdmissionDate.getYear());
+            params.put("admissionDate", stringBuilderAdmissionDate.toString());
+
+            params.put("name", editStudentname.getText().toString());
+
+            StringBuilder stringBuilderDOB = new StringBuilder();
+            stringBuilderDOB.append(String.format("%02d",datePickerDOB.getDayOfMonth())+"/");
+            stringBuilderDOB.append(String.format("%02d",datePickerDOB.getMonth() + 1)+"/");
+            stringBuilderDOB.append(datePickerDOB.getYear());
+            params.put("dob", stringBuilderDOB.toString());
+
+            params.put("uName", editUserName.getText().toString());
+            params.put("passwd", editUserPassword.getText().toString());
+
+
+        }
+        catch (Exception objException)
+        {
+            objException.printStackTrace();
+        }
+        return params;
+    }
+
+
+    public void isStudedntInfromationUpdated(String strResponse)
+    {
+
+    }
+
+    /*private void testsendInformationToServer()
     {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            String URL = "http://csdfoundation.co.in/online_exam/admin/webservices/validateLogin.php";
+            String URL = "xxx";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("uName", "Android Volley Demo");
             jsonBody.put("passwd", "BNK");
@@ -395,16 +460,19 @@ public class RegistrationFormActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-    }
+    }*/
 
-    private void sendInformationToServer()
+    /*private void sendInformationToServer()
     {
+        Map<String, String> params = new HashMap<String, String>();
+
         String strPostdata;
         try {
             long intSpinnerSex = spinnerSex.getSelectedItemId()-1;
 
+            params.put("sex", Long.toString(intSpinnerSex));
             strPostdata = URLEncoder.encode("sex", "UTF-8")
-                    + "=" + URLEncoder.encode(Long.toString(intSpinnerSex), "UTF-8");
+                    + "=" + URLEncoder.encode(, "UTF-8");
 
             strPostdata += "&" + URLEncoder.encode("fatherName", "UTF-8") + "="
                     + URLEncoder.encode(editFatherName.getText().toString(), "UTF-8");
@@ -471,28 +539,11 @@ public class RegistrationFormActivity extends AppCompatActivity
             strPostdata += "&" + URLEncoder.encode("passwd", "UTF-8") + "="
                     + URLEncoder.encode(editUserPassword.getText().toString(), "UTF-8");
 
-
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        objValidation.PostDataToWebService(getString(R.string.url_save_update_student_details),strPostdata.toString());
-//                    } catch (Exception objException) {
-//
-//                    }
-//                }
-//            }).start();
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-
         }
         catch (Exception objException)
         {
-            Log.e("ERROR", objException.getMessage(), objException);
+            objException.printStackTrace();
         }
 
-    }
+    }*/
 }

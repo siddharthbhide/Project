@@ -71,7 +71,6 @@ public class WebServiceManager {
     }
 
 
-
     public void getLoginStudentDetails(String strUrl, final String strUserName, final String strPassword) {
 
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
@@ -80,11 +79,11 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray jsonResponse = new JSONArray(response);
-                            CheckStudentLoginDetails(jsonResponse);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            CheckStudentLoginDetails(response);
+
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -106,12 +105,13 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
-    private void CheckStudentLoginDetails(JSONArray jsonResponse) {
+    private void CheckStudentLoginDetails(String strResponse) {
 
         jsonobject = null;
         strResult = "";
+
         try {
-            jsonobject = jsonResponse.getJSONObject(0);
+            jsonobject = new JSONObject(strResponse);
             strResult = jsonobject.getString("result");
             if (0 == strResult.compareToIgnoreCase("1")) {
                 objStudentDetails.setId(jsonobject.getString("id"));
@@ -147,11 +147,10 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray jsonResponse = new JSONArray(response);
-                            CheckExam_CodeDetails(jsonResponse);
+                            CheckExam_CodeDetails(response);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -172,12 +171,12 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
-    private void CheckExam_CodeDetails(JSONArray jsonResponse) {
+    private void CheckExam_CodeDetails(String strResponse) {
 
         jsonobject = null;
         strResult = "";
         try {
-            jsonobject = jsonResponse.getJSONObject(0);
+            jsonobject = new JSONObject(strResponse);
             strResult = jsonobject.getString("result");
             if (0 == strResult.compareToIgnoreCase("1")) {
                 objExam_Details.setId(jsonobject.getString("id"));
@@ -189,9 +188,7 @@ public class WebServiceManager {
                 objExam_Details.setEndDate(jsonobject.getString("endDate"));
                 objExam_Details.setIsCompleted(jsonobject.getString("isCompleted"));
             }
-        } catch (Exception objException)
-
-        {
+        } catch (Exception objException) {
             objException.printStackTrace();
         }
 
@@ -205,11 +202,10 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray jsonResponse = new JSONArray(response);
-                            CheckExamQuestion(jsonResponse);
+                            CheckExamQuestion(response);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -230,15 +226,16 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
-    private void CheckExamQuestion(JSONArray jsonResponse) {
+    private void CheckExamQuestion(String strResponse) {
 
-        jsonobject = null;
+        JSONArray jsonarray = null;
         strResult = "";
 
         try {
-            for (int nIndex = 0; nIndex < jsonResponse.length(); nIndex++) {
+            jsonarray = new JSONArray(strResponse);
+            for (int nIndex = 0; nIndex < jsonarray.length(); nIndex++) {
 
-                jsonobject = jsonResponse.getJSONObject(nIndex);
+                jsonobject = jsonarray.getJSONObject(nIndex);
                 objExamQuestions.setId(jsonobject.getString("id"));
                 objExamQuestions.setDescription(jsonobject.getString("description"));
                 objExamQuestions.setOptionA(jsonobject.getString("optionA"));
@@ -255,5 +252,63 @@ public class WebServiceManager {
             objException.printStackTrace();
         }
     }
+
+    public void getNetworkList(String strUrl, final LoginActivity objLoginActivity) {
+
+        objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
+        objStringRequest = new StringRequest(Request.Method.GET, strUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            objLoginActivity.initFranchiseNameSpinner(response);
+
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        objRequestQueue.add(objStringRequest);
+    }
+
+    public void sendStudentDetailsToServer(String strUrl, final RegistrationFormActivity objRegistrationFormActivity) {
+
+        objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
+        objStringRequest = new StringRequest(Request.Method.POST, strUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            jsonobject = null;
+                            jsonobject = new JSONObject(response);
+                            strResult = jsonobject.getString("result");
+                            objRegistrationFormActivity.isStudedntInfromationUpdated(strResult);
+
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            //Post method parameters
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return objRegistrationFormActivity.getStudentInformation();
+            }
+        };
+        objRequestQueue.add(objStringRequest);
+    }
+
+
 }
 

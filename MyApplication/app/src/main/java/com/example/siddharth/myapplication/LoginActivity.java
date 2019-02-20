@@ -39,11 +39,12 @@ public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     List<String> listOfFranchiseName = new ArrayList<String>();
-    //private Spinner objSpinnerFranchiseName;
+    String strResponse;
     Intent objIntent;
     EditText edittextFranchisPassword;
     Spinner spinnerOfFranchiseNameView;
     CValidation objCValidation = CValidation.getInstance();
+    WebServiceManager objWebServiceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +53,8 @@ public class LoginActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        objWebServiceManager = WebServiceManager.getInstance(getApplicationContext());
+        objWebServiceManager.getNetworkList(getString(R.string.url_network_list),this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,31 +66,14 @@ public class LoginActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         this.setTitle(R.string.login_for_franchise);
         InitVariables();
-/*        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String objCSDNetworkList;
-                    objCSDNetworkList = getCSDNetworkList();
-                    initFranchiseNameSpinner(objCSDNetworkList);
-                } catch (Exception objException) {
-                    initFranchiseNameSpinner("");
-                }
-            }
-        }).start();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        //InitSpinner();
+
     }
 
-    private void initFranchiseNameSpinner(String objCSDNetworkList) {
+    public void initFranchiseNameSpinner(String objCSDNetworkList) {
         JSONArray jsonarray = null;
         objCValidation.objHashMapOfFranchiseName.clear();
+        listOfFranchiseName.add("Select Item from List");
         try {
-            listOfFranchiseName.add("Select Item from List");
             jsonarray = new JSONArray(objCSDNetworkList);
             for (int i = 0; i < jsonarray.length(); i++) {
                 JSONObject jsonobject = jsonarray.getJSONObject(i);
@@ -109,6 +87,8 @@ public class LoginActivity extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        InitSpinner();
     }
 
     private void InitVariables() {
@@ -141,16 +121,9 @@ public class LoginActivity extends AppCompatActivity
     private void InitSpinner()
     {
         spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
-        listOfFranchiseName.add("Select Item from List");
-        listOfFranchiseName.add("CSDFOUNDATION");
-        listOfFranchiseName.add("Shreyas Abacus Academy");
-        listOfFranchiseName.add("Desai Abacus Academy");
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfFranchiseName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfFranchiseNameView.setAdapter(adapter);
-
-
-
     }
 
     @Override
