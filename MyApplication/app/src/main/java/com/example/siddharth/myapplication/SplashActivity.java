@@ -2,6 +2,7 @@ package com.example.siddharth.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -27,6 +28,7 @@ public class SplashActivity extends AppCompatActivity
                 // This method will be executed once the timer is over
                 if(isNetworkAvailable())
                 {
+
                    objIntent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(objIntent);
                    /*objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);

@@ -4,26 +4,26 @@ public class CommonLibrary {
 }
 
 class StudentDetails {
-    String sex;
-    String fatherName;
-    String address;
-    String motherName;
-    String fatherOccupation;
-    String motherOccupation;
-    String mobileNo;
-    String school;
-    String std;
-    String courseId;
-    String courseLevel;
-    String email;
-    String franId;
-    String dateAdded;
-    String admissionDate;
-    String studentName;
-    String dateOfBirth;
-    String userName;
-    String password;
-    String id;
+    private String sex;
+    private String fatherName;
+    private String address;
+    private  String motherName;
+    private String fatherOccupation;
+    private String motherOccupation;
+    private String mobileNo;
+    private String school;
+    private String std;
+    private String courseId;
+    private String courseLevel;
+    private String email;
+    private String franId;
+    private String dateAdded;
+    private String admissionDate;
+    private String studentName;
+    private String dateOfBirth;
+    private String userName;
+    private String password;
+    private String id;
 
     public String getSex() { return this.sex; }
     public void setSex(String strsex) { this.sex = strsex; }
@@ -125,14 +125,14 @@ class StudentDetails {
 class Exam_Details
 {
 
-    String id;
-    String name;
-    String course;
-    String level;
-    String type;
-    String startDate;
-    String endDate;
-    String isCompleted;
+    private String id;
+    private String name;
+    private String course;
+    private  String level;
+    private String type;
+    private String startDate;
+    private String endDate;
+    private String isCompleted;
 
     public String getId() {
         return id;
@@ -194,19 +194,19 @@ class Exam_Details
 class ExamQuestions
 {
 
-    String id;
-    String description;
-    String optionA;
-    String optionB;
-    String optionC;
-    String optionD;
-    String course;
-    String answer;
-    String StudentAns;
-    String StartTime;
-    String EndTime;
-    String ExamId;
-    String LastQuestion;
+    private String id;
+    private String description;
+    private String optionA;
+    private String optionB;
+    private  String optionC;
+    private String optionD;
+    private String course;
+    private String answer;
+    private  String StudentAns;
+    private String StartTime;
+    private  String EndTime;
+    private  String ExamId;
+    private String LastQuestion;
 
     public String getId() {
         return id;
@@ -302,18 +302,18 @@ class ExamQuestions
 
 class ResultDetails
 {
-    String id;
-    String CourseId;
-    String CourseLevel;
-    String ExamDate;
-    String ExamScore;
-    String TotalTime;
-    String TotalQuestion;
-    String AttemptedQuestion;
-    String NoAttemptedQuestion;
-    String CorrectAnswere;
-    String WrongAnswere;
-    String TimePerQuestion;
+    private String id;
+    private String CourseId;
+    private String CourseLevel;
+    private String ExamDate;
+    private String ExamScore;
+    private String TotalTime;
+    private String TotalQuestion;
+    private String AttemptedQuestion;
+    private String NoAttemptedQuestion;
+    private String CorrectAnswere;
+    private String WrongAnswere;
+    private String TimePerQuestion;
 
     public String getId() {
         return id;
