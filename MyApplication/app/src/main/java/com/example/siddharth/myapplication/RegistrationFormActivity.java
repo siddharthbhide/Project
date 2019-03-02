@@ -1,5 +1,6 @@
 package com.example.siddharth.myapplication;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -39,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,8 +66,8 @@ public class RegistrationFormActivity extends AppCompatActivity
     Spinner spinnerCourseName;
     Spinner spinnerCourseLevel;
     Spinner spinnerSex;
-    DatePicker datePickerAdmissionDate;
-    DatePicker datePickerDOB;
+    EditText datePickerAdmissionDate;
+    EditText datePickerDOB;
     Spinner spinnerOfFranchiseNameView;
     List <String> listOfSex = new ArrayList<>();
     List<String> listOfCourse = new ArrayList<>();
@@ -299,15 +301,13 @@ public class RegistrationFormActivity extends AppCompatActivity
         editMobileNumber = (EditText) findViewById(R.id.editMobileNumber);
         editEmail = (EditText) findViewById(R.id.editEmail);
         editSchoolName = (EditText) findViewById(R.id.editSchoolName);
-        editStandard = (EditText) findViewById(R.id.editUserName);
-        editUserName = (EditText) findViewById(R.id.editPassword);
-        editUserPassword = (EditText) findViewById(R.id.editStandard);
+        editStandard = (EditText) findViewById(R.id.editStandard);
         spinnerCourseName = (Spinner) findViewById(R.id.spinnerCourseName);
         spinnerCourseLevel = (Spinner) findViewById(R.id.spinnerCourseLevel);
         spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
         spinnerSex = (Spinner) findViewById(R.id.spinnerSex);
-        datePickerAdmissionDate = (DatePicker) findViewById(R.id.dateAdmissionDate);
-        datePickerDOB= (DatePicker) findViewById(R.id.dateDateOfBirth);
+        datePickerAdmissionDate = (EditText) findViewById(R.id.dateAdmissionDate);
+        datePickerDOB= (EditText) findViewById(R.id.dateDateOfBirth);
 
         listOfSex.add("Select Item from List");
         listOfSex.add("Male");
@@ -376,19 +376,22 @@ public class RegistrationFormActivity extends AppCompatActivity
             String strCurrentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
             params.put("dateAdded", strCurrentDate);
 
-            StringBuilder stringBuilderAdmissionDate = new StringBuilder();            //month is 0 based
+            params.put("admissionDate", datePickerAdmissionDate.getText().toString());
+
+            /*StringBuilder stringBuilderAdmissionDate = new StringBuilder();            //month is 0 based
             stringBuilderAdmissionDate.append(String.format("%02d",datePickerAdmissionDate.getDayOfMonth())+"-");
             stringBuilderAdmissionDate.append(String.format("%02d",datePickerAdmissionDate.getMonth() + 1)+"-");
             stringBuilderAdmissionDate.append(datePickerAdmissionDate.getYear());
-            params.put("admissionDate", stringBuilderAdmissionDate.toString());
+            params.put("admissionDate", stringBuilderAdmissionDate.toString());*/
 
             params.put("name", editStudentname.getText().toString());
 
-            StringBuilder stringBuilderDOB = new StringBuilder();
+            params.put("dob", datePickerDOB.getText().toString());
+            /*StringBuilder stringBuilderDOB = new StringBuilder();
             stringBuilderDOB.append(String.format("%02d",datePickerDOB.getDayOfMonth())+"/");
             stringBuilderDOB.append(String.format("%02d",datePickerDOB.getMonth() + 1)+"/");
             stringBuilderDOB.append(datePickerDOB.getYear());
-            params.put("dob", stringBuilderDOB.toString());
+            params.put("dob", stringBuilderDOB.toString());*/
 
             params.put("uName", editUserName.getText().toString());
             params.put("passwd", editUserPassword.getText().toString());
@@ -407,6 +410,53 @@ public class RegistrationFormActivity extends AppCompatActivity
     {
 
     }
+
+    public void onAdmissionDateClick(View view)
+    {
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        datePickerAdmissionDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    public void onBirthDateClick(View view)
+    {
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        datePickerDOB.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+
+
 
     /*private void testsendInformationToServer()
     {

@@ -2,10 +2,12 @@ package com.example.siddharth.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +23,6 @@ public class SplashActivity extends AppCompatActivity
 
         new Handler().postDelayed(new Runnable() {
 
-
             @Override
             public void run()
             {
@@ -29,10 +30,10 @@ public class SplashActivity extends AppCompatActivity
                 if(isNetworkAvailable())
                 {
 
-                   objIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                    objIntent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(objIntent);
-                   /*objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
-                   startActivity(objIntent);*/
+                    objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
+                    startActivity(objIntent);
 
                 }
                 else
