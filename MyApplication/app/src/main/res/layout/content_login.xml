@@ -32,6 +32,29 @@
         />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/franchise_uname"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size"
+        />
+
+    <EditText
+        android:id="@+id/editTextUserName"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_below="@id/textViewFranchisePassword"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:textSize="@dimen/font_size"
+        android:background="@color/colorGrey"
+        android:hint=" User Name"/>
+
+    <TextView
         android:id="@+id/textViewFranchisePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
