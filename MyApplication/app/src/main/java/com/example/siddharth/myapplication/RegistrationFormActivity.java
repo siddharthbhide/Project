@@ -47,8 +47,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class RegistrationFormActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class RegistrationFormActivity extends AppCompatActivity {
     CValidation objValidation;
     EditText editStudentname;
     EditText editRollno;
@@ -73,6 +72,11 @@ public class RegistrationFormActivity extends AppCompatActivity
     List<String> listOfCourse = new ArrayList<>();
     List<String> listOfCourseLevel = new ArrayList<>();
     WebServiceManager objWebServiceManager;
+
+    NavigationListener navigationLitener = null;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,23 +84,16 @@ public class RegistrationFormActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        this.navigationLitener = new NavigationListener(this);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener( this.navigationLitener);
         objValidation = CValidation.getInstance();
         initFields();
 
@@ -132,31 +129,6 @@ public class RegistrationFormActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void OnClickSend(View view)

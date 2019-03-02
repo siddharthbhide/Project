@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class AboutUsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AboutUsActivity extends AppCompatActivity {
+
+    NavigationListener navigationLitener = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +25,13 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        this.navigationLitener = new NavigationListener(this);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this.navigationLitener);
 
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-    {
-        return false;
-    }
+
 }

@@ -1,21 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".ContactUsActivity">
 
-    <TextView
-        android:id="@+id/textViewContactUs"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Head Office : \nChildren Skills Development Foundation \nDurgai Heights,\nNear Wafgaonkar Jewellers,\nChakan Old Bajarpeth,\nOffice No-1,\nChakan \nTal : Rajgurunagar, \nDist : Pune, Pin - 410501  \n\nEmail : csd_foundation@rediffmail.com  \n\nWebsite : www.csdfoundation.com  \nMob : 9881472882/9822199406/9922928981."
-        android:textSize="@dimen/font_size"
-        android:textColor="@color/colorGrey"
-        android:layout_margin="@dimen/tenPixels"
-        android:lineSpacingExtra="8dip"
-        android:background="@drawable/rounded_bg"
-        android:paddingLeft="@dimen/tenPixels"
-        />
-</ScrollView>
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="50dip"
+                android:paddingBottom="50dip">
+                <TextView
+                    android:id="@+id/textViewContactUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Head Office : \nChildren Skills Development Foundation \nDurgai Heights,\nNear Wafgaonkar Jewellers,\nChakan Old Bajarpeth,\nOffice No-1,\nChakan \nTal : Rajgurunagar, \nDist : Pune, Pin - 410501 \n\nMobile :\n9881472882/9822199406/9922928981  \n\nEmail : csd_foundation@rediffmail.com  \n\nWebsite : www.csdfoundation.com  "
+                    android:textSize="@dimen/font_size"
+                    android:textColor="@color/colorGrey"
+                    android:layout_margin="@dimen/tenPixels"
+                    android:lineSpacingExtra="8dip"
+                    android:background="@drawable/rounded_bg"
+                    android:paddingLeft="@dimen/tenPixels"
+                    />
+            </LinearLayout>
+
+        </ScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_login"
+        app:menu="@menu/activity_login_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

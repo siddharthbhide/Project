@@ -35,8 +35,7 @@ import java.util.List;
 
 import static android.widget.Toast.makeText;
 
-public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class LoginActivity extends AppCompatActivity {
 
     List<String> listOfFranchiseName = new ArrayList<String>();
     String strResponse;
@@ -45,6 +44,7 @@ public class LoginActivity extends AppCompatActivity
     Spinner spinnerOfFranchiseNameView;
     CValidation objCValidation = CValidation.getInstance();
     WebServiceManager objWebServiceManager;
+    NavigationListener navigationLitener = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +62,10 @@ public class LoginActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        this.navigationLitener = new NavigationListener(this);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this.navigationLitener);
         this.setTitle(R.string.login_for_franchise);
         InitVariables();
 
@@ -156,61 +158,6 @@ public class LoginActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_gotowebsite) {
-
-            objIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://csdfoundation.co.in/index.php"));
-            startActivity(objIntent);
-        }
-        if (id == R.id.nav_camera) {
-          /* objIntent = new Intent(this,RegistrationFormActivity.class);
-            startActivity(objIntent);*/
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            objIntent = new Intent(this, AboutUsActivity.class);
-            startActivity(objIntent);
-        } else if (id == R.id.nav_slideshow) {
-            /*objIntent = new Intent(this,ContactUsActivity.class);
-            startActivity(objIntent);*/
-        } else if (id == R.id.nav_manage) {
-            /*objIntent = new Intent(this,ContactUsActivity.class);
-            startActivity(objIntent);*/
-        } else if (id == R.id.nav_share) {
-            /*objIntent = new Intent(this,ContactUsActivity.class);
-            startActivity(objIntent);*/
-        } else if (id == R.id.nav_send) {
-           /* objIntent = new Intent(this,ContactUsActivity.class);
-            startActivity(objIntent);*/
-        } else if (id == R.id.nav_level_exam) {
-            objIntent = new Intent(this, ExamOptionActivity.class);
-            startActivity(objIntent);
-        } else if (id == R.id.nav_practice_paper) {
-            objIntent = new Intent(this, ExamOptionActivity.class);
-            startActivity(objIntent);
-        } else if (id == R.id.nav_report_history) {
-            objIntent = new Intent(this, ReportHistoryActivity.class);
-            startActivity(objIntent);
-        }
-        if (id == R.id.nav_result) {
-            objIntent = new Intent(this, RegistrationFormActivity.class);
-            startActivity(objIntent);
-            // Handle the camera action
-        } else if (item.getTitle().equals("Contact Us")) {
-            objIntent = new Intent(this, ContactUsActivity.class);
-            startActivity(objIntent);
-        }
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void OnClickSend(View v) {

@@ -26,7 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ExamOptionActivity" />
+
+        <activity android:name=".ExamOptionActivity"
+            android:label="@string/practice_paper"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ExamActivity" />
         <activity
             android:name=".RegistrationFormActivity"
@@ -37,11 +41,21 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ContactUsActivity" />
+
+        <activity android:name=".ContactUsActivity"
+            android:label="@string/title_activity_contact_us"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".RulesActivity"
+            android:label="@string/rule"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ReportActivity" />
+
         <activity android:name=".ReportHistoryActivity"></activity>
     </application>
 
