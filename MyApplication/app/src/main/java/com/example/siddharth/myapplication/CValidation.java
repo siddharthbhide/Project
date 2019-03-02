@@ -67,7 +67,7 @@ public class CValidation {
             bReturn = false;
         }
 
-        if (0 != spinnerText.compareToIgnoreCase("Select Item from List")) {
+        if (0 == spinnerText.compareToIgnoreCase("Select Item from List")) {
             bReturn = false;
         }
 

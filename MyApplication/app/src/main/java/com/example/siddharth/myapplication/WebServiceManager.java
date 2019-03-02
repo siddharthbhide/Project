@@ -309,6 +309,41 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
+    public void getFranchiseLogin(String strUrl, final String franchiseUserName, final String franchisePassword,final String franchiseId,final LoginActivity objLoginActivity ) {
+
+        objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
+        objStringRequest = new StringRequest(Request.Method.POST, strUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            objLoginActivity.getResponseAndCallActivity(response);
+
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            //Post method parameters
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("uName", franchiseUserName);
+                params.put("passwd", franchisePassword);
+                params.put("frId", franchiseId);
+                return params;
+            }
+        };
+        objRequestQueue.add(objStringRequest);
+    }
+
 
 }
 

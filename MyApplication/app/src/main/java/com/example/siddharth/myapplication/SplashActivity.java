@@ -29,11 +29,18 @@ public class SplashActivity extends AppCompatActivity
                 // This method will be executed once the timer is over
                 if(isNetworkAvailable())
                 {
+                    /*Check if student is already register then do not go to franchise login page*/
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    String strFranId = prefs.getString(getString( R.string.shared_preferences_franchisee_id), "0");
 
-                    objIntent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(objIntent);
-                    /*objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
-                    startActivity(objIntent);*/
+                    if(0 ==strFranId.compareToIgnoreCase("0")) {
+                        objIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(objIntent);
+                    }
+                    else {
+                        objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
+                        startActivity(objIntent);
+                    }
 
                 }
                 else

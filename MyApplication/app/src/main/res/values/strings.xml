@@ -36,6 +36,8 @@
     <string name="url_save_update_student_details">http://csdfoundation.co.in/online_exam/admin/webservices/saveStudentDetails.php</string>
     <string name="about_us_1">CSD Foundation is a children skills development organization, headquartered in Pune, India. Various programs offered by Foundation, have been developed after years of research &amp; testing and are of international standards. These programs focus on developing various skills in children. In the process of developing skills they improve the learning ability of the child. </string>
     <string name="about_us_2">CSD Foundation runs world class skill development programmes those make a significant impact on the mental potential of children. CSD Foundation is managed by a team of professionals. CSD Foundation include Abacus (fast/slow track), Smart handwriting (English - plain &amp; cursive, Devnagari), Smart English, Mid brain activation and Vedic Maths. These scientifically researched programmes, with world-class standards, have proved themselves over the years. </string>
-
+    <string name="url_franchisee_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateFranchieseLogin.php</string>
+    <string name="shared_preferences_franchisee_id">FranId</string>
+    <string name="shared_preferences_student_id">FranId</string>
 
 </resources>

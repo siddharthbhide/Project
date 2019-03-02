@@ -1,8 +1,10 @@
 package com.example.siddharth.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
@@ -35,7 +37,8 @@ import java.util.List;
 
 import static android.widget.Toast.makeText;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     List<String> listOfFranchiseName = new ArrayList<String>();
     String strResponse;
@@ -44,7 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     Spinner spinnerOfFranchiseNameView;
     CValidation objCValidation = CValidation.getInstance();
     WebServiceManager objWebServiceManager;
-    NavigationListener navigationLitener = null;
+    SharedPreferences prefs;
+    EditText editTextUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        this.navigationLitener = new NavigationListener(this);
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this.navigationLitener);
+        navigationView.setNavigationItemSelectedListener(this);
         this.setTitle(R.string.login_for_franchise);
         InitVariables();
 
@@ -95,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void InitVariables() {
         edittextFranchisPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextUserName = (EditText) findViewById(R.id.editTextUserName);
         //Spinner spinnerOfFranchiseNameView = (Spinner) findViewById(R.id.spinnerOfFranchiseName);
     }
 
@@ -160,11 +163,66 @@ public class LoginActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_gotowebsite) {
+
+            objIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://csdfoundation.co.in/index.php"));
+            startActivity(objIntent);
+        }
+        if (id == R.id.nav_camera) {
+          /* objIntent = new Intent(this,RegistrationFormActivity.class);
+            startActivity(objIntent);*/
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+            objIntent = new Intent(this, AboutUsActivity.class);
+            startActivity(objIntent);
+        } else if (id == R.id.nav_slideshow) {
+            /*objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        } else if (id == R.id.nav_manage) {
+            /*objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        } else if (id == R.id.nav_share) {
+            /*objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        } else if (id == R.id.nav_send) {
+           /* objIntent = new Intent(this,ContactUsActivity.class);
+            startActivity(objIntent);*/
+        } else if (id == R.id.nav_level_exam) {
+            objIntent = new Intent(this, ExamOptionActivity.class);
+            startActivity(objIntent);
+        } else if (id == R.id.nav_practice_paper) {
+            objIntent = new Intent(this, ExamOptionActivity.class);
+            startActivity(objIntent);
+        } else if (id == R.id.nav_report_history) {
+            objIntent = new Intent(this, ReportHistoryActivity.class);
+            startActivity(objIntent);
+        }
+        if (id == R.id.nav_result) {
+            objIntent = new Intent(this, RegistrationFormActivity.class);
+            startActivity(objIntent);
+            // Handle the camera action
+        } else if (item.getTitle().equals("Contact Us")) {
+            objIntent = new Intent(this, ContactUsActivity.class);
+            startActivity(objIntent);
+        }
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     public void OnClickSend(View v) {
         CValidation objValidation = CValidation.getInstance();
         String strFranchiseName = spinnerOfFranchiseNameView.getSelectedItem().toString();
 
-        if (objValidation.isSpinnerValueSelected(strFranchiseName))
+        if (!objValidation.isSpinnerValueSelected(strFranchiseName))
         {
             Toast.makeText(getApplicationContext(), "Select Franchise", Toast.LENGTH_SHORT).show();
             return;
@@ -175,12 +233,42 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        /*if (edittextFranchisPassword.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "Enter Correct Password", Toast.LENGTH_SHORT).show();
+        if (objValidation.isStringEmpty(editTextUserName.getText().toString())) {
+            Toast.makeText(getApplicationContext(), "Enter Correct User Name", Toast.LENGTH_SHORT).show();
             return;
-        }*/
+        }
 
-        Intent objIntent = new Intent(this, ExamOptionActivity.class);
-        startActivity(objIntent);
+        String strFranchiseId = objValidation.GetFranchiseId(strFranchiseName);
+        objWebServiceManager = WebServiceManager.getInstance(getApplicationContext());
+        objWebServiceManager.getFranchiseLogin(getString(R.string.url_franchisee_login),editTextUserName.getText().toString(),edittextFranchisPassword.getText().toString(),strFranchiseId,this);
+    }
+
+    public  void getResponseAndCallActivity(String strResponse)
+    {
+        JSONObject jsonobject = null;
+        String strResult = "";
+
+        try {
+            jsonobject = new JSONObject(strResponse);
+            strResult = jsonobject.getString("result");
+            if (0 != strResult.compareToIgnoreCase("0")) {
+                String strFranId = jsonobject.getString("id");
+                /*Save data on globally */
+                prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(getString( R.string.shared_preferences_franchisee_id), strFranId);
+                editor.commit(); //important, otherwise it wouldn't save.
+
+                Intent objIntent = new Intent(this, RegistrationFormActivity.class);
+                startActivity(objIntent);
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception objException) {
+            objException.printStackTrace();
+        }
     }
 }
