@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,13 +8,14 @@
 
     <TextView
         android:id="@+id/textViewContactUs"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Head Office : \nChildren Skills Development Foundation \nDurgai Heights,\nNear Wafgaonkar Jewellers,\nChakan Old Bajarpeth,\nOffice No-1,\nChakan \nTal : Rajgurunagar, \nDist : Pune, Pin - 410501  \n\nEmail : csd_foundation@rediffmail.com  \n\nWebsite : www.csdfoundation.com  \nMob : 9881472882/9822199406/9922928981."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="90dp"
         android:textSize="@dimen/font_size"
-        android:textColor="@color/colorFont"
+        android:textColor="@color/colorGrey"
+        android:layout_margin="@dimen/tenPixels"
+        android:lineSpacingExtra="8dip"
+        android:background="@drawable/rounded_bg"
+        android:paddingLeft="@dimen/tenPixels"
         />
-</RelativeLayout>
+</ScrollView>

@@ -1,11 +1,379 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".RegistrationFormActivity"
-    tools:showIn="@layout/app_bar_registration_form">
+    tools:context=".RegistrationFormActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="5dip"
+        android:paddingBottom="80dip">
+            <!--<TextView-->
+                <!--android:id="@+id/textStudentname"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Student Name :"-->
+                <!--android:textColor="@color/colorFont"-->
+                <!--android:textSize="@dimen/font_size"-->
+                <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+            <EditText
+                android:id="@+id/editStudentname"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:background="@drawable/textbox_background"
+                android:hint="  Enter Student Name "
+                />
+
+            <!--<TextView-->
+                <!--android:id="@+id/textRollno"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Roll No :"-->
+                <!--android:textColor="@color/colorFont"-->
+                <!--android:textSize="@dimen/font_size"-->
+                <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+            <EditText
+                android:id="@+id/editRollno"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:background="@drawable/textbox_background"
+                android:hint="  Enter Roll No "/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/textCourseName"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Course Name :"-->
+                <!--android:textColor="@color/colorFont"-->
+                <!--android:textSize="@dimen/font_size"-->
+                <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+            <Spinner
+                android:id="@+id/spinnerCourseName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
+                android:background="@drawable/textbox_background"
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:spinnerMode="dialog"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/textCourseLevel"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Course Level :"-->
+                <!--android:textColor="@color/colorFont"-->
+                <!--android:textSize="@dimen/font_size"-->
+                <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+            <Spinner
+                android:id="@+id/spinnerCourseLevel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
+                android:background="@drawable/textbox_background"
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:spinnerMode="dialog"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/tenPixels">
+
+                <EditText
+                    android:id="@+id/dateAdmissionDate"
+                    android:layout_width="@dimen/calenderWidth"
+                    android:layout_height="35dip"
+                    android:hint="  Admission Date :  "
+                    android:textColor="@color/colorFont"
+                    android:textSize="@dimen/font_size"
+                    android:background="@drawable/textbox_background"
+                    android:textAlignment="center"
+                    android:inputType="none"
+                    android:focusableInTouchMode="false"
+                    />
+                <ImageButton
+                    android:layout_width="35dip"
+                    android:layout_height="35dip"
+                    android:src="@mipmap/calender"
+                    android:layout_marginLeft="@dimen/tenPixels"
+                    android:onClick="onAdmissionDateClick"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/tenPixels">
+
+                <EditText
+                    android:id="@+id/dateDateOfBirth"
+                    android:layout_width="@dimen/calenderWidth"
+                    android:layout_height="35dip"
+                    android:hint="    Date of Birth :    "
+                    android:textColor="@color/colorFont"
+                    android:textSize="@dimen/font_size"
+                    android:background="@drawable/textbox_background"
+                    android:textAlignment="center"
+                    android:inputType="none"
+                    android:focusableInTouchMode="false"/>
+                <ImageButton
+                    android:layout_width="35dip"
+                    android:layout_height="35dip"
+                    android:src="@mipmap/calender"
+                    android:layout_marginLeft="@dimen/tenPixels"
+                    android:onClick="onBirthDateClick"/>
+            </LinearLayout>
+
+            <!--<TextView-->
+                <!--android:id="@+id/textSex"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Sex :"-->
+                <!--android:textColor="@color/colorFont"-->
+                <!--android:textSize="@dimen/font_size"-->
+                <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+            <Spinner
+                android:id="@+id/spinnerSex"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
+                android:background="@drawable/textbox_background"
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="@dimen/tenPixels"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/textFatherName"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Name of Father:"-->
+                <!--android:textColor="@color/colorFont"-->
+                <!--android:textSize="@dimen/font_size"-->
+                <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+            <EditText
+                android:id="@+id/editFatherName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:background="@drawable/textbox_background"
+                android:hint="  Enter Father Name "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textResidentialAddress"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Residential Address:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editResidentialAddress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Residential Address "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textFatherOccupation"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Father Occupation:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editFatherOccupation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Father Occupation "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textMotherName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Name of Mother:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editMotherName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Name of Mother "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textMotherOccupation"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Mother Occupation:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editMotherOccupation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Mother Occupation "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textMobileNumber"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Mobile Number:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editMobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Mobile Number "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textEmail"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Email:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Email "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textSchoolName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Name of School:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editSchoolName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  School Name "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textStandard"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Standard:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <EditText
+            android:id="@+id/editStandard"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"
+            android:background="@drawable/textbox_background"
+            android:hint="  Standard "/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/textUserName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="User Name:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/editUserName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/textHeight"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"-->
+            <!--android:background="@drawable/textbox_background"-->
+            <!--android:hint="  User Name "/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textPassword"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Password:"-->
+            <!--android:textColor="@color/colorFont"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/editPassword"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/textHeight"-->
+            <!--android:inputType="textPassword"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="@dimen/font_size"-->
+            <!--android:layout_marginTop="@dimen/tenPixels"-->
+            <!--android:background="@drawable/textbox_background"/>-->
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:onClick="OnClickSend"
+            android:text="Send"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/tenPixels"/>
+    </LinearLayout>
+
+</ScrollView>

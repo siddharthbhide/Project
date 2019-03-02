@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -39,10 +38,11 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ContactUsActivity" />
-        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".AboutUsActivity"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ReportActivity" />
         <activity android:name=".ReportHistoryActivity"></activity>
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>

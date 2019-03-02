@@ -1,79 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".LoginActivity"
-    tools:showIn="@layout/app_bar_login">
+    tools:showIn="@layout/app_bar_login"
+    android:background="@drawable/rounded_bg"
+    android:layout_margin="10dip"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewFranchiseName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
         android:text="@string/franchise_name"
-        android:textColor="@color/colorFont"
-        android:textSize="@dimen/font_size" />
-
-    <TextView
-        android:id="@+id/textViewFranchisePassword"
-        android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextUserName"
-        android:layout_alignEnd="@+id/textViewFranchiseName"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="6dp"
-        android:text="@string/franchise_Password"
-        android:textColor="@color/colorFont"
-        android:textSize="@dimen/font_size" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="303dp"
-        android:layout_height="55dp"
-        android:layout_below="@id/textViewFranchisePassword"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textSize="@dimen/font_size" />
-
-    <Button
-        android:id="@+id/btnSend"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="255dp"
-        android:layout_height="53dp"
-        android:layout_alignStart="@+id/textViewFranchiseName"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="-6dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="81dp"
-        android:background="@color/colorPrimary"
-        android:onClick="OnClickSend"
-        android:text="@string/LogIn"
-        android:textColor="#FFF"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/font_size" />
 
     <Spinner
         android:id="@+id/spinnerOfFranchiseName"
-        android:layout_width="303dp"
-        android:layout_height="55dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="80dp"
-        android:textSize="@dimen/font_size" />
- </RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
+        android:textSize="@dimen/font_size"
+        android:background="@color/colorGrey"
+        />
+
+    <TextView
+        android:id="@+id/textViewFranchisePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/franchise_Password"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size"
+        />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_below="@id/textViewFranchisePassword"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_size"
+        android:background="@color/colorGrey"
+        android:hint=" Password"/>
+
+    <Button
+        android:id="@+id/btnSend"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="@color/colorPrimary"
+        android:onClick="OnClickSend"
+        android:text="@string/LogIn"
+        android:textColor="#FFF"
+        android:textSize="@dimen/font_size"
+        android:layout_gravity="center_horizontal"/>
+
+
+ </LinearLayout>

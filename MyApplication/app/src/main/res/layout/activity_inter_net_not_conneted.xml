@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InterNetNotConnetedActivity">
+    tools:context=".InterNetNotConnetedActivity"
+    android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:src="@mipmap/no_network"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/textHeight"/>
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="247dp"
-        android:layout_height="32dp"
-        android:text="Internet Disconnected."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="45dp" />
-    <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/nointernetconnection"/>
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:text="No Internet Connection. \n\nPlease make sure that you have active internet connection."
+        android:textAlignment="center"
+        android:textSize="@dimen/tenPixels"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="@dimen/textHeight"
+        android:layout_marginLeft="@dimen/textHeight"
+        android:layout_marginRight="@dimen/textHeight"
+        android:background="@drawable/textbox_background"/>
+</LinearLayout>

@@ -10,7 +10,7 @@
     <string name="login_for_franchise">Login for Franchise</string>
     <string name="franchise_Password">Password :</string>
     <string name="homework">Home Work</string>
-    <string name="LogIn">Send</string>
+    <string name="LogIn">Login</string>
     <string name="competitionexam">Competition Exam</string>
     <string name="regularexam">Regular Exam</string>
     <string name="title_activity_registration_form">RegistrationFormActivity</string>
@@ -33,7 +33,8 @@
     <string name="report">Report</string>
     <string name="url_network_list">xxx</string>
     <string name="url_save_update_student_details">xxx</string>
-    <string name="url_login_student_details">xxx</string>
-    <string name="url_exam_details">xxx</string>
-    <string name="url_questions_for_exam">xxx</string>
+    <string name="about_us_1">CSD Foundation is a children skills development organization, headquartered in Pune, India. Various programs offered by Foundation, have been developed after years of research &amp; testing and are of international standards. These programs focus on developing various skills in children. In the process of developing skills they improve the learning ability of the child. </string>
+    <string name="about_us_2">CSD Foundation runs world class skill development programmes those make a significant impact on the mental potential of children. CSD Foundation is managed by a team of professionals. CSD Foundation include Abacus (fast/slow track), Smart handwriting (English - plain &amp; cursive, Devnagari), Smart English, Mid brain activation and Vedic Maths. These scientifically researched programmes, with world-class standards, have proved themselves over the years. </string>
+
+
 </resources>
