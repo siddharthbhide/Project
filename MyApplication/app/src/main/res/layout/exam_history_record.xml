@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_bg">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dip"
+    android:orientation="vertical"
+    android:id="@+id/contents">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exam Title One"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size"
+        android:textStyle="bold"
+        android:id="@+id/examName"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abacus : FT-L1"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size"
+        android:layout_marginTop="5dip"
+        android:id="@+id/examCourse"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10-02-2019"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size"
+        android:layout_marginTop="5dip"
+        android:id="@+id/examDate"
+        />
+
+</LinearLayout>
+
+    <ImageButton
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="3dip"
+        android:id="@+id/historyDetails"
+        android:background="@mipmap/arrow2"
+        />
+
+</RelativeLayout>

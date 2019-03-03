@@ -38,10 +38,17 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
         }
         else if (id == R.id.nav_level_exam) {
             objIntent = new Intent(this.activity, ExamOptionActivity.class);
+            objIntent.putExtra("exam_type", "Level");
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_practice_paper) {
             objIntent = new Intent(this.activity, ExamOptionActivity.class);
+            objIntent.putExtra("exam_type", "Practice");
+            cntx.startActivity(objIntent);
+        }
+        else if (id == R.id.nav_online_exam) {
+            objIntent = new Intent(this.activity, ExamOptionActivity.class);
+            objIntent.putExtra("exam_type", "Annual");
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_report_history) {
@@ -52,9 +59,8 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
             objIntent = new Intent(this.activity, RulesActivity.class);
             cntx.startActivity(objIntent);
         }
-        else if (id == R.id.nav_result) {
-            objIntent = new Intent(this.activity, RegistrationFormActivity.class);
-            cntx.startActivity(objIntent);
+        else if (id == R.id.nav_faq) {
+
         }
         else if (menuItem.getTitle().equals("Contact Us")) {
             objIntent = new Intent(this.activity, ContactUsActivity.class);

@@ -29,9 +29,9 @@ public class WebServiceManager {
     private RequestQueue objRequestQueue;
     Context objContext;
     StudentDetails objStudentDetails;
-    Exam_Details objExam_Details;
-    ExamQuestions objExamQuestions;
-    List<ExamQuestions> listOfExamQuestions = new ArrayList();
+    ExamDetails objExam_Details;
+    ExamQuestionDetails objExamQuestions;
+    List<ExamQuestionDetails> listOfExamQuestions = new ArrayList();
     String strResult;
     JSONObject jsonobject = null;
 

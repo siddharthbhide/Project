@@ -1,232 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".ReportActivity">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewExam_Type"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="40dp"
-            android:textSize="@dimen/font_size"
-            android:text="Exam Type ---" />
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/textViewViewExamTypeOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:layout_marginTop="40dp"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <TextView
-            android:id="@+id/textViewCourse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="80dp"
-            android:textSize="@dimen/font_size"
-            android:text="Course ---" />
+        </android.support.design.widget.AppBarLayout>
 
-        <TextView
-            android:id="@+id/textViewCourseOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:layout_marginTop="80dp"
-            android:text="Output"
-            android:textSize="@dimen/font_size" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="120dp"
-            android:textSize="@dimen/font_size"
-            android:text="Level ---" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical"
+                android:layout_marginTop="70dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:layout_marginLeft="@dimen/tenPixels"
+                android:layout_marginRight="@dimen/tenPixels"
+                android:layout_marginBottom="15dip">
 
-        <TextView
-            android:id="@+id/textViewLevelOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:layout_marginTop="120dp"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Exam Name :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/tenPixels"
+                        android:textColor="@color/colorLemon"/>
 
-        <TextView
-            android:id="@+id/textViewDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="160dp"
-            android:textSize="@dimen/font_size"
-            android:text="Date ---" />
+                    <TextView
+                        android:id="@+id/txtExamName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Abacus Exam March 2019"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
 
-        <TextView
-            android:id="@+id/textViewDateOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:layout_marginTop="160dp"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
 
-        <TextView
-            android:id="@+id/textViewTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="200dp"
-            android:textSize="@dimen/font_size"
-            android:text="Time ---" />
 
-        <TextView
-            android:id="@+id/textViewTimeOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:layout_marginTop="200dp"
-            android:textSize="@dimen/font_size"
-            android:text="OutPut" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Course :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
 
-        <TextView
-            android:id="@+id/textViewTotalQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="240dp"
-            android:textSize="@dimen/font_size"
-            android:text="Total Question ---" />
+                    <TextView
+                        android:id="@+id/txtCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Abacus"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
 
-        <TextView
-            android:id="@+id/textViewTotalQuestionOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:layout_marginTop="240dp"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
 
-        <TextView
-            android:id="@+id/textViewAttempt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="280dp"
-            android:textSize="@dimen/font_size"
-            android:text="Attempt ---" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Level :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
 
-        <TextView
-            android:id="@+id/textViewAttemptOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="280dp"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
+                    <TextView
+                        android:id="@+id/txtCourseLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="FT-L1"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
 
-        <TextView
-            android:id="@+id/textViewRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="320dp"
-            android:textSize="@dimen/font_size"
-            android:text="Right ---" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Exam Date :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
 
-        <TextView
-            android:id="@+id/textViewRightOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="320dp"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
+                    <TextView
+                        android:id="@+id/txtExamDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="02-03-2019"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
 
-        <TextView
-            android:id="@+id/textViewWrong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="360dp"
-            android:textSize="@dimen/font_size"
-            android:text="Wrong ---" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Time Taken :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
 
-        <TextView
-            android:id="@+id/textViewWrongutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="360dp"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
+                    <TextView
+                        android:id="@+id/txtTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="5:32"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
 
-        <TextView
-            android:id="@+id/textViewTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/exam_activity_start_margin"
-            android:layout_marginTop="400dp"
-            android:textSize="@dimen/font_size"
-            android:text="Total ---" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Total Questions :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
 
-        <TextView
-            android:id="@+id/textViewTotalOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="400dp"
-            android:layout_marginStart="@dimen/report_activity_output_start_margin"
-            android:textSize="@dimen/font_size"
-            android:text="Output" />
+                    <TextView
+                        android:id="@+id/txtQuestions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="20"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
 
-    </RelativeLayout>
-</ScrollView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Attempted Questions :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
+
+                    <TextView
+                        android:id="@+id/txtAttempted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="12"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Correct Answers :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
+
+                    <TextView
+                        android:id="@+id/txtCorrect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="10"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Incorrect Answers :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
+
+                    <TextView
+                        android:id="@+id/txtIncorrect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="2"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="Marks :"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dip"
+                        android:textColor="@color/colorLemon"/>
+
+                    <TextView
+                        android:id="@+id/txtMarks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size"
+                        android:text="100/120"
+                        android:layout_marginTop="5dip"
+                        android:textColor="@color/colorGrey"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dip"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_login"
+        app:menu="@menu/activity_login_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

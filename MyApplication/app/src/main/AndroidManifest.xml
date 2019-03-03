@@ -54,9 +54,13 @@
             android:label="@string/title_activity_about_us"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".ReportActivity" />
+        <activity android:name=".ReportActivity"
+            android:label="@string/result_details"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".ReportHistoryActivity"></activity>
+        <activity android:name=".ReportHistoryActivity"
+            android:label="@string/report_history"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -31,30 +31,80 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dip"
+            android:layout_marginTop="80dip"
             android:background="@drawable/rounded_bg"
             android:layout_marginLeft="@dimen/tenPixels"
             android:layout_marginRight="@dimen/tenPixels">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dip"
+                android:layout_marginTop="20dip"
+                android:text="Select Course"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_size"
+                />
+
             <Spinner
                 android:id="@+id/spinnerCourse"
                 android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:textSize="@dimen/font_size"
+                android:background="@color/colorGrey"/>
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/tenPixels"/>
+                android:layout_marginStart="10dip"
+                android:layout_marginTop="20dip"
+                android:text="Select Course Level"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_size"
+                />
 
             <Spinner
                 android:id="@+id/spinnerLavel_Category"
                 android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="@dimen/tenPixels"
+                android:textSize="@dimen/font_size"
+                android:background="@color/colorGrey" />
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/tenPixels" />
+                android:layout_marginStart="10dip"
+                android:layout_marginTop="20dip"
+                android:text="Exam Code"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_size"
+                />
+
+            <EditText
+                android:id="@+id/editTextUserName"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_below="@id/textViewFranchisePassword"
+                android:layout_marginTop="10dip"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="@dimen/font_size"
+                android:background="@color/colorGrey"
+                android:textAlignment="center"/>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/tenPixels"
-                android:textColor="@color/colorPrimary"
-                android:onClick="validateExamCode"/>
+                android:background="@color/colorPrimary"
+                android:onClick="validateExamCode"
+                android:text="@string/LogIn"
+                android:textColor="#FFF"
+                android:textSize="@dimen/font_size"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>

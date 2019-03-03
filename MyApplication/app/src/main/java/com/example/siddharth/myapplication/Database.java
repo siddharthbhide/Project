@@ -185,7 +185,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-    public long addExam_Details(Exam_Details objExam_Details) {
+    public long addExam_Details(ExamDetails objExam_Details) {
         long longRet = 0;
         try {
 
@@ -208,7 +208,7 @@ public class Database extends SQLiteOpenHelper {
         return longRet;
     }
 
-    public long addQuestion_Answere(ExamQuestions objExamQuestions) {
+    public long addQuestion_Answere(ExamQuestionDetails objExamQuestions) {
         long longRet = 0;
         try {
             ContentValues objContentValues = new ContentValues();
@@ -235,7 +235,7 @@ public class Database extends SQLiteOpenHelper {
         return longRet;
     }
 
-    public long addResult(ResultDetails objResultDetails) {
+    public long addResult(ExamResultDetails objResultDetails) {
         long longRet = 0;
         try {
             ContentValues objContentValues = new ContentValues();
@@ -260,9 +260,9 @@ public class Database extends SQLiteOpenHelper {
         return longRet;
     }
 
-    public ArrayList<Exam_Details> getExam_Details(String strSelectQuery) {
+    public ArrayList<ExamDetails> getExam_Details(String strSelectQuery) {
 
-        ArrayList<Exam_Details> list = new ArrayList<Exam_Details>();
+        ArrayList<ExamDetails> list = new ArrayList<ExamDetails>();
         String selectQuery = strSelectQuery;
         SQLiteDatabase db = this.getReadableDatabase();
         try {
@@ -273,7 +273,7 @@ public class Database extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         int nCoulumIndex = 0;
-                        Exam_Details objExam_Details = new Exam_Details();
+                        ExamDetails objExam_Details = new ExamDetails();
 
                         objExam_Details.setId(cursor.getString(nCoulumIndex++));
                         objExam_Details.setName(cursor.getString(nCoulumIndex++));
@@ -305,9 +305,9 @@ public class Database extends SQLiteOpenHelper {
         return list;
     }
 
-    public ArrayList<ExamQuestions> getQuestion_Answere(String strSelectQuery) {
+    public ArrayList<ExamQuestionDetails> getQuestion_Answere(String strSelectQuery) {
 
-        ArrayList<ExamQuestions> list = new ArrayList<ExamQuestions>();
+        ArrayList<ExamQuestionDetails> list = new ArrayList<ExamQuestionDetails>();
         String selectQuery = strSelectQuery;
         SQLiteDatabase db = this.getReadableDatabase();
         try {
@@ -318,7 +318,7 @@ public class Database extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         int nCoulumIndex = 0;
-                        ExamQuestions objExamQuestions = new ExamQuestions();
+                        ExamQuestionDetails objExamQuestions = new ExamQuestionDetails();
 
                         objExamQuestions.setId(cursor.getString(nCoulumIndex++));
                         objExamQuestions.setDescription(cursor.getString(nCoulumIndex++));
@@ -355,9 +355,9 @@ public class Database extends SQLiteOpenHelper {
         return list;
     }
 
-    public ArrayList<ResultDetails> getResult(String strSelectQuery) {
+    public ArrayList<ExamResultDetails> getResult(String strSelectQuery) {
 
-        ArrayList<ResultDetails> list = new ArrayList<ResultDetails>();
+        ArrayList<ExamResultDetails> list = new ArrayList<ExamResultDetails>();
         String selectQuery = strSelectQuery;
         SQLiteDatabase db = this.getReadableDatabase();
         try {
@@ -368,7 +368,7 @@ public class Database extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         int nCoulumIndex = 0;
-                        ResultDetails objResultDetails = new ResultDetails();
+                        ExamResultDetails objResultDetails = new ExamResultDetails();
 
                         objResultDetails.setId(cursor.getString(nCoulumIndex++));
                         objResultDetails.setCourseId(cursor.getString(nCoulumIndex++));

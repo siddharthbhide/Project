@@ -41,6 +41,20 @@ public class ExamOptionActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
+
+        String examType = this.getIntent().getStringExtra("exam_type");
+        if (examType.equalsIgnoreCase("Level"))
+        {
+            getSupportActionBar().setTitle(getResources().getString(R.string.competitionexam));
+        }
+        else if (examType.equalsIgnoreCase("Practice"))
+        {
+            getSupportActionBar().setTitle(getResources().getString(R.string.practice_paper));
+        }
+        else if (examType.equalsIgnoreCase("Annual"))
+        {
+            getSupportActionBar().setTitle(getResources().getString(R.string.regularexam));
+        }
     }
 
     private void InitSpinner()
