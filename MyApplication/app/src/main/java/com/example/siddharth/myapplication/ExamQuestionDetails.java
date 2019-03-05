@@ -9,7 +9,7 @@ public class ExamQuestionDetails
     private String optionB;
     private String optionC;
     private String optionD;
-    private String course;
+    //private String course;
     private String answer;
     private String StudentAns;
     private String StartTime;
@@ -59,12 +59,12 @@ public class ExamQuestionDetails
         this.optionD = optionD;
     }
 
-    public String getCourse() {
+    /*public String getCourse() {
         return course;
     }
     public void setCourse(String course) {
         this.course = course;
-    }
+    }*/
 
     public String getAnswer() {
         return answer;

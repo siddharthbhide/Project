@@ -40,5 +40,7 @@
     <string name="shared_preferences_franchisee_id">FranId</string>
     <string name="shared_preferences_student_id">FranId</string>
     <string name="faq">FAQ</string>
-
+    <string name="table_question_answere">Question_Answere_Table</string>
+    <string name="table_result_details">Result_Details</string>
+    <string name="table_exam_details">Exam_Details</string>
 </resources>

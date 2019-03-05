@@ -242,7 +242,7 @@ public class WebServiceManager {
                 objExamQuestions.setOptionB(jsonobject.getString("optionB"));
                 objExamQuestions.setOptionC(jsonobject.getString("optionC"));
                 objExamQuestions.setOptionD(jsonobject.getString("optionD"));
-                objExamQuestions.setCourse(jsonobject.getString("course"));
+                //objExamQuestions.setCourse(jsonobject.getString("course"));
                 objExamQuestions.setAnswer(jsonobject.getString("answer"));
 
                 listOfExamQuestions.add(objExamQuestions);

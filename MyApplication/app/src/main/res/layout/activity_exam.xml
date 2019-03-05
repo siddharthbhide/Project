@@ -16,6 +16,7 @@
         android:layout_marginTop="33dp"
         android:text="1/10"
         android:textColor="@color/colorFont" />
+
     <TextView
         android:id="@+id/textTime"
         android:layout_width="91dp"
@@ -24,9 +25,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:text="TextView"
-        tools:text="@tools:sample/date/hhmm"
+        android:textColor="@color/colorFont"
         android:textSize="@dimen/font_size"
-        android:textColor="@color/colorFont"/>
+        tools:text="@tools:sample/date/hhmm" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -41,62 +42,50 @@
         app:srcCompat="@drawable/ic_menu_camera" />
 
     <TextView
+        android:id="@+id/Question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/exam_activity_start_margin"
         android:layout_marginTop="151dp"
         android:inputType="textMultiLine"
         android:longClickable="false"
         android:text="1. Hello, Dies ist ein Beispielsatz. 2. Dies ist der zweite Satz."
-        android:layout_marginStart="@dimen/exam_activity_start_margin"
         android:textSize="20dp" />
 
     <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textQuestionNumber"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="224dp"/>
-
-    <RadioButton
-        android:id="@+id/radioAnsFirst"
+        android:id="@+id/RGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/exam_activity_start_margin"
-        android:layout_marginBottom="223dp"
-        android:text="ANS 1" />
+        android:layout_marginStart="19dip"
+        android:layout_marginBottom="169dip">
 
-    <RadioButton
-        android:id="@+id/radioAnsSecond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/exam_activity_start_margin"
-        android:layout_marginBottom="171dp"
-        android:text="ANS 2" />
+        <RadioButton
+            android:id="@+id/radioAnsFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ANS 1" />
 
-    <RadioButton
-        android:id="@+id/radioAnsThird"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/exam_activity_start_margin"
-        android:layout_marginBottom="122dp"
-        android:text="ANS 3" />
+        <RadioButton
+            android:id="@+id/radioAnsSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ANS 2" />
 
-    <RadioButton
-        android:id="@+id/radioAnsFourth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/exam_activity_start_margin"
-        android:layout_marginBottom="122dp"
-        android:text="ANS 4" />
+        <RadioButton
+            android:id="@+id/radioAnsThird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ANS 3" />
+
+        <RadioButton
+            android:id="@+id/radioAnsFourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ANS 4" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/btnPrev"
@@ -106,6 +95,7 @@
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="16dp"
         android:layout_toStartOf="@+id/imageView2"
+        android:onClick="OnClickPrev"
         android:text="Prev" />
 
     <Button
@@ -116,8 +106,8 @@
         android:layout_marginEnd="-108dp"
         android:layout_marginBottom="16dp"
         android:layout_toStartOf="@+id/imageView2"
-        android:text="Save"
-        android:onClick="OnClickSave"/>
+        android:onClick="OnClickSave"
+        android:text="Save" />
 
     <Button
         android:id="@+id/btnNext"
@@ -127,8 +117,8 @@
         android:layout_marginEnd="-229dp"
         android:layout_marginBottom="16dp"
         android:layout_toStartOf="@+id/imageView2"
+        android:onClick="OnClickNext"
         android:text="Next" />
-
 
 
 </RelativeLayout>

@@ -38,7 +38,8 @@ public class SplashActivity extends AppCompatActivity
                         startActivity(objIntent);
                     }
                     else {
-                        objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
+                        //objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
+                        objIntent = new Intent(SplashActivity.this, ExamActivity.class);
                         startActivity(objIntent);
                     }
 

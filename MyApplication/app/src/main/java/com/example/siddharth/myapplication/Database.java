@@ -27,9 +27,9 @@ public class Database extends SQLiteOpenHelper {
     private static String DB_PATH = "";
     private final Context myContext;
 
-    public static final String TABLE_Question_Answere_Table = "Question_Answere_Table";
+   /* public static final String TABLE_Question_Answere_Table = "Question_Answere_Table";
     public static final String TABLE_Result_Details_Table = "Result_Details";
-    public static final String TABLE_Exam_Details_Table = "Exam_Details";
+    public static final String TABLE_Exam_Details_Table = "Exam_Details";*/
 
 
     //Question_Answere_Table
@@ -121,16 +121,10 @@ public class Database extends SQLiteOpenHelper {
     private long addRecord(String strTableName, ContentValues objContentValues) {
         long longRet = -1;
         try {
-
             objSQLiteDatabase = getWritableDatabase();
-            /*boolean bOpen = objSQLiteDatabase.isOpen();
-            if (objSQLiteDatabase != null && !objSQLiteDatabase.isOpen())
-                objSQLiteDatabase.close();*/
-
             objSQLiteDatabase.beginTransaction();
             longRet = objSQLiteDatabase.insert(strTableName, null, objContentValues);
             objSQLiteDatabase.setTransactionSuccessful();
-            //objSQLiteDatabase.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -140,23 +134,21 @@ public class Database extends SQLiteOpenHelper {
         return longRet;
     }
 
-    public boolean updateRecord(Integer id, String correctAns) {
-        boolean bRet = false;
+    public long updateRecord(String strTableName, ContentValues objContentValues,String id) {
+        long longRet = -1;
 
-       /* try
-        {
-            objSQLiteDatabase = this.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(Col_CorrectAns, correctAns);
-            objSQLiteDatabase.update(TABLE_NAME, contentValues, "id = ? ", new String[] { Integer.toString(id) } );
-            objSQLiteDatabase.close();
-            bRet = true;
-        }
-        catch (Exception e)
-        {
+        try {
+            objSQLiteDatabase = getWritableDatabase();
+            objSQLiteDatabase.beginTransaction();
+            longRet = objSQLiteDatabase.update(strTableName,objContentValues,Col_Question_Id+"=?",new String[] {id});
+            objSQLiteDatabase.setTransactionSuccessful();
+        } catch (Exception e) {
             e.printStackTrace();
-        }*/
-        return bRet;
+        } finally {
+            objSQLiteDatabase.endTransaction();
+        }
+
+        return longRet;
     }
 
     public void getRecord(Integer id, String question, String opt1,
@@ -199,7 +191,7 @@ public class Database extends SQLiteOpenHelper {
             objContentValues.put(Col_Exam_End_Date, objExam_Details.getEndDate());
             objContentValues.put(Col_Exam_Is_Completed, objExam_Details.getIsCompleted());
 
-            longRet = addRecord(TABLE_Exam_Details_Table, objContentValues);
+            longRet = addRecord(myContext.getString(R.string.table_exam_details), objContentValues);
 
 
         } catch (Exception objException) {
@@ -218,7 +210,7 @@ public class Database extends SQLiteOpenHelper {
             objContentValues.put(Col_QA_Opt2, objExamQuestions.getOptionB());
             objContentValues.put(Col_QA_Opt3, objExamQuestions.getOptionC());
             objContentValues.put(Col_QA_Opt4, objExamQuestions.getOptionD());
-            objContentValues.put(Col_QA_Course, objExamQuestions.getCourse());
+            //objContentValues.put(Col_QA_Course, objExamQuestions.getCourse());
             objContentValues.put(Col_QA_Correct_Ans, objExamQuestions.getAnswer());
             objContentValues.put(Col_QA_Student_Ans, objExamQuestions.getStudentAns());
             objContentValues.put(Col_QA_Time_Start, objExamQuestions.getStartTime());
@@ -227,7 +219,7 @@ public class Database extends SQLiteOpenHelper {
             objContentValues.put(Col_QA_Last_Question, objExamQuestions.getLastQuestion());
 
 
-            longRet = addRecord(TABLE_Question_Answere_Table, objContentValues);
+            longRet = addRecord(myContext.getString(R.string.table_question_answere), objContentValues);
 
         } catch (Exception objException) {
             objException.printStackTrace();
@@ -252,7 +244,7 @@ public class Database extends SQLiteOpenHelper {
             objContentValues.put(Col_Result_Wrong_Answere, objResultDetails.getWrongAnswere());
             objContentValues.put(Col_Result_Time_Per_Question, objResultDetails.getTimePerQuestion());
 
-            longRet = addRecord(TABLE_Result_Details_Table, objContentValues);
+            longRet = addRecord(myContext.getString(R.string.table_result_details), objContentValues);
 
         } catch (Exception objException) {
             objException.printStackTrace();
@@ -326,7 +318,7 @@ public class Database extends SQLiteOpenHelper {
                         objExamQuestions.setOptionB(cursor.getString(nCoulumIndex++));
                         objExamQuestions.setOptionC(cursor.getString(nCoulumIndex++));
                         objExamQuestions.setOptionD(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setCourse(cursor.getString(nCoulumIndex++));
+                        //objExamQuestions.setCourse(cursor.getString(nCoulumIndex++));
                         objExamQuestions.setAnswer(cursor.getString(nCoulumIndex++));
                         objExamQuestions.setStudentAns(cursor.getString(nCoulumIndex++));
                         objExamQuestions.setStartTime(cursor.getString(nCoulumIndex++));
@@ -441,7 +433,7 @@ public class Database extends SQLiteOpenHelper {
         boolean checkDB = false;
         try
         {
-            String myPath = DB_PATH + DATABASE_NAME;
+            String myPath = DB_PATH;
             File dbfile = new File(myPath);
             checkDB = dbfile.exists();
         }
@@ -455,7 +447,7 @@ public class Database extends SQLiteOpenHelper {
     {
 
         InputStream mInput = myContext.getAssets().open(DATABASE_NAME);
-        String outFileName = DB_PATH + DATABASE_NAME;
+        String outFileName = DB_PATH;
         OutputStream mOutput = new FileOutputStream(outFileName);
         byte[] mBuffer = new byte[2024];
         int mLength;
@@ -465,6 +457,33 @@ public class Database extends SQLiteOpenHelper {
         mOutput.flush();
         mOutput.close();
         mInput.close();
+    }
+
+    public long updateQuestion_Answere(ExamQuestionDetails objExamQuestions) {
+        long longRet = 0;
+        try {
+            ContentValues objContentValues = new ContentValues();
+            objContentValues.put(Col_QA_Exam_Id, objExamQuestions.getId());
+            objContentValues.put(Col_QA_Question, objExamQuestions.getDescription());
+            objContentValues.put(Col_QA_Opt1, objExamQuestions.getOptionA());
+            objContentValues.put(Col_QA_Opt2, objExamQuestions.getOptionB());
+            objContentValues.put(Col_QA_Opt3, objExamQuestions.getOptionC());
+            objContentValues.put(Col_QA_Opt4, objExamQuestions.getOptionD());
+            //objContentValues.put(Col_QA_Course, objExamQuestions.getCourse());
+            objContentValues.put(Col_QA_Correct_Ans, objExamQuestions.getAnswer());
+            objContentValues.put(Col_QA_Student_Ans, objExamQuestions.getStudentAns());
+            objContentValues.put(Col_QA_Time_Start, objExamQuestions.getStartTime());
+            objContentValues.put(Col_QA_Time_End, objExamQuestions.getEndTime());
+            objContentValues.put(Col_QA_Exam_Id, objExamQuestions.getExamId());
+            objContentValues.put(Col_QA_Last_Question, objExamQuestions.getLastQuestion());
+
+
+            longRet = updateRecord(myContext.getString(R.string.table_question_answere), objContentValues,objExamQuestions.getId());
+
+        } catch (Exception objException) {
+            objException.printStackTrace();
+        }
+        return longRet;
     }
 
 }
