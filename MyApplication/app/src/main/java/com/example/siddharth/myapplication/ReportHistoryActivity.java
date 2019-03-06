@@ -20,7 +20,7 @@ public class ReportHistoryActivity extends AppCompatActivity
     ListView listView = null;
     ExamHistoryAdaptor adaptor = null;
     NavigationListener navigationLitener = null;
-
+    Database objDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,9 +40,9 @@ public class ReportHistoryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
-
-
-        ArrayList<HistoryDetails> items = new ArrayList<>();
+        objDatabase = new Database(getApplicationContext());
+        getResultFromDatabase();
+        /*ArrayList<HistoryDetails> items = new ArrayList<>();
         for (int i=0; i<10; i++)
         {
             ExamDetails examDetails = new ExamDetails();
@@ -59,11 +59,36 @@ public class ReportHistoryActivity extends AppCompatActivity
         adaptor = new ExamHistoryAdaptor(getApplicationContext(), items);
 
         listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adaptor);
+        listView.setAdapter(adaptor);*/
     }
     public void onClickDisplayReport(View view)
     {
         Intent objIntent = new Intent(this,ReportActivity.class);
         startActivity(objIntent);
+    }
+
+    void InitExamHistoryAdaptor()
+    {
+
+    }
+    void getResultFromDatabase(){
+
+        ArrayList<HistoryDetails> items = new ArrayList<>();
+        String strQuery = "Select * from " + getString(R.string.table_exam_details) +
+                " where Is_Completed = 1";
+        ArrayList<ExamDetails> objExamDetails = new ArrayList<>();
+        objExamDetails = objDatabase.getExam_Details(strQuery);
+
+        for (int nIndex=0; nIndex < objExamDetails.size(); nIndex++)
+        {
+            HistoryDetails details = new HistoryDetails();
+            details.setExamDetails(objExamDetails.get(nIndex));
+            items.add(details);
+        }
+        adaptor = new ExamHistoryAdaptor(getApplicationContext(), items);
+
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adaptor);
+
     }
 }
