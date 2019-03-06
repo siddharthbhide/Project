@@ -67,18 +67,9 @@ public class ReportHistoryActivity extends AppCompatActivity
         startActivity(objIntent);
     }
 
-    void InitExamHistoryAdaptor()
+    void initExamHistoryAdaptor(ArrayList<ExamDetails> objExamDetails)
     {
-
-    }
-    void getResultFromDatabase(){
-
         ArrayList<HistoryDetails> items = new ArrayList<>();
-        String strQuery = "Select * from " + getString(R.string.table_exam_details) +
-                " where Is_Completed = 1";
-        ArrayList<ExamDetails> objExamDetails = new ArrayList<>();
-        objExamDetails = objDatabase.getExam_Details(strQuery);
-
         for (int nIndex=0; nIndex < objExamDetails.size(); nIndex++)
         {
             HistoryDetails details = new HistoryDetails();
@@ -86,9 +77,14 @@ public class ReportHistoryActivity extends AppCompatActivity
             items.add(details);
         }
         adaptor = new ExamHistoryAdaptor(getApplicationContext(), items);
-
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adaptor);
-
+    }
+    void getResultFromDatabase(){
+        String strQuery = "Select * from " + getString(R.string.table_exam_details) +
+                " where Is_Completed = 1";
+        ArrayList<ExamDetails> objExamDetails = new ArrayList<>();
+        objExamDetails = objDatabase.getExam_Details(strQuery);
+        initExamHistoryAdaptor(objExamDetails);
     }
 }
