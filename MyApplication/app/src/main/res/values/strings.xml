@@ -38,9 +38,13 @@
     <string name="about_us_2">CSD Foundation runs world class skill development programmes those make a significant impact on the mental potential of children. CSD Foundation is managed by a team of professionals. CSD Foundation include Abacus (fast/slow track), Smart handwriting (English - plain &amp; cursive, Devnagari), Smart English, Mid brain activation and Vedic Maths. These scientifically researched programmes, with world-class standards, have proved themselves over the years. </string>
     <string name="url_franchisee_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateFranchieseLogin.php</string>
     <string name="shared_preferences_franchisee_id">FranId</string>
-    <string name="shared_preferences_student_id">FranId</string>
+    <string name="shared_preferences_student_id">studId</string>
+    <string name="shared_preferences_student_uname">studUserName</string>
+    <string name="shared_preferences_student_passwd">studPasswd</string>
     <string name="faq">FAQ</string>
     <string name="table_question_answere">Question_Answere_Table</string>
     <string name="table_result_details">Result_Details</string>
     <string name="table_exam_details">Exam_Details</string>
+    <string name="preferences">CSDPref</string>
+
 </resources>

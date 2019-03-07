@@ -287,8 +287,8 @@ public class WebServiceManager {
 
                             jsonobject = null;
                             jsonobject = new JSONObject(response);
-                            strResult = jsonobject.getString("result");
-                            objRegistrationFormActivity.isStudedntInfromationUpdated(strResult);
+                            //strResult = jsonobject.getString("result");
+                            objRegistrationFormActivity.isStudedntInfromationUpdated(jsonobject);
 
                         } catch (Exception objException) {
                             objException.printStackTrace();

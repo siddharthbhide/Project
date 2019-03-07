@@ -41,6 +41,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -345,30 +346,29 @@ public class RegistrationFormActivity extends AppCompatActivity {
     }
 
 
-    public void isStudedntInfromationUpdated(String strResponse)
+    public void isStudedntInfromationUpdated(JSONObject jsonobject)
     {
-        JSONObject jsonobject = null;
-        String strResult = "";
+        try
+        {
 
-        try {
-            jsonobject = new JSONObject(strResponse);
-            strResult = jsonobject.getString("result");
+            String strResult = jsonobject.getString("result");
             if (0 != strResult.compareToIgnoreCase("0")) {
                 /*check is student register on first time
                 * if he is register 1st time then save his ID and display username and pssword
                 * else do nothing*/
-                prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                String strStudentId = prefs.getString(getString( R.string.shared_preferences_student_id), "");
-                if(0== strStudentId.compareToIgnoreCase("")) {
-                    String strFranId = jsonobject.getString("id");
-                    String strstudentId = jsonobject.getString("stu_id");
-                    String strUserName = jsonobject.getString("uName");
-                    String strPassword = jsonobject.getString("passwd");
+                prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
+                String strStudentId = prefs.getString(getString( R.string.shared_preferences_student_id), "000");
+                if(0 == strStudentId.compareToIgnoreCase("000")) {
+                    String studentId = jsonobject.getString("id");
+                    String userName = jsonobject.getString("userName");
+                    String passwd = jsonobject.getString("passwd");
                     /*Save data on globally */
 
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString(getString(R.string.shared_preferences_student_id), strstudentId);
-                    editor.commit(); //important, otherwise it wouldn't save.
+                    editor.putString(getString(R.string.shared_preferences_student_id), studentId);
+                    editor.putString(getString(R.string.shared_preferences_student_uname), userName);
+                    editor.putString(getString(R.string.shared_preferences_student_passwd), passwd);
+                    editor.commit();
                 }
             }
             else
@@ -390,6 +390,8 @@ public class RegistrationFormActivity extends AppCompatActivity {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
+
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
@@ -397,7 +399,9 @@ public class RegistrationFormActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        datePickerAdmissionDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        DecimalFormat mFormat= new DecimalFormat("00");
+                        String day = mFormat.format(Double.valueOf(dayOfMonth));
+                        datePickerAdmissionDate.setText(day + "-" + (monthOfYear + 1) + "-" + year);
 
                     }
                 }, mYear, mMonth, mDay);
@@ -419,7 +423,9 @@ public class RegistrationFormActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        datePickerDOB.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        DecimalFormat mFormat= new DecimalFormat("00");
+                        String day = mFormat.format(Double.valueOf(dayOfMonth));
+                        datePickerDOB.setText(day + "-" + (monthOfYear + 1) + "-" + year);
 
                     }
                 }, mYear, mMonth, mDay);
