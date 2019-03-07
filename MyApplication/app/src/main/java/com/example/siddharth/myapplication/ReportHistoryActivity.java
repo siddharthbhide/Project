@@ -80,6 +80,7 @@ public class ReportHistoryActivity extends AppCompatActivity
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adaptor);
     }
+
     void getResultFromDatabase(){
         String strQuery = "Select * from " + getString(R.string.table_exam_details) +
                 " where Is_Completed = 1";
