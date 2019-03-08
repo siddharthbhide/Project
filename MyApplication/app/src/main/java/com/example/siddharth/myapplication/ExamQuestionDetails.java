@@ -1,7 +1,10 @@
 package com.example.siddharth.myapplication;
 
 
-public class ExamQuestionDetails
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ExamQuestionDetails implements Parcelable
 {
     private String id;
     private String description;
@@ -107,4 +110,62 @@ public class ExamQuestionDetails
     public void setLastQuestion(String lastQuestion) {
         LastQuestion = lastQuestion;
     }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(this.id);
+        dest.writeString(this.description);
+        dest.writeString(this.optionA);
+        dest.writeString(this.optionB);
+        dest.writeString(this.optionC);
+        dest.writeString(this.optionD);
+        dest.writeString(this.answer);
+        dest.writeString(this.StudentAns);
+        dest.writeString(this.StartTime);
+        dest.writeString(this.EndTime);
+        dest.writeString(this.ExamId);
+        dest.writeString(this.LastQuestion);
+    }
+
+    public ExamQuestionDetails()
+    {
+    }
+
+    protected ExamQuestionDetails(Parcel in)
+    {
+        this.id = in.readString();
+        this.description = in.readString();
+        this.optionA = in.readString();
+        this.optionB = in.readString();
+        this.optionC = in.readString();
+        this.optionD = in.readString();
+        this.answer = in.readString();
+        this.StudentAns = in.readString();
+        this.StartTime = in.readString();
+        this.EndTime = in.readString();
+        this.ExamId = in.readString();
+        this.LastQuestion = in.readString();
+    }
+
+    public static final Parcelable.Creator<ExamQuestionDetails> CREATOR = new Parcelable.Creator<ExamQuestionDetails>()
+    {
+        @Override
+        public ExamQuestionDetails createFromParcel(Parcel source)
+        {
+            return new ExamQuestionDetails(source);
+        }
+
+        @Override
+        public ExamQuestionDetails[] newArray(int size)
+        {
+            return new ExamQuestionDetails[size];
+        }
+    };
 }

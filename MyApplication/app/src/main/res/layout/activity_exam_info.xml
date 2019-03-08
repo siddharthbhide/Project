@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical"
+                android:layout_marginTop="15dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:layout_marginLeft="@dimen/tenPixels"
+                android:layout_marginRight="@dimen/tenPixels"
+                android:layout_marginBottom="15dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="Exam Name :"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/tenPixels"
+                    android:textColor="@color/colorLemon"/>
+
+                <TextView
+                    android:id="@+id/txtExamName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="Abacus Exam March 2019"
+                    android:layout_marginTop="5dip"
+                    android:textColor="@color/colorGrey"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="Course :"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dip"
+                    android:textColor="@color/colorLemon"/>
+
+                <TextView
+                    android:id="@+id/txtCourse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="Abacus"
+                    android:layout_marginTop="5dip"
+                    android:textColor="@color/colorGrey"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="Level :"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dip"
+                    android:textColor="@color/colorLemon"/>
+
+                <TextView
+                    android:id="@+id/txtCourseLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="FT-L1"
+                    android:layout_marginTop="5dip"
+                    android:textColor="@color/colorGrey"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="Exam Validity Info :"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dip"
+                    android:textColor="@color/colorLemon"/>
+
+                <TextView
+                    android:id="@+id/txtValidDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size"
+                    android:text="02-03-2019"
+                    android:layout_marginTop="5dip"
+                    android:textColor="@color/colorGrey"/>
+
+                <Button
+                    android:id="@+id/btnSend"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dip"
+                    android:background="@color/colorPrimary"
+                    android:onClick="onStartExam"
+                    android:text=" START EXAM "
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/font_size"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </ScrollView>

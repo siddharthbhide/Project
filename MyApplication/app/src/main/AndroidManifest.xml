@@ -61,6 +61,8 @@
         <activity android:name=".ReportHistoryActivity"
             android:label="@string/report_history"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".ExamInfoActivity" />
     </application>
 
 </manifest>

@@ -1,7 +1,10 @@
 package com.example.siddharth.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,7 +33,6 @@ public class WebServiceManager {
     Context objContext;
     StudentDetails objStudentDetails;
     ExamDetails objExam_Details;
-    ExamQuestionDetails objExamQuestions;
     List<ExamQuestionDetails> listOfExamQuestions = new ArrayList();
     String strResult;
     JSONObject jsonobject = null;
@@ -139,7 +141,7 @@ public class WebServiceManager {
         }
     }
 
-    public void getExamDetails(String strUrl, final String strExam_Code) {
+    public void getExamDetails(String strUrl, final String strExam_Code, final ExamOptionActivity activity) {
 
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
@@ -147,7 +149,11 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            CheckExam_CodeDetails(response);
+                            ExamDetails examDetails = CheckExam_CodeDetails(response);
+                            if (activity != null)
+                            {
+                                activity.showExamInfo(examDetails);
+                            }
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
@@ -171,7 +177,7 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
-    private void CheckExam_CodeDetails(String strResponse) {
+    private ExamDetails CheckExam_CodeDetails(String strResponse) {
 
         jsonobject = null;
         strResult = "";
@@ -179,6 +185,7 @@ public class WebServiceManager {
             jsonobject = new JSONObject(strResponse);
             strResult = jsonobject.getString("result");
             if (0 == strResult.compareToIgnoreCase("1")) {
+                objExam_Details = new ExamDetails();
                 objExam_Details.setId(jsonobject.getString("id"));
                 objExam_Details.setName(jsonobject.getString("name"));
                 objExam_Details.setCourse(jsonobject.getString("course"));
@@ -187,14 +194,20 @@ public class WebServiceManager {
                 objExam_Details.setStartDate(jsonobject.getString("startDate"));
                 objExam_Details.setEndDate(jsonobject.getString("endDate"));
                 objExam_Details.setIsCompleted(jsonobject.getString("isCompleted"));
+
+                return  objExam_Details;
+            }
+            else
+            {
+                Toast.makeText(this.objContext, "Please enter valida exam code", Toast.LENGTH_LONG).show();
             }
         } catch (Exception objException) {
             objException.printStackTrace();
         }
-
+        return null;
     }
 
-    public void getExamQuestion(String strUrl, final String strExamId) {
+    public void getExamQuestion(String strUrl, final String strExamId, final ExamInfoActivity activity) {
 
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
@@ -202,8 +215,11 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            CheckExamQuestion(response);
-
+                            ArrayList<ExamQuestionDetails> questions = CheckExamQuestion(response);
+                            if (activity != null)
+                            {
+                                activity.onReceiveQuestions(questions);
+                            }
                         } catch (Exception objException) {
                             objException.printStackTrace();
                         }
@@ -226,31 +242,44 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
-    private void CheckExamQuestion(String strResponse) {
+    private ArrayList<ExamQuestionDetails> CheckExamQuestion(String strResponse) {
 
+        ArrayList<ExamQuestionDetails> result = new ArrayList<ExamQuestionDetails>();
         JSONArray jsonarray = null;
         strResult = "";
 
         try {
             jsonarray = new JSONArray(strResponse);
-            for (int nIndex = 0; nIndex < jsonarray.length(); nIndex++) {
+            if(jsonarray.length() > 0)
+            {
+                for (int i = 0; i < jsonarray.length(); i++)
+                {
 
-                jsonobject = jsonarray.getJSONObject(nIndex);
-                objExamQuestions.setId(jsonobject.getString("id"));
-                objExamQuestions.setDescription(jsonobject.getString("description"));
-                objExamQuestions.setOptionA(jsonobject.getString("optionA"));
-                objExamQuestions.setOptionB(jsonobject.getString("optionB"));
-                objExamQuestions.setOptionC(jsonobject.getString("optionC"));
-                objExamQuestions.setOptionD(jsonobject.getString("optionD"));
-                //objExamQuestions.setCourse(jsonobject.getString("course"));
-                objExamQuestions.setAnswer(jsonobject.getString("answer"));
+                    jsonobject = (JSONObject) jsonarray.get(i);
 
-                listOfExamQuestions.add(objExamQuestions);
+                    ExamQuestionDetails objExamQuestions = new ExamQuestionDetails();
+                    objExamQuestions.setId(jsonobject.getString("id"));
+                    objExamQuestions.setDescription(jsonobject.getString("description"));
+                    objExamQuestions.setOptionA(jsonobject.getString("optionA"));
+                    objExamQuestions.setOptionB(jsonobject.getString("optionB"));
+                    objExamQuestions.setOptionC(jsonobject.getString("optionC"));
+                    objExamQuestions.setOptionD(jsonobject.getString("optionD"));
+                    objExamQuestions.setAnswer(jsonobject.getString("answer"));
+
+                    result.add(objExamQuestions);
+                }
+            }
+            else
+            {
+                Toast.makeText(objContext, "Not a single question available for this exam", Toast.LENGTH_LONG).show();
             }
 
-        } catch (Exception objException) {
+        } catch (Exception objException)
+        {
             objException.printStackTrace();
+            Toast.makeText(objContext, "Error occurred for this exam. Please contact CSD.", Toast.LENGTH_LONG).show();
         }
+        return  result;
     }
 
     public void getNetworkList(String strUrl, final LoginActivity objLoginActivity) {

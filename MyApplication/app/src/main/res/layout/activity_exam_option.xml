@@ -36,7 +36,7 @@
             android:layout_marginLeft="@dimen/tenPixels"
             android:layout_marginRight="@dimen/tenPixels">
 
-            <TextView
+            <!--<TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dip"
@@ -70,20 +70,20 @@
                 android:layout_height="40dip"
                 android:layout_marginTop="@dimen/tenPixels"
                 android:textSize="@dimen/font_size"
-                android:background="@color/colorGrey" />
+                android:background="@color/colorGrey" />-->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dip"
                 android:layout_marginTop="20dip"
-                android:text="Exam Code"
+                android:text="Enter Exam Code"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_size"
                 />
 
             <EditText
-                android:id="@+id/editTextUserName"
+                android:id="@+id/editExamCode"
                 android:layout_width="match_parent"
                 android:layout_height="40dip"
                 android:layout_below="@id/textViewFranchisePassword"

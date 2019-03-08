@@ -1,6 +1,9 @@
 package com.example.siddharth.myapplication;
 
-public class ExamDetails
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ExamDetails implements Parcelable
 {
 
     private String id;
@@ -67,5 +70,55 @@ public class ExamDetails
     public void setIsCompleted(String isCompleted) {
         this.isCompleted = isCompleted;
     }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.course);
+        dest.writeString(this.level);
+        dest.writeString(this.type);
+        dest.writeString(this.startDate);
+        dest.writeString(this.endDate);
+        dest.writeString(this.isCompleted);
+    }
+
+    public ExamDetails()
+    {
+    }
+
+    protected ExamDetails(Parcel in)
+    {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.course = in.readString();
+        this.level = in.readString();
+        this.type = in.readString();
+        this.startDate = in.readString();
+        this.endDate = in.readString();
+        this.isCompleted = in.readString();
+    }
+
+    public static final Parcelable.Creator<ExamDetails> CREATOR = new Parcelable.Creator<ExamDetails>()
+    {
+        @Override
+        public ExamDetails createFromParcel(Parcel source)
+        {
+            return new ExamDetails(source);
+        }
+
+        @Override
+        public ExamDetails[] newArray(int size)
+        {
+            return new ExamDetails[size];
+        }
+    };
 }
 

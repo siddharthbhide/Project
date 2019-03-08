@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class ExamOptionActivity extends AppCompatActivity
     Spinner spinnerOfCourse;
     Spinner spinnerOfLevel;
     NavigationListener navigationLitener = null;
+    String examType = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +46,7 @@ public class ExamOptionActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
 
         String examType = this.getIntent().getStringExtra("exam_type");
+        this.examType = examType;
         if (examType.equalsIgnoreCase("Level"))
         {
             getSupportActionBar().setTitle(getResources().getString(R.string.competitionexam));
@@ -59,7 +63,7 @@ public class ExamOptionActivity extends AppCompatActivity
 
     private void InitSpinner()
     {
-        spinnerOfCourse = (Spinner) findViewById(R.id.spinnerCourse);
+        /*spinnerOfCourse = (Spinner) findViewById(R.id.spinnerCourse);
         listOfCourse.add("Select Course");
         listOfCourse.add("CSD Abacus");
         listOfCourse.add("CSD Vedic Maths");
@@ -76,12 +80,32 @@ public class ExamOptionActivity extends AppCompatActivity
         ArrayAdapter adapterLevel = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfLevel);
         adapterLevel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfLevel.setAdapter(adapterLevel);
-
+    */
 
     }
 
     public void validateExamCode(View view)
     {
+        EditText txtCode = (EditText)findViewById(R.id.editExamCode);
+        String examCode = txtCode.getText().toString();
+        if (!examCode.isEmpty())
+        {
+            WebServiceManager.getInstance(getApplicationContext()).getExamDetails(getString(R.string.url_validate_exam), examCode, this);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Please enter valid exam code", Toast.LENGTH_LONG).show();
+        }
+    }
 
+    public void showExamInfo(ExamDetails examDetails)
+    {
+        if (examDetails != null)
+        {
+            Intent intent = new Intent(ExamOptionActivity.this, ExamInfoActivity.class);
+            intent.putExtra("exam_details", examDetails);
+            intent.putExtra("exam_type", this.examType);
+            startActivity(intent);
+        }
     }
 }

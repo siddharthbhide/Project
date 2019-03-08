@@ -16,12 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 public class ExamActivity extends AppCompatActivity {
 
-    String question;
-    String opt1;
-    String opt2;
-    String opt3;
-    String opt4;
-    String ans;
     private TextView objTimeView;
     Database objDatabase;
 
@@ -47,6 +41,9 @@ public class ExamActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
+
+        listOfQuestions =  getIntent().getParcelableArrayListExtra("questions");
+
         InitVariables();
         countDownTimer.start();
 
@@ -90,7 +87,7 @@ public class ExamActivity extends AppCompatActivity {
         objTimeView.setText("00:00:00");
         objDatabase = new Database(getApplicationContext());
         //setQuestionInDatabse();
-        getQuestionFromDatabase();
+        //getQuestionFromDatabase();
         displayQuestion(nQuestionIndex);
     }
 

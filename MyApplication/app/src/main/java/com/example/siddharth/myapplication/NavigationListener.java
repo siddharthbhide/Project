@@ -3,6 +3,7 @@ package com.example.siddharth.myapplication;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -27,7 +28,20 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
         int id = menuItem.getItemId();
         Intent objIntent = null;
 
-        if (id == R.id.nav_gotowebsite) {
+        if (id == R.id.nav_home)
+        {
+            if (isFranchieseLoggedin())
+            {
+                objIntent = new Intent(this.activity, RegistrationFormActivity.class);
+            }
+            else
+            {
+                objIntent = new Intent(this.activity, LoginActivity.class);
+            }
+
+            cntx.startActivity(objIntent);
+        }
+        else if (id == R.id.nav_gotowebsite) {
 
             objIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://csdfoundation.co.in/index.php"));
             cntx.startActivity(objIntent);
@@ -71,5 +85,22 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
         DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public boolean isFranchieseLoggedin()
+    {
+        boolean result = false;
+
+        SharedPreferences prefs = this.cntx.getSharedPreferences(this.cntx.getString(R.string.preferences), 0);
+        if (prefs != null)
+        {
+            String frId = prefs.getString(this.cntx.getString(R.string.shared_preferences_franchisee_id), null);
+            if (frId != null)
+            {
+                result = true;
+            }
+        }
+
+        return result;
     }
 }

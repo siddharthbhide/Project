@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -113,12 +115,12 @@ public class RegistrationFormActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.registration_form, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -281,24 +283,36 @@ public class RegistrationFormActivity extends AppCompatActivity {
         listOfCourse.add("Select Item from List");
         listOfCourse.add("Abacus");
         listOfCourse.add("Vedic Maths");
-        listOfCourse.add("Smart Writing");
-        listOfCourse.add("Smart English");
-        listOfCourse.add("Mind Activation");
         ArrayAdapter adapterOfCourse = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfCourse);
         adapterOfCourse.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourseName.setAdapter(adapterOfCourse);
 
+        spinnerCourseName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                String[] items = {"Select Level"};
+                if (i == 1)
+                {
+                    items = getResources().getStringArray(R.array.abacusLevels);
+                }
+                if (i == 2)
+                {
+                    items = getResources().getStringArray(R.array.vedicMathLevels);
+                }
+                listOfCourseLevel = new ArrayList<String>(Arrays.asList(items));
+                ArrayAdapter adapterOfCourseLevel = new ArrayAdapter(RegistrationFormActivity.this, android.R.layout.simple_spinner_item, listOfCourseLevel);
+                adapterOfCourseLevel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerCourseLevel.setAdapter(adapterOfCourseLevel);
+            }
 
-        listOfCourseLevel.add("Select Item from List");
-        listOfCourseLevel.add("1");
-        listOfCourseLevel.add("2");
-        listOfCourseLevel.add("3");
-        listOfCourseLevel.add("4");
-        listOfCourseLevel.add("5");
-        ArrayAdapter adapterOfCourseLevel = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfCourseLevel);
-        adapterOfCourse.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCourseLevel.setAdapter(adapterOfCourseLevel);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
 
+            }
+        });
     }
 
 
@@ -323,7 +337,7 @@ public class RegistrationFormActivity extends AppCompatActivity {
             params.put("courseLevel", spinnerCourseLevel.getSelectedItem().toString());
             params.put("email", editEmail.getText().toString());
 
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
             String strFranId = prefs.getString(getString( R.string.shared_preferences_franchisee_id), "0");
             strFranId = "63";
             params.put("franId", strFranId);
@@ -356,8 +370,7 @@ public class RegistrationFormActivity extends AppCompatActivity {
                 /*check is student register on first time
                 * if he is register 1st time then save his ID and display username and pssword
                 * else do nothing*/
-                prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
-                String strStudentId = prefs.getString(getString( R.string.shared_preferences_student_id), "000");
+                 String strStudentId = prefs.getString(getString( R.string.shared_preferences_student_id), "000");
                 if(0 == strStudentId.compareToIgnoreCase("000")) {
                     String studentId = jsonobject.getString("id");
                     String userName = jsonobject.getString("userName");

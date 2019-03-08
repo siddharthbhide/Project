@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExamActivity">
+    tools:context=".ExamActivity"
+    android:background="@drawable/rounded_bg"
+    android:layout_margin="5dip">
 
     <TextView
         android:id="@+id/textQuestionNumber"
@@ -15,7 +17,7 @@
         android:layout_marginStart="@dimen/exam_activity_start_margin"
         android:layout_marginTop="33dp"
         android:text="1/10"
-        android:textColor="@color/colorFont" />
+        android:textColor="@color/colorGrey" />
 
     <TextView
         android:id="@+id/textTime"
@@ -25,7 +27,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:text="TextView"
-        android:textColor="@color/colorFont"
+        android:textColor="@color/colorGrey"
         android:textSize="@dimen/font_size"
         tools:text="@tools:sample/date/hhmm" />
 
@@ -51,7 +53,8 @@
         android:inputType="textMultiLine"
         android:longClickable="false"
         android:text="1. Hello, Dies ist ein Beispielsatz. 2. Dies ist der zweite Satz."
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textColor="@color/colorGrey"/>
 
     <RadioGroup
         android:id="@+id/RGroup"
@@ -66,25 +69,34 @@
             android:id="@+id/radioAnsFirst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ANS 1" />
+            android:text="ANS 1"
+            android:textColor="@color/colorGrey"
+            android:backgroundTint="@color/colorWhite"
+            android:foregroundTint="@color/colorWhite"/>
 
         <RadioButton
             android:id="@+id/radioAnsSecond"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ANS 2" />
+            android:text="ANS 2"
+            android:textColor="@color/colorGrey"
+
+            android:backgroundTint="@color/colorWhite"
+            android:foregroundTint="@color/colorWhite"/>
 
         <RadioButton
             android:id="@+id/radioAnsThird"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ANS 3" />
+            android:text="ANS 3"
+            android:textColor="@color/colorGrey"/>
 
         <RadioButton
             android:id="@+id/radioAnsFourth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ANS 4" />
+            android:text="ANS 4"
+            android:textColor="@color/colorGrey"/>
     </RadioGroup>
 
     <Button

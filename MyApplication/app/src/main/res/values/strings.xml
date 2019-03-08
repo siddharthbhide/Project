@@ -23,20 +23,26 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_contact_us">Contact Us</string>
     <string name="title_activity_about_us">About Us</string>
+    <string name="home">Home</string>
     <string name="go_to_website">Go To Website</string>
     <string name="practice_paper">Practice Paper</string>
     <string name="level_exam">Level Exam</string>
     <string name="online_exam">Competition Exam</string>
     <string name="report_history">Report History</string>
+    <string name="exam_info">Exam Information</string>
     <string name="rule">Exam Rules</string>
     <string name="result">Result</string>
     <string name="new_notification">New Notification</string>
     <string name="result_details">Exam Result Details</string>
+
     <string name="url_network_list">http://csdfoundation.co.in/admin/webservices/getNetworkList.php</string>
     <string name="url_save_update_student_details">http://csdfoundation.co.in/online_exam/admin/webservices/saveStudentDetails.php</string>
+    <string name="url_franchisee_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateFranchieseLogin.php</string>
+    <string name="url_validate_exam">http://csdfoundation.co.in/online_exam/admin/webservices/getExamDetails.php</string>
+    <string name="url_get_questions">http://csdfoundation.co.in/online_exam/admin/webservices/getQuestionsForExam.php</string>
+
     <string name="about_us_1">CSD Foundation is a children skills development organization, headquartered in Pune, India. Various programs offered by Foundation, have been developed after years of research &amp; testing and are of international standards. These programs focus on developing various skills in children. In the process of developing skills they improve the learning ability of the child. </string>
     <string name="about_us_2">CSD Foundation runs world class skill development programmes those make a significant impact on the mental potential of children. CSD Foundation is managed by a team of professionals. CSD Foundation include Abacus (fast/slow track), Smart handwriting (English - plain &amp; cursive, Devnagari), Smart English, Mid brain activation and Vedic Maths. These scientifically researched programmes, with world-class standards, have proved themselves over the years. </string>
-    <string name="url_franchisee_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateFranchieseLogin.php</string>
     <string name="shared_preferences_franchisee_id">FranId</string>
     <string name="shared_preferences_student_id">studId</string>
     <string name="shared_preferences_student_uname">studUserName</string>
@@ -46,5 +52,53 @@
     <string name="table_result_details">Result_Details</string>
     <string name="table_exam_details">Exam_Details</string>
     <string name="preferences">CSDPref</string>
+    <string-array name="abacusLevels">
+        <item>Beginer</item>
+        <item>FT-L1</item>
+        <item>FT-L2</item>
+        <item>FT-L3</item>
+        <item>FT-L4</item>
+        <item>FT-L5</item>
+        <item>FT-L6</item>
+        <item>FT-L7</item>
+        <item>ST-L1</item>
+        <item>ST-L2</item>
+        <item>ST-L3</item>
+        <item>ST-L4</item>
+        <item>ST-L5</item>
+        <item>ST-L6</item>
+        <item>ST-L7</item>
+        <item>ST-L8</item>
+    </string-array>
 
+    <string-array name="vedicMathLevels">
+        <item>L1</item>
+        <item>L2</item>
+        <item>L3</item>
+        <item>L4</item>
+    </string-array>
+
+    <string-array name="smartWritingLevels">
+        <item>Plain</item>
+        <item>Cursive</item>
+        <item>Devnagri</item>
+        <item>Hindi</item>
+    </string-array>
+
+    <string-array name="mindActivationLevels">
+        <item>L1</item>
+        <item>L2</item>
+        <item>L3</item>
+    </string-array>
+
+    <string-array name="knowledgeProLevels">
+        <item>L1</item>
+        <item>L2</item>
+        <item>L3</item>
+        <item>L4</item>
+        <item>L5</item>
+        <item>L6</item>
+        <item>L7</item>
+        <item>L8</item>
+    </string-array>
 </resources>

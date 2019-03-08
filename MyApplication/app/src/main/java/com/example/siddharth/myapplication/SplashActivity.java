@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity
                 if(isNetworkAvailable())
                 {
                     /*Check if student is already register then do not go to franchise login page*/
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
                     String strFranId = prefs.getString(getString( R.string.shared_preferences_franchisee_id), "0");
 
                     if(0 ==strFranId.compareToIgnoreCase("0")) {
@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity
                     }
                     else {
                         //objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
-                        objIntent = new Intent(SplashActivity.this, ExamActivity.class);
+                        objIntent = new Intent(SplashActivity.this, RegistrationFormActivity.class);
                         startActivity(objIntent);
                     }
 
