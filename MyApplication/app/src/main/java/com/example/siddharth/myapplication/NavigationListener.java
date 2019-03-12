@@ -39,38 +39,46 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
                 objIntent = new Intent(this.activity, LoginActivity.class);
             }
 
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_gotowebsite) {
 
             objIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://csdfoundation.co.in/index.php"));
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_gallery) {
             objIntent = new Intent(this.activity, AboutUsActivity.class);
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_level_exam) {
             objIntent = new Intent(this.activity, ExamOptionActivity.class);
             objIntent.putExtra("exam_type", "Level");
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_practice_paper) {
             objIntent = new Intent(this.activity, ExamOptionActivity.class);
             objIntent.putExtra("exam_type", "Practice");
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_online_exam) {
             objIntent = new Intent(this.activity, ExamOptionActivity.class);
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             objIntent.putExtra("exam_type", "Annual");
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_report_history) {
             objIntent = new Intent(this.activity, ReportHistoryActivity.class);
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_rule) {
             objIntent = new Intent(this.activity, RulesActivity.class);
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
         else if (id == R.id.nav_faq) {
@@ -78,6 +86,7 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
         }
         else if (menuItem.getTitle().equals("Contact Us")) {
             objIntent = new Intent(this.activity, ContactUsActivity.class);
+            objIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);/*Ref:- https://stackoverflow.com/questions/3918517/calling-startactivity-from-outside-of-an-activity-context*/
             cntx.startActivity(objIntent);
         }
 
