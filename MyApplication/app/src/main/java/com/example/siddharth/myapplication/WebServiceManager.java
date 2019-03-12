@@ -1,6 +1,7 @@
 package com.example.siddharth.myapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -36,6 +37,7 @@ public class WebServiceManager {
     List<ExamQuestionDetails> listOfExamQuestions = new ArrayList();
     String strResult;
     JSONObject jsonobject = null;
+    private ProgressDialog objProgress;
 
     private WebServiceManager(Context context) {
         objContext = context;
@@ -373,6 +375,18 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
+    public void showProgressBar(Context context){
+        try {
+            objProgress = ProgressDialog.show(context, "Loading","Wait while loading...");
+            objProgress.show();
+        }catch (Exception objException) {
+            objException.printStackTrace();
+        }
+    }
+
+    public void stopProgressBar(){
+        objProgress.dismiss();
+    }
 
 }
 

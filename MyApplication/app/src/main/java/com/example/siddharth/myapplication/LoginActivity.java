@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         objWebServiceManager = WebServiceManager.getInstance(getApplicationContext());
+        objWebServiceManager.showProgressBar(this);
         objWebServiceManager.getNetworkList(getString(R.string.url_network_list),this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         InitSpinner();
+        objWebServiceManager.stopProgressBar();
     }
 
     private void InitVariables() {
@@ -203,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
             if (0 != strResult.compareToIgnoreCase("0")) {
                 String strFranId = jsonobject.getString("id");
                 /*Save data on globally */
-                prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
+                prefs = getApplicationContext().getSharedPreferences(getString(R.string.shared_preferences_franchisee_id), 0);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(getString( R.string.shared_preferences_franchisee_id), strFranId);
                 editor.commit(); //important, otherwise it wouldn't save.
