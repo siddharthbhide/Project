@@ -6,48 +6,49 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/home" />
         <item
             android:id="@+id/nav_gotowebsite"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_website"
             android:title="@string/go_to_website" />
         <item
             android:id="@+id/nav_practice_paper"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_paper"
             android:title="@string/practice_paper" />
         <item
             android:id="@+id/nav_level_exam"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_exam"
             android:title="@string/level_exam" />
         <item
             android:id="@+id/nav_online_exam"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_online_test"
             android:title="@string/online_exam" />
         <item
             android:id="@+id/nav_report_history"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_report"
             android:title="@string/report_history" />
         <item
             android:id="@+id/nav_rule"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_rules"
             android:title="@string/rule" />
         <item
             android:id="@+id/nav_faq"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_faq"
             android:title="@string/faq" />
         <item
             android:id="@+id/nav_new_notification"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_notification"
             android:title="@string/new_notification" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_about_us"
             android:title="About Us" />
         <item
             android:id="@+id/nav_slides"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_contact_us"
             android:title="@string/title_activity_contact_us" />
+        <!--REF:- https://icons8.com/icon/set/faq/ios-->
    <!--
    <item
        android:id="@+id/nav_manage"
