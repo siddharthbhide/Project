@@ -212,13 +212,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/font_size"
-                        android:text="Marks :"
+                        android:text="Non Attempted Questions:"
                         android:textStyle="bold"
                         android:layout_marginTop="30dip"
                         android:textColor="@color/colorLemon"/>
 
                     <TextView
-                        android:id="@+id/txtMarks"
+                        android:id="@+id/txtNonAttempted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/font_size"

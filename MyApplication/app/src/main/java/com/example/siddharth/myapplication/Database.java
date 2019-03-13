@@ -31,50 +31,37 @@ public class Database extends SQLiteOpenHelper {
     public static final String TABLE_Result_Details_Table = "Result_Details";
     public static final String TABLE_Exam_Details_Table = "Exam_Details";*/
 
-
-    //Question_Answere_Table
-    public static final String Col_Question_Id = "Question_Id";
-    public static final String Col_QA_Question = "Question";
-    public static final String Col_QA_Opt1 = "Option_1";
-    public static final String Col_QA_Opt2 = "Option_2";
-    public static final String Col_QA_Opt3 = "Option_3";
-    public static final String Col_QA_Opt4 = "Option_4";
-    public static final String Col_QA_Ans = "Correct_Ans";
-    public static final String Col_QA_Correct_Ans = "Correct_Ans";
-    public static final String Col_QA_Course = "Course";
-    public static final String Col_QA_Student_Ans = "Student_Ans";
-    public static final String Col_QA_Time_Start = "Time_Start";
-    public static final String Col_QA_Time_End = "Time_End";
-    public static final String Col_QA_Last_Question = "Last_Question";
-    private static final String Col_QA_Exam_Id = "Exam_Id";
-
     //Result Details
-    public static final String Col_Result_Exam_Id = "Exam_Id";
-    public static final String Col_Result_Course_Id = "Course_Id";
-    public static final String Col_Result_Course_Level = "Course_Level";
-    public static final String Col_Result_Date = "Exam_Date";
-    public static final String Col_Result_Score = "Exam_Score";
-    public static final String Col_Result_Total_Time = "Total_Time";
-    public static final String Col_Result_Total_Question = "Total_Question";
-    public static final String Col_Result_Attempted_Question = "Attempted_Question";
-    public static final String Col_Result_Non_Attempted_Question = "Non_Attempted_Question";
-    public static final String Col_Result_Correct_Answere = "Correct_Answere";
-    public static final String Col_Result_Wrong_Answere = "Wrong_Answere";
-    public static final String Col_Result_Time_Per_Question = "Time_Per_Question";
+    public static final String Col_Result_Exam_Id = "ExamId";
+    public static final String Col_Result_Course_Id = "Course";
+    public static final String Col_Result_Course_Level = "CourseLevel";
+    public static final String Col_Result_Date = "ExamDate";
+    public static final String Col_Result_Score = "ExamScore";
+    public static final String Col_Result_Total_Time = "TotalTime";
+    public static final String Col_Result_Total_Question = "TotalQuestion";
+    public static final String Col_Result_Attempted_Question = "Attempted";
+    public static final String Col_Result_Non_Attempted_Question = "NonAttempted";
+    public static final String Col_Result_Correct_Answere = "Correct";
+    public static final String Col_Result_Wrong_Answere = "Wrong";
+    public static final String Col_Result_Uploaded = "Uploaded";
 
-    //Exam Details
-    public static final String Col_Exam_Id = "Exam_Id";
-    public static final String Col_Exam_Course_Id = "Course_Id";
-    public static final String Col_Exam_Course_level = "Course_Level";
-    public static final String Col_Exam_Start_Date = "Exam_Satrt_Date";
-    public static final String Col_Exam_End_Date = "Exam_End_Date";
-    private static final String Col_Exam_Name = "Exam_Name";
-    private static final String Col_Exam_Course_Type = "Course_Type";
-    private static final String Col_Exam_Is_Completed = "Is_Completed";
-
+    //History Column names
+    public static final String Col_History_ExamName = "ExamName";
+    public static final String Col_History_Exam_Id = "ExamId";
+    public static final String Col_History_Exam_Type = "ExamType";
+    public static final String Col_History_Course = "Course";
+    public static final String Col_History_Level = "Level";
+    public static final String Col_History_StartDate = "StartDate";
+    public static final String Col_History_EndDate = "EndDate";
+    public static final String Col_History_ExamDate = "ExamDate";
+    public static final String Col_History_Total = "Total";
+    public static final String Col_History_Time = "Time";
+    public static final String Col_History_Attempted_Question = "Attempted";
+    public static final String Col_History_Non_Attempted_Question = "NonAttempted";
+    public static final String Col_History_Correct = "Correct";
+    public static final String Col_History_Wrong = "Wrong";
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //objSQLiteDatabase = getWritableDatabase();
         myContext = context;
         try {
             DB_PATH = context.getDatabasePath(DATABASE_NAME).getPath();
@@ -86,29 +73,10 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-       /* String strQurey;
-        try
-        {
-            strQurey = "create table "+TABLE_NAME+" (id integer,"+
-                    Col_Question+" text,"+
-                    Col_Opt1+" text,"+
-                    Col_Opt2+" text,"+
-                    Col_Opt3+" text,"+
-                    Col_Opt4+" text,"+
-                    Col_Ans+" text,"+
-                    Col_CorrectAns+" text)";
-            db.execSQL(strQurey);
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }*/
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //onCreate(db);
     }
 
     public int numberOfRows(String strTableName) {
@@ -137,7 +105,7 @@ public class Database extends SQLiteOpenHelper {
     public long updateRecord(String strTableName, ContentValues objContentValues,String id) {
         long longRet = -1;
 
-        try {
+        /*try {
             objSQLiteDatabase = getWritableDatabase();
             objSQLiteDatabase.beginTransaction();
             longRet = objSQLiteDatabase.update(strTableName,objContentValues,Col_Question_Id+"=?",new String[] {id});
@@ -146,84 +114,8 @@ public class Database extends SQLiteOpenHelper {
             e.printStackTrace();
         } finally {
             objSQLiteDatabase.endTransaction();
-        }
+        }*/
 
-        return longRet;
-    }
-
-    public void getRecord(Integer id, String question, String opt1,
-                          String opt2, String opt3, String opt4) {
-        /*objSQLiteDatabase = this.getReadableDatabase();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_NAME,
-                new String[]{Col_Id, Col_Opt1, Col_Opt2,Col_Opt3,Col_Opt4,Col_Question},
-                Col_Id + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        // prepare note object
-        id = cursor.getColumnIndex(Col_Id);
-        question = cursor.getString(cursor.getColumnIndex(Col_Question));
-        opt1 = cursor.getString(cursor.getColumnIndex(Col_Opt1));
-        opt2 = cursor.getString(cursor.getColumnIndex(Col_Opt2));
-        opt3 = cursor.getString(cursor.getColumnIndex(Col_Opt3));
-        opt4 = cursor.getString(cursor.getColumnIndex(Col_Opt4));
-        // close the db connection
-        cursor.close();
-        objSQLiteDatabase.close();*/
-    }
-
-
-    public long addExam_Details(ExamDetails objExam_Details) {
-        long longRet = 0;
-        try {
-
-            ContentValues objContentValues = new ContentValues();
-            objContentValues.put(Col_Exam_Id, objExam_Details.getId());
-            objContentValues.put(Col_Exam_Name, objExam_Details.getName());
-            objContentValues.put(Col_Exam_Course_Id, objExam_Details.getCourse());
-            objContentValues.put(Col_Exam_Course_level, objExam_Details.getLevel());
-            objContentValues.put(Col_Exam_Course_Type, objExam_Details.getType());
-            objContentValues.put(Col_Exam_Start_Date, objExam_Details.getStartDate());
-            objContentValues.put(Col_Exam_End_Date, objExam_Details.getEndDate());
-            objContentValues.put(Col_Exam_Is_Completed, objExam_Details.getIsCompleted());
-
-            longRet = addRecord(myContext.getString(R.string.table_exam_details), objContentValues);
-
-
-        } catch (Exception objException) {
-            objException.printStackTrace();
-        }
-        return longRet;
-    }
-
-    public long addQuestion_Answere(ExamQuestionDetails objExamQuestions) {
-        long longRet = 0;
-        try {
-            ContentValues objContentValues = new ContentValues();
-            objContentValues.put(Col_QA_Exam_Id, objExamQuestions.getId());
-            objContentValues.put(Col_QA_Question, objExamQuestions.getDescription());
-            objContentValues.put(Col_QA_Opt1, objExamQuestions.getOptionA());
-            objContentValues.put(Col_QA_Opt2, objExamQuestions.getOptionB());
-            objContentValues.put(Col_QA_Opt3, objExamQuestions.getOptionC());
-            objContentValues.put(Col_QA_Opt4, objExamQuestions.getOptionD());
-            //objContentValues.put(Col_QA_Course, objExamQuestions.getCourse());
-            objContentValues.put(Col_QA_Correct_Ans, objExamQuestions.getAnswer());
-            objContentValues.put(Col_QA_Student_Ans, objExamQuestions.getStudentAns());
-            objContentValues.put(Col_QA_Time_Start, objExamQuestions.getStartTime());
-            objContentValues.put(Col_QA_Time_End, objExamQuestions.getEndTime());
-            objContentValues.put(Col_QA_Exam_Id, objExamQuestions.getExamId());
-            objContentValues.put(Col_QA_Last_Question, objExamQuestions.getLastQuestion());
-
-
-            longRet = addRecord(myContext.getString(R.string.table_question_answere), objContentValues);
-
-        } catch (Exception objException) {
-            objException.printStackTrace();
-        }
         return longRet;
     }
 
@@ -231,7 +123,8 @@ public class Database extends SQLiteOpenHelper {
         long longRet = 0;
         try {
             ContentValues objContentValues = new ContentValues();
-            objContentValues.put(Col_Result_Exam_Id, objResultDetails.getId());
+            int examId = Integer.parseInt(objResultDetails.getExamId());
+            objContentValues.put(Col_Result_Exam_Id, examId);
             objContentValues.put(Col_Result_Course_Id, objResultDetails.getCourseId());
             objContentValues.put(Col_Result_Course_Level, objResultDetails.getCourseLevel());
             objContentValues.put(Col_Result_Date, objResultDetails.getExamDate());
@@ -242,109 +135,13 @@ public class Database extends SQLiteOpenHelper {
             objContentValues.put(Col_Result_Non_Attempted_Question, objResultDetails.getNoAttemptedQuestion());
             objContentValues.put(Col_Result_Correct_Answere, objResultDetails.getCorrectAnswere());
             objContentValues.put(Col_Result_Wrong_Answere, objResultDetails.getWrongAnswere());
-            objContentValues.put(Col_Result_Time_Per_Question, objResultDetails.getTimePerQuestion());
-
+            objContentValues.put(Col_Result_Uploaded, objResultDetails.getUploaded());
             longRet = addRecord(myContext.getString(R.string.table_result_details), objContentValues);
 
         } catch (Exception objException) {
             objException.printStackTrace();
         }
         return longRet;
-    }
-
-    public ArrayList<ExamDetails> getExam_Details(String strSelectQuery) {
-
-        ArrayList<ExamDetails> list = new ArrayList<ExamDetails>();
-        String selectQuery = strSelectQuery;
-        SQLiteDatabase db = this.getReadableDatabase();
-        try {
-
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            try {
-
-                if (cursor.moveToFirst()) {
-                    do {
-                        int nCoulumIndex = 0;
-                        ExamDetails objExam_Details = new ExamDetails();
-
-                        objExam_Details.setId(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setName(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setCourse(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setLevel(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setType(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setStartDate(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setEndDate(cursor.getString(nCoulumIndex++));
-                        objExam_Details.setIsCompleted(cursor.getString(nCoulumIndex++));
-
-                        list.add(objExam_Details);
-                    } while (cursor.moveToNext());
-                }
-
-            } finally {
-                try {
-                    cursor.close();
-                } catch (Exception ignore) {
-                }
-            }
-
-        } finally {
-            try {
-                db.close();
-            } catch (Exception ignore) {
-            }
-        }
-
-        return list;
-    }
-
-    public ArrayList<ExamQuestionDetails> getQuestion_Answere(String strSelectQuery) {
-
-        ArrayList<ExamQuestionDetails> list = new ArrayList<ExamQuestionDetails>();
-        String selectQuery = strSelectQuery;
-        SQLiteDatabase db = this.getReadableDatabase();
-        try {
-
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            try {
-
-                if (cursor.moveToFirst()) {
-                    do {
-                        int nCoulumIndex = 0;
-                        ExamQuestionDetails objExamQuestions = new ExamQuestionDetails();
-
-                        objExamQuestions.setId(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setDescription(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setOptionA(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setOptionB(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setOptionC(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setOptionD(cursor.getString(nCoulumIndex++));
-                        //objExamQuestions.setCourse(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setAnswer(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setStudentAns(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setStartTime(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setEndTime(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setExamId(cursor.getString(nCoulumIndex++));
-                        objExamQuestions.setLastQuestion(cursor.getString(nCoulumIndex++));
-
-                        list.add(objExamQuestions);
-                    } while (cursor.moveToNext());
-                }
-
-            } finally {
-                try {
-                    cursor.close();
-                } catch (Exception ignore) {
-                }
-            }
-
-        } finally {
-            try {
-                db.close();
-            } catch (Exception ignore) {
-            }
-        }
-
-        return list;
     }
 
     public ArrayList<ExamResultDetails> getResult(String strSelectQuery) {
@@ -357,23 +154,22 @@ public class Database extends SQLiteOpenHelper {
             Cursor cursor = db.rawQuery(selectQuery, null);
             try {
 
-                if (cursor.moveToFirst()) {
+                if (cursor.moveToFirst())
+                {
                     do {
-                        int nCoulumIndex = 0;
                         ExamResultDetails objResultDetails = new ExamResultDetails();
-
-                        objResultDetails.setId(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setCourseId(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setCourseLevel(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setExamDate(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setExamScore(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setTotalTime(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setTotalQuestion(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setAttemptedQuestion(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setNoAttemptedQuestion(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setCorrectAnswere(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setWrongAnswere(cursor.getString(nCoulumIndex++));
-                        objResultDetails.setTimePerQuestion(cursor.getString(nCoulumIndex++));
+                        objResultDetails.setExamId(""+cursor.getInt(0));
+                        objResultDetails.setCourseId(cursor.getString(1));
+                        objResultDetails.setCourseLevel(cursor.getString(2));
+                        objResultDetails.setExamDate(cursor.getString(3));
+                        objResultDetails.setExamScore(cursor.getString(4));
+                        objResultDetails.setTotalTime(cursor.getString(5));
+                        objResultDetails.setTotalQuestion(cursor.getString(6));
+                        objResultDetails.setAttemptedQuestion(cursor.getString(7));
+                        objResultDetails.setNoAttemptedQuestion(cursor.getString(8));
+                        objResultDetails.setCorrectAnswere(cursor.getString(9));
+                        objResultDetails.setWrongAnswere(cursor.getString(10));
+                        objResultDetails.setUploaded(cursor.getInt(11));
 
                         list.add(objResultDetails);
                     } while (cursor.moveToNext());
@@ -396,6 +192,92 @@ public class Database extends SQLiteOpenHelper {
         return list;
     }
 
+    public ArrayList<HistoryDetails> getHistoryRecords(String strSelectQuery) {
+
+        ArrayList<HistoryDetails> list = new ArrayList<HistoryDetails>();
+        String selectQuery = strSelectQuery;
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            try {
+
+                if (cursor.moveToFirst())
+                {
+                    do {
+                        HistoryDetails historyRecord = new HistoryDetails();
+
+                        ExamDetails examDetails = new ExamDetails();
+                        examDetails.setId(""+cursor.getInt(0));
+                        examDetails.setName(cursor.getString(1));
+                        examDetails.setCourse(cursor.getString(2));
+                        examDetails.setLevel(cursor.getString(3));
+                        examDetails.setStartDate(cursor.getString(4));
+                        examDetails.setEndDate(cursor.getString(5));
+                        examDetails.setType(cursor.getString(13));
+
+                        ExamResultDetails result = new ExamResultDetails();
+                        result.setExamDate(cursor.getString(6));
+                        result.setTotalQuestion(""+cursor.getInt(7));
+                        result.setAttemptedQuestion(""+cursor.getInt(8));
+                        result.setNoAttemptedQuestion(""+cursor.getInt(9));
+                        result.setCorrectAnswere(""+cursor.getInt(10));
+                        result.setWrongAnswere(""+cursor.getInt(11));
+                        result.setTotalTime(cursor.getString(12));
+
+                        historyRecord.setExamDetails(examDetails);
+                        historyRecord.setResultDetails(result);
+
+                        list.add(historyRecord);
+                    } while (cursor.moveToNext());
+                }
+            } finally {
+                try {
+                    cursor.close();
+                } catch (Exception ignore) {
+                }
+            }
+
+        } finally {
+            try {
+                db.close();
+            } catch (Exception ignore) {
+            }
+        }
+
+        return list;
+    }
+
+    public long addHistory(HistoryDetails history) {
+        long longRet = 0;
+        try {
+            ContentValues objContentValues = new ContentValues();
+            int examId = Integer.parseInt(history.getExamDetails().getId());
+            objContentValues.put(Col_History_Exam_Id, examId);
+            objContentValues.put(Col_History_ExamName, history.getExamDetails().getName());
+            objContentValues.put(Col_History_Exam_Type, history.getExamDetails().getType());
+            objContentValues.put(Col_History_Course, history.getExamDetails().getCourse());
+            objContentValues.put(Col_History_Level, history.getExamDetails().getLevel());
+            objContentValues.put(Col_History_StartDate, history.getExamDetails().getStartDate());
+            objContentValues.put(Col_History_EndDate, history.getExamDetails().getEndDate());
+            objContentValues.put(Col_History_ExamDate, history.getResultDetails().getExamDate());
+            objContentValues.put(Col_History_Total, Integer.parseInt(history.getResultDetails().getTotalQuestion()));
+            objContentValues.put(Col_History_Time, history.getResultDetails().getTotalTime());
+            objContentValues.put(Col_History_Attempted_Question, Integer.parseInt(history.getResultDetails().getAttemptedQuestion()));
+            objContentValues.put(Col_History_Non_Attempted_Question, Integer.parseInt(history.getResultDetails().getNoAttemptedQuestion()));
+            objContentValues.put(Col_History_Correct, Integer.parseInt(history.getResultDetails().getCorrectAnswere()));
+            objContentValues.put(Col_History_Wrong, Integer.parseInt(history.getResultDetails().getWrongAnswere()));
+
+            longRet = addRecord("History", objContentValues);
+
+        } catch (Exception objException) {
+            objException.printStackTrace();
+        }
+        return longRet;
+    }
+
+
+
     //Create a empty database on the system
     public void createDatabase() throws IOException
     {
@@ -405,14 +287,9 @@ public class Database extends SQLiteOpenHelper {
         if(dbExist)
         {
             Log.v("DB Exists", "db exists");
-            // By calling this method here onUpgrade will be called on a
-            // writeable database, but only if the version number has been
-            // bumped
-            //onUpgrade(myDataBase, DATABASE_VERSION_old, DATABASE_VERSION);
         }
 
-        boolean dbExist1 = checkDataBase();
-        if(!dbExist1)
+        if(!dbExist)
         {
             this.getReadableDatabase();
             try
@@ -439,9 +316,11 @@ public class Database extends SQLiteOpenHelper {
         }
         catch(SQLiteException e)
         {
+            Log.e("Database", "SQLiteException : "+e.getLocalizedMessage());
         }
         return checkDB;
     }
+
     //Copies your database from your local assets-folder to the just created empty database in the system folder
     private void copyDataBase() throws IOException
     {
@@ -459,31 +338,5 @@ public class Database extends SQLiteOpenHelper {
         mInput.close();
     }
 
-    public long updateQuestion_Answere(ExamQuestionDetails objExamQuestions) {
-        long longRet = 0;
-        try {
-            ContentValues objContentValues = new ContentValues();
-            objContentValues.put(Col_QA_Exam_Id, objExamQuestions.getId());
-            objContentValues.put(Col_QA_Question, objExamQuestions.getDescription());
-            objContentValues.put(Col_QA_Opt1, objExamQuestions.getOptionA());
-            objContentValues.put(Col_QA_Opt2, objExamQuestions.getOptionB());
-            objContentValues.put(Col_QA_Opt3, objExamQuestions.getOptionC());
-            objContentValues.put(Col_QA_Opt4, objExamQuestions.getOptionD());
-            //objContentValues.put(Col_QA_Course, objExamQuestions.getCourse());
-            objContentValues.put(Col_QA_Correct_Ans, objExamQuestions.getAnswer());
-            objContentValues.put(Col_QA_Student_Ans, objExamQuestions.getStudentAns());
-            objContentValues.put(Col_QA_Time_Start, objExamQuestions.getStartTime());
-            objContentValues.put(Col_QA_Time_End, objExamQuestions.getEndTime());
-            objContentValues.put(Col_QA_Exam_Id, objExamQuestions.getExamId());
-            objContentValues.put(Col_QA_Last_Question, objExamQuestions.getLastQuestion());
-
-
-            longRet = updateRecord(myContext.getString(R.string.table_question_answere), objContentValues,objExamQuestions.getId());
-
-        } catch (Exception objException) {
-            objException.printStackTrace();
-        }
-        return longRet;
-    }
 
 }

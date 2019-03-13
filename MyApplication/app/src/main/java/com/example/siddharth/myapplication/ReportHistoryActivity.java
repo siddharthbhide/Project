@@ -42,24 +42,7 @@ public class ReportHistoryActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
         objDatabase = new Database(getApplicationContext());
         getResultFromDatabase();
-        /*ArrayList<HistoryDetails> items = new ArrayList<>();
-        for (int i=0; i<10; i++)
-        {
-            ExamDetails examDetails = new ExamDetails();
-            examDetails.setName("Exam Name "+i);
-            examDetails.setCourse("Abacus");
-            examDetails.setLevel("FT-L1");
-            examDetails.setStartDate("01-03-2019");
-            examDetails.setEndDate("10-03-2019");
 
-            HistoryDetails details = new HistoryDetails();
-            details.setExamDetails(examDetails);
-            items.add(details);
-        }
-        adaptor = new ExamHistoryAdaptor(getApplicationContext(), items);
-
-        listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adaptor);*/
     }
     public void onClickDisplayReport(View view)
     {
@@ -67,25 +50,17 @@ public class ReportHistoryActivity extends AppCompatActivity
         startActivity(objIntent);
     }
 
-    void initExamHistoryAdaptor(ArrayList<ExamDetails> objExamDetails)
+    void initExamHistoryAdaptor(ArrayList<HistoryDetails> historyDetails)
     {
-        ArrayList<HistoryDetails> items = new ArrayList<>();
-        for (int nIndex=0; nIndex < objExamDetails.size(); nIndex++)
-        {
-            HistoryDetails details = new HistoryDetails();
-            details.setExamDetails(objExamDetails.get(nIndex));
-            items.add(details);
-        }
-        adaptor = new ExamHistoryAdaptor(getApplicationContext(), items);
+        adaptor = new ExamHistoryAdaptor(getApplicationContext(), historyDetails);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adaptor);
     }
 
     void getResultFromDatabase(){
-        String strQuery = "Select * from " + getString(R.string.table_exam_details) +
-                " where Is_Completed = 1";
-        ArrayList<ExamDetails> objExamDetails = new ArrayList<>();
-        objExamDetails = objDatabase.getExam_Details(strQuery);
+        String strQuery = "SELECT * FROM History";
+        ArrayList<HistoryDetails> objExamDetails = new ArrayList<HistoryDetails>();
+        objExamDetails = objDatabase.getHistoryRecords(strQuery);
         initExamHistoryAdaptor(objExamDetails);
     }
 }

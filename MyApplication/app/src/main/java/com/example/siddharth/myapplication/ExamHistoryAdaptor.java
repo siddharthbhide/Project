@@ -44,10 +44,13 @@ public class ExamHistoryAdaptor extends ArrayAdapter<HistoryDetails> {
         examDate.setText(record.examDetails.getStartDate());
 
         ImageButton detailsBtn = (ImageButton)convertView.findViewById(R.id.historyDetails);
+        detailsBtn.setTag(""+position);
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = Integer.parseInt(view.getTag().toString());
                 Intent intent = new Intent(cntx, ReportActivity.class);
+                intent.putExtra("historyRecord", records.get(position));
                 cntx.startActivity(intent);
             }
         });
