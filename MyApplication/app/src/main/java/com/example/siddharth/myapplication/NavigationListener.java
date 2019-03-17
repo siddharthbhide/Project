@@ -9,17 +9,20 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.MenuItem;
 
 public class NavigationListener implements NavigationView.OnNavigationItemSelectedListener
 {
     private Context cntx = null;
     private Activity activity = null;
+    NavigationView navigationView;
 
     public NavigationListener(Activity activity)
     {
         this.cntx = activity.getApplicationContext();
         this.activity = activity;
+        show_hideItem();
     }
 
     @Override
@@ -111,5 +114,18 @@ public class NavigationListener implements NavigationView.OnNavigationItemSelect
         }
 
         return result;
+    }
+
+    public void show_hideItem()
+    {
+        boolean result = isFranchieseLoggedin();
+        navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.nav_level_exam).setVisible(result);
+        nav_Menu.findItem(R.id.nav_practice_paper).setVisible(result);
+        nav_Menu.findItem(R.id.nav_online_exam).setVisible(result);
+        nav_Menu.findItem(R.id.nav_report_history).setVisible(result);
+        nav_Menu.findItem(R.id.nav_rule).setVisible(result);
+
     }
 }

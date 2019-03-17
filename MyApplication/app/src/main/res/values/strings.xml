@@ -38,6 +38,7 @@
     <string name="url_network_list">http://csdfoundation.co.in/admin/webservices/getNetworkList.php</string>
     <string name="url_save_update_student_details">http://csdfoundation.co.in/online_exam/admin/webservices/saveStudentDetails.php</string>
     <string name="url_franchisee_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateFranchieseLogin.php</string>
+    <string name="url_student_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateLogin.php</string>
     <string name="url_validate_exam">http://csdfoundation.co.in/online_exam/admin/webservices/getExamDetails.php</string>
     <string name="url_get_questions">http://csdfoundation.co.in/online_exam/admin/webservices/getQuestionsForExam.php</string>
 

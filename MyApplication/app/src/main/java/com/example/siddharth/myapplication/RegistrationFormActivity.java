@@ -1,10 +1,14 @@
 package com.example.siddharth.myapplication;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -102,6 +107,26 @@ public class RegistrationFormActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener( this.navigationLitener);
         objValidation = CValidation.getInstance();
         initFields();
+
+        if (isStudentRegistered())
+        {
+            objWebServiceManager = WebServiceManager.getInstance(getApplicationContext());
+            if (objWebServiceManager != null)
+            {
+                SharedPreferences sPref = getSharedPreferences(getString( R.string.preferences), 0);
+                if (sPref != null)
+                {
+                    if (sPref.contains(getString(R.string.shared_preferences_student_uname))
+                            && sPref.contains(getString(R.string.shared_preferences_student_passwd)))
+                    {
+                        String uName = sPref.getString(getString(R.string.shared_preferences_student_uname), "000");
+                        String passwd = sPref.getString(getString(R.string.shared_preferences_student_passwd), "000");
+
+                        objWebServiceManager.getLoginStudentDetails(getString(R.string.url_student_login), uName, passwd, this);
+                    }
+                }
+            }
+        }
 
     }
 
@@ -280,7 +305,7 @@ public class RegistrationFormActivity extends AppCompatActivity {
         adapterOfSex.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSex.setAdapter(adapterOfSex);
 
-        listOfCourse.add("Select Item from List");
+        listOfCourse.add("Select Course");
         listOfCourse.add("Abacus");
         listOfCourse.add("Vedic Maths");
         ArrayAdapter adapterOfCourse = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfCourse);
@@ -341,15 +366,12 @@ public class RegistrationFormActivity extends AppCompatActivity {
             String strFranId = prefs.getString(getString( R.string.shared_preferences_franchisee_id), "0");
             strFranId = "63";
             params.put("franId", strFranId);
-
             String strCurrentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
             params.put("dateAdded", strCurrentDate);
-
             params.put("admissionDate", datePickerAdmissionDate.getText().toString());
-
             params.put("name", editStudentname.getText().toString());
-
             params.put("dob", datePickerDOB.getText().toString());
+            params.put("rollNo", editRollno.getText().toString());
 
         }
         catch (Exception objException)
@@ -359,18 +381,33 @@ public class RegistrationFormActivity extends AppCompatActivity {
         return params;
     }
 
+    public boolean isStudentRegistered()
+    {
+        boolean result = false;
+        SharedPreferences sPref = getSharedPreferences(getString( R.string.preferences), 0);
+        if (sPref != null)
+        {
+            if (sPref.contains(getString(R.string.shared_preferences_student_uname))
+                    && sPref.contains(getString(R.string.shared_preferences_student_passwd)))
+            {
+                result = true;
+            }
+        }
+        return result;
+    }
+
 
     public void isStudedntInfromationUpdated(JSONObject jsonobject)
     {
         try
         {
-
             String strResult = jsonobject.getString("result");
             if (0 != strResult.compareToIgnoreCase("0")) {
                 /*check is student register on first time
                 * if he is register 1st time then save his ID and display username and pssword
                 * else do nothing*/
-                 String strStudentId = prefs.getString(getString( R.string.shared_preferences_student_id), "000");
+                 prefs = getSharedPreferences(getString(R.string.preferences), 0);
+                 String strStudentId = prefs.getString(getString(R.string.shared_preferences_student_id), "000");
                 if(0 == strStudentId.compareToIgnoreCase("000")) {
                     String studentId = jsonobject.getString("id");
                     String userName = jsonobject.getString("userName");
@@ -382,6 +419,8 @@ public class RegistrationFormActivity extends AppCompatActivity {
                     editor.putString(getString(R.string.shared_preferences_student_uname), userName);
                     editor.putString(getString(R.string.shared_preferences_student_passwd), passwd);
                     editor.commit();
+
+                    Toast.makeText(getApplicationContext(), "Thanks for Registration", Toast.LENGTH_SHORT).show();
                 }
             }
             else
@@ -445,4 +484,58 @@ public class RegistrationFormActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    public void onProfilePhotoClick(View view)
+    {
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        startActivityForResult(intent, 5001);
+    }
+
+    public void onActivityResult(int requestCode,int resultCode,Intent data)
+    {
+        ImageView profilePhoto = findViewById(R.id.profilePhoto);
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode){
+                case 5001:
+                    Uri selectedImage = data.getData();
+                    profilePhoto.setImageURI(selectedImage);
+                    break;
+            }
+    }
+
+    public void displayStudentInfo(final StudentDetails studentDetails)
+    {
+        if (studentDetails != null)
+        {
+            // Get a handler that can be used to post to the main thread
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+
+            Runnable myRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    editStudentname.setText(studentDetails.getStudentName());
+                    //editRollno.setText(studentDetails.getRollNo());;
+                    editFatherName.setText(studentDetails.getFatherName());
+                    editResidentialAddress.setText(studentDetails.getAddress());
+                    editFatherOccupation.setText(studentDetails.getFatherOccupation());
+                    editMotherOccupation.setText(studentDetails.getMotherOccupation());
+                    editMotherName.setText(studentDetails.getMotherName());
+                    editMobileNumber.setText(studentDetails.getMobileNo());
+                    editEmail.setText(studentDetails.getEmail());
+                    editSchoolName.setText(studentDetails.getSchool());
+                    editStandard.setText(studentDetails.getStd());
+                    spinnerCourseName.setSelection(Integer.parseInt(studentDetails.getCourseId()));
+                    int index = listOfCourseLevel.indexOf(studentDetails.getCourseLevel());
+                     spinnerCourseLevel.setSelection(index);
+                    // spinnerOfFranchiseNameView.setText(studentDetails.getStudentName());
+                     spinnerSex.setSelection(Integer.parseInt(studentDetails.getSex()));
+                    datePickerAdmissionDate.setText(studentDetails.getAdmissionDate());
+                    datePickerDOB.setText(studentDetails.getDateOfBirth());
+                }
+            };
+            mainHandler.post(myRunnable);
+        }
+    }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -19,9 +20,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.android.volley.VolleyLog.TAG;
@@ -75,7 +79,7 @@ public class WebServiceManager {
     }
 
 
-    public void getLoginStudentDetails(String strUrl, final String strUserName, final String strPassword) {
+    public void getLoginStudentDetails(String strUrl, final String strUserName, final String strPassword, final RegistrationFormActivity regForm) {
 
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
@@ -83,8 +87,7 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(String response) {
                         try {
-
-                            CheckStudentLoginDetails(response);
+                            CheckStudentLoginDetails(response, regForm);
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
@@ -109,33 +112,38 @@ public class WebServiceManager {
         objRequestQueue.add(objStringRequest);
     }
 
-    private void CheckStudentLoginDetails(String strResponse) {
+    private void CheckStudentLoginDetails(String strResponse, RegistrationFormActivity regForm) {
 
         jsonobject = null;
         strResult = "";
-
         try {
             jsonobject = new JSONObject(strResponse);
             strResult = jsonobject.getString("result");
-            if (0 == strResult.compareToIgnoreCase("1")) {
-                objStudentDetails.setId(jsonobject.getString("id"));
-                objStudentDetails.setUserName(jsonobject.getString("name"));
-                objStudentDetails.setDateOfBirth(jsonobject.getString("dob"));
-                objStudentDetails.setAdmissionDate(jsonobject.getString("admissionDate"));
-                objStudentDetails.setDateAdded(jsonobject.getString("dateAdded"));
-                objStudentDetails.setFranId(jsonobject.getString("franId"));
-                objStudentDetails.setEmail(jsonobject.getString("email"));
-                objStudentDetails.setCourseLevel(jsonobject.getString("courseLevel"));
-                objStudentDetails.setCourseId(jsonobject.getString("courseId"));
-                objStudentDetails.setStd(jsonobject.getString("std"));
-                objStudentDetails.setSchool(jsonobject.getString("school"));
-                objStudentDetails.setMobileNo(jsonobject.getString("mobileNo"));
-                objStudentDetails.setMotherOccupation(jsonobject.getString("motherOccupation"));
-                objStudentDetails.setFatherOccupation(jsonobject.getString("fatherOccupation"));
-                objStudentDetails.setMotherName(jsonobject.getString("motherName"));
-                objStudentDetails.setAddress(jsonobject.getString("address"));
-                objStudentDetails.setFatherName(jsonobject.getString("fatherName"));
-                objStudentDetails.setSex(jsonobject.getString("sex"));
+            if (strResult.equalsIgnoreCase("1"))
+            {
+                StudentDetails studentDetails = new StudentDetails();
+                studentDetails.setId(jsonobject.getString("id"));
+                studentDetails.setStudentName(jsonobject.getString("name"));
+                //studentDetails.setRollNo(jsonobject.getString("rollNo"));
+                studentDetails.setDateOfBirth(jsonobject.getString("dob"));
+                studentDetails.setAdmissionDate(jsonobject.getString("admissionDate"));
+                studentDetails.setDateAdded(jsonobject.getString("dateAdded"));
+                studentDetails.setFranId(jsonobject.getString("franId"));
+                studentDetails.setEmail(jsonobject.getString("email"));
+                studentDetails.setCourseLevel(jsonobject.getString("courseLevel"));
+                studentDetails.setCourseId(jsonobject.getString("courseId"));
+                studentDetails.setStd(jsonobject.getString("std"));
+                studentDetails.setSchool(jsonobject.getString("school"));
+                studentDetails.setMobileNo(jsonobject.getString("mobileNo"));
+                studentDetails.setMotherOccupation(jsonobject.getString("motherOccupation"));
+                studentDetails.setFatherOccupation(jsonobject.getString("fatherOccupation"));
+                studentDetails.setMotherName(jsonobject.getString("motherName"));
+                studentDetails.setAddress(jsonobject.getString("address"));
+                studentDetails.setFatherName(jsonobject.getString("fatherName"));
+                studentDetails.setSex(jsonobject.getString("sex"));
+
+                regForm.displayStudentInfo(studentDetails);
+
             }
 
         } catch (Exception objException) {
@@ -377,7 +385,7 @@ public class WebServiceManager {
 
     public void showProgressBar(Context context){
         try {
-            objProgress = ProgressDialog.show(context, "Loading","Wait while loading...");
+            objProgress = ProgressDialog.show(context, "Loading","Please wait while loading...");
             objProgress.show();
         }catch (Exception objException) {
             objException.printStackTrace();

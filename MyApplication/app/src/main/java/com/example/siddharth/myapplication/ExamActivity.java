@@ -1,16 +1,24 @@
 package com.example.siddharth.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +42,7 @@ public class ExamActivity extends AppCompatActivity {
     ArrayList<ExamQuestionDetails> listOfQuestions = new ArrayList<ExamQuestionDetails>();
     int nQuestionIndex = 0;
     String strQuestionNumber;
+    ExamDetails examDetails = null;
 
 
     @Override
@@ -43,13 +52,10 @@ public class ExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exam);
 
         listOfQuestions =  getIntent().getParcelableArrayListExtra("questions");
+        this.examDetails = getIntent().getParcelableExtra("exam_details");
 
         InitVariables();
         countDownTimer.start();
-
-        /*objDatabase = new Database(this);
-        objDatabase.addRecord("What is One","1","2","1","3","4","1");
-        objDatabase.getRecord(0,question,opt1,opt2,opt3,opt4);*/
     }
 
     CountDownTimer countDownTimer = new CountDownTimer(1360 * 1000, 1000)
@@ -69,7 +75,6 @@ public class ExamActivity extends AppCompatActivity {
         }
         public void onFinish()
         {
-            //objTimeView.setText("Done !");
             objTimeView.setText("00:00:00");
             cancel();
         }
@@ -86,31 +91,84 @@ public class ExamActivity extends AppCompatActivity {
         radioGroupQuestion = (RadioGroup) findViewById(R.id.RGroup);
         objTimeView.setText("00:00:00");
         objDatabase = new Database(getApplicationContext());
-        //setQuestionInDatabse();
-        //getQuestionFromDatabase();
         displayQuestion(nQuestionIndex);
     }
 
     public void OnClickSave(View view)
     {
-        ExamQuestionDetails objExamQuestions;
-        objExamQuestions = listOfQuestions.get(nQuestionIndex);
-        int selectedId = radioGroupQuestion.getCheckedRadioButtonId();/*get ans from ui*/
-        radioButtonStuAns = (RadioButton) findViewById(selectedId);/*get ans from ui*/
-        String strAns = radioButtonStuAns.getText().toString();/*get ans from ui*/
-        objExamQuestions.setStudentAns(strAns);/*set ans in object*/
-        objDatabase.updateQuestion_Answere(objExamQuestions);/*update data base*/
-        getQuestionFromDatabase();/*Update list with new ans*/
+        if (nQuestionIndex < listOfQuestions.size() && nQuestionIndex >= 0)
+        {
+            ExamQuestionDetails objExamQuestions = listOfQuestions.get(nQuestionIndex);
+            int selectedId = radioGroupQuestion.getCheckedRadioButtonId();
+            RadioButton radioButtonStuAns = (RadioButton) findViewById(selectedId);
+            if (radioButtonStuAns != null)
+            {
+                String strAns = radioButtonStuAns.getText().toString();
+                objExamQuestions.setStudentAns(strAns);
+                Toast.makeText(this, "Alright Saved !", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void OnClickNext(View view) {
-        nQuestionIndex++;
-        displayQuestion(nQuestionIndex);
+        Button nextBtn = (Button)view;
+
+        if (nQuestionIndex < listOfQuestions.size()-1 && nQuestionIndex >= 0)
+        {
+            nQuestionIndex++;
+
+            displayQuestion(nQuestionIndex);
+
+            if (nQuestionIndex == listOfQuestions.size()-1)
+            {
+                nextBtn.setText("Finish");
+            }
+        }
+        else if (nextBtn.getText().toString().equalsIgnoreCase("Finish"))
+        {
+                //store result in DB
+                ExamResultDetails result = new ExamResultDetails();
+                result.setTotalTime(objTimeView.getText().toString());
+                result.setCourseId(examDetails.getCourse());
+                result.setExamId(examDetails.getId());
+                result.setCourseLevel(examDetails.getLevel());
+                result.setStartDate(examDetails.getStartDate());
+                result.setEndDate(examDetails.getEndDate());
+                result.setUploaded(0);
+                result.setExamScore("");
+                result.setTotalQuestion(""+getTotalQuestions());
+                result.setCorrectAnswere(""+getCorrectQuestions());
+                result.setWrongAnswere(""+getWrongQuestions());
+                result.setAttemptedQuestion(""+getAttemptedQuestions());
+                result.setNoAttemptedQuestion(""+getNonAttemptedQuestions());
+                result.setExamName(examDetails.getName());
+                result.setExamType(examDetails.getType());
+                Date today = Calendar.getInstance().getTime();
+
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                String formattedDate = df.format(today);
+                result.setExamDate(formattedDate);
+
+                if(objDatabase != null)
+                {
+                    long dbOperationResult = objDatabase.addResult(result);
+                    if (dbOperationResult > 0)
+                    {
+                        //upload exam result to server on successful
+                        showExamEmoji();
+                    }
+                }
+        }
     }
 
     public void OnClickPrev(View view) {
-        nQuestionIndex--;
-        displayQuestion(nQuestionIndex);
+        if (nQuestionIndex <= listOfQuestions.size() && nQuestionIndex > 0)
+        {
+            Button nextBtn = findViewById(R.id.btnNext);
+            nextBtn.setText("Next");
+            nQuestionIndex--;
+            displayQuestion(nQuestionIndex);
+        }
     }
 
     @Override
@@ -125,55 +183,151 @@ public class ExamActivity extends AppCompatActivity {
         bIsPause = false;
     }
 
-    void setQuestionInDatabse(){
-
-        for (int nIndex = 0; nIndex<5; nIndex++) {
-            ExamQuestionDetails objExamQuestions = new ExamQuestionDetails();
-            //objExamQuestions.setId(Integer.toString(nIndex));
-            objExamQuestions.setDescription(Integer.toString(nIndex));
-            objExamQuestions.setOptionA(Integer.toString(nIndex));
-            objExamQuestions.setOptionB(Integer.toString(nIndex));
-            objExamQuestions.setOptionC(Integer.toString(nIndex));
-            objExamQuestions.setOptionD(Integer.toString(nIndex));
-            objExamQuestions.setExamId(Integer.toString(1));
-            //objExamQuestions.setCourse(Integer.toString(1));
-            objExamQuestions.setAnswer(Integer.toString(1));
-            objExamQuestions.setStudentAns(Integer.toString(1));
-            objExamQuestions.setStartTime(Integer.toString(1));
-            objExamQuestions.setEndTime(Integer.toString(1));
-            objExamQuestions.setLastQuestion(Integer.toString(1));
-
-            objDatabase.addQuestion_Answere(objExamQuestions);
-        }
-    }
-
-    void getQuestionFromDatabase(){
-
-        /*fire a query and get question array in list
-        * before get list clear that list*/
-        String strQuery = "Select * from "+getString(R.string.table_question_answere)+
-                " where Exam_Id = 1";
-        listOfQuestions.clear(); /*Empty list*/
-        listOfQuestions = objDatabase.getQuestion_Answere(strQuery);
-    }
-
     void displayQuestion(int nIndex){
-        ExamQuestionDetails objExamQuestions;
         try {
-            if (nIndex < listOfQuestions.size() && nIndex >= 0) {
+
+            if (nIndex < listOfQuestions.size() && nIndex >= 0)
+            {
+                ExamQuestionDetails objExamQuestions = listOfQuestions.get(nIndex);
+
                 strQuestionNumber = Integer.toString(nIndex+1) + " / " + Integer.toString(listOfQuestions.size());
                 textQuestionNumber.setText(strQuestionNumber);
-                objExamQuestions = listOfQuestions.get(nIndex);
+
                 textViewQuestion.setText(objExamQuestions.getDescription());
                 radioButtonOpt1.setText(objExamQuestions.getOptionA());
                 radioButtonOpt2.setText(objExamQuestions.getOptionB());
                 radioButtonOpt3.setText(objExamQuestions.getOptionC());
                 radioButtonOpt4.setText(objExamQuestions.getOptionD());
+
+                String studentAns = objExamQuestions.getStudentAns();
+                if (studentAns != null && !studentAns.isEmpty())
+                {
+                    if (studentAns.equalsIgnoreCase(objExamQuestions.getOptionA()))
+                    {
+                        radioButtonOpt1.setChecked(true);
+                    }
+                    else if (studentAns.equalsIgnoreCase(objExamQuestions.getOptionB()))
+                    {
+                        radioButtonOpt2.setChecked(true);
+                    }
+                    else if (studentAns.equalsIgnoreCase(objExamQuestions.getOptionC()))
+                    {
+                        radioButtonOpt3.setChecked(true);
+                    }
+                    else if (studentAns.equalsIgnoreCase(objExamQuestions.getOptionD()))
+                    {
+                        radioButtonOpt4.setChecked(true);
+                    }
+                }
+                else
+                {
+                    radioGroupQuestion.clearCheck();
+                }
             }
 
         }catch (Exception objException) {
             objException.printStackTrace();
         }
 
+    }
+
+    int getTotalQuestions()
+    {
+        int result = 0;
+        if (listOfQuestions != null)
+        {
+            result = listOfQuestions.size();
+        }
+        return result;
+    }
+
+    int getAttemptedQuestions()
+    {
+        int result = 0;
+        if (listOfQuestions != null)
+        {
+            for (ExamQuestionDetails item:listOfQuestions)
+            {
+                if (item.getStudentAns() != null && !item.getStudentAns().isEmpty())
+                {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
+
+    int getNonAttemptedQuestions()
+    {
+        int result = 0;
+        if (listOfQuestions != null)
+        {
+            for (ExamQuestionDetails item:listOfQuestions)
+            {
+                if (item.getStudentAns() == null || item.getStudentAns().isEmpty())
+                {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
+
+    int getWrongQuestions()
+    {
+        int result = 0;
+        if (listOfQuestions != null)
+        {
+            for (ExamQuestionDetails item:listOfQuestions)
+            {
+                if (item.getStudentAns() != null && !item.getStudentAns().isEmpty() && item.getAnswer() != null)
+                {
+                    if (!item.getStudentAns().equalsIgnoreCase(item.getAnswer()))
+                        result++;
+                }
+            }
+        }
+        return result;
+    }
+
+    int getCorrectQuestions()
+    {
+        int result = 0;
+        if (listOfQuestions != null)
+        {
+            for (ExamQuestionDetails item:listOfQuestions)
+            {
+                if (item.getStudentAns() != null && !item.getStudentAns().isEmpty() && item.getAnswer() != null)
+                {
+                    if (item.getStudentAns().equalsIgnoreCase(item.getAnswer()))
+                        result++;
+                }
+            }
+        }
+        return result;
+    }
+
+    void showExamEmoji()
+    {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.result_emoji, null);
+        dialogBuilder.setView(dialogView);
+
+        /*EditText editText = (EditText) dialogView.findViewById(R.id.label_field);
+        editText.setText("test label");*/
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "SUBMIT", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                finish();
+                Intent objIntent = new Intent(ExamActivity.this, ExamOptionActivity.class);
+                objIntent.putExtra("exam_type", examDetails.getType());
+                startActivity(objIntent);
+            }
+        });
+        alertDialog.show();
     }
 }

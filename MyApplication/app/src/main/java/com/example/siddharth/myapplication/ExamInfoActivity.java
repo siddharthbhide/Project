@@ -76,6 +76,7 @@ public class ExamInfoActivity extends AppCompatActivity
         {
             Intent intent = new Intent(ExamInfoActivity.this, ExamActivity.class);
             intent.putExtra("questions", questions);
+            intent.putExtra("exam_details", examDetails);
             startActivity(intent);
         }
     }

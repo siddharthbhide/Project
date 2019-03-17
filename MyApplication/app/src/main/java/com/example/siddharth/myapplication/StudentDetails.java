@@ -23,6 +23,18 @@ class StudentDetails
     private String password;
     private String id;
 
+    public String getRollNo()
+    {
+        return rollNo;
+    }
+
+    public void setRollNo(String rollNo)
+    {
+        this.rollNo = rollNo;
+    }
+
+    private String rollNo;
+
     public String getSex() { return this.sex; }
     public void setSex(String strsex) { this.sex = strsex; }
 

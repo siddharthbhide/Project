@@ -202,10 +202,10 @@ public class LoginActivity extends AppCompatActivity {
         try {
             jsonobject = new JSONObject(strResponse);
             strResult = jsonobject.getString("result");
-            if (0 != strResult.compareToIgnoreCase("0")) {
+            if (strResult.equalsIgnoreCase("1")) {
                 String strFranId = jsonobject.getString("id");
                 /*Save data on globally */
-                prefs = getApplicationContext().getSharedPreferences(getString(R.string.shared_preferences_franchisee_id), 0);
+                prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(getString( R.string.shared_preferences_franchisee_id), strFranId);
                 editor.commit(); //important, otherwise it wouldn't save.

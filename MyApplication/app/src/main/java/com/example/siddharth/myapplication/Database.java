@@ -37,6 +37,9 @@ public class Database extends SQLiteOpenHelper {
     public static final String Col_Result_Course_Level = "CourseLevel";
     public static final String Col_Result_Date = "ExamDate";
     public static final String Col_Result_Score = "ExamScore";
+    public static final String Col_Result_StartDate = "StartDate";
+    public static final String Col_Result_EndDate = "EndDate";
+    public static final String Col_Result_ExamType = "ExamType";
     public static final String Col_Result_Total_Time = "TotalTime";
     public static final String Col_Result_Total_Question = "TotalQuestion";
     public static final String Col_Result_Attempted_Question = "Attempted";
@@ -44,6 +47,7 @@ public class Database extends SQLiteOpenHelper {
     public static final String Col_Result_Correct_Answere = "Correct";
     public static final String Col_Result_Wrong_Answere = "Wrong";
     public static final String Col_Result_Uploaded = "Uploaded";
+    public static final String Col_Result_ExamName = "ExamName";
 
     //History Column names
     public static final String Col_History_ExamName = "ExamName";
@@ -136,6 +140,10 @@ public class Database extends SQLiteOpenHelper {
             objContentValues.put(Col_Result_Correct_Answere, objResultDetails.getCorrectAnswere());
             objContentValues.put(Col_Result_Wrong_Answere, objResultDetails.getWrongAnswere());
             objContentValues.put(Col_Result_Uploaded, objResultDetails.getUploaded());
+            objContentValues.put(Col_Result_ExamName, objResultDetails.getExamName());
+            objContentValues.put(Col_Result_StartDate, objResultDetails.getStartDate());
+            objContentValues.put(Col_Result_EndDate, objResultDetails.getEndDate());
+            objContentValues.put(Col_Result_ExamType, objResultDetails.getExamType());
             longRet = addRecord(myContext.getString(R.string.table_result_details), objContentValues);
 
         } catch (Exception objException) {
