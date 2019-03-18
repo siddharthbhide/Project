@@ -41,7 +41,8 @@ public class WebServiceManager {
     List<ExamQuestionDetails> listOfExamQuestions = new ArrayList();
     String strResult;
     JSONObject jsonobject = null;
-    private ProgressDialog objProgress;
+    private ProgressDialog objProgress = null;
+    String strError = "Error In Network Connection.";
 
     private WebServiceManager(Context context) {
         objContext = context;
@@ -79,24 +80,30 @@ public class WebServiceManager {
     }
 
 
-    public void getLoginStudentDetails(String strUrl, final String strUserName, final String strPassword, final RegistrationFormActivity regForm) {
-
+    public void getLoginStudentDetails(String strUrl, final String strUserName, final String strPassword, final RegistrationFormActivity activity) {
+        showProgressBar(activity);
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            CheckStudentLoginDetails(response, regForm);
+                            CheckStudentLoginDetails(response, activity);
+                            stopProgressBar();
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
+                            stopProgressBar();
+
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                Toast.makeText(objContext,strError, Toast.LENGTH_SHORT).show();
+                stopProgressBar();
+
             }
         }) {
             //Post method parameters
@@ -153,6 +160,7 @@ public class WebServiceManager {
 
     public void getExamDetails(String strUrl, final String strExam_Code, final ExamOptionActivity activity) {
 
+        showProgressBar(activity);
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
                 new Response.Listener<String>() {
@@ -163,16 +171,20 @@ public class WebServiceManager {
                             if (activity != null)
                             {
                                 activity.showExamInfo(examDetails);
+                                stopProgressBar();
                             }
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
+                            stopProgressBar();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                Toast.makeText(objContext, strError, Toast.LENGTH_SHORT).show();
+                stopProgressBar();
             }
         }) {
             //Post method parameters
@@ -219,6 +231,7 @@ public class WebServiceManager {
 
     public void getExamQuestion(String strUrl, final String strExamId, final ExamInfoActivity activity) {
 
+        showProgressBar(activity);
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
                 new Response.Listener<String>() {
@@ -229,15 +242,19 @@ public class WebServiceManager {
                             if (activity != null)
                             {
                                 activity.onReceiveQuestions(questions);
+                                stopProgressBar();
                             }
                         } catch (Exception objException) {
                             objException.printStackTrace();
+                            stopProgressBar();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                stopProgressBar();
+                Toast.makeText(objContext, strError, Toast.LENGTH_SHORT).show();
             }
         }) {
             //Post method parameters
@@ -294,6 +311,7 @@ public class WebServiceManager {
 
     public void getNetworkList(String strUrl, final LoginActivity objLoginActivity) {
 
+        showProgressBar(objLoginActivity);
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.GET, strUrl,
                 new Response.Listener<String>() {
@@ -301,15 +319,19 @@ public class WebServiceManager {
                     public void onResponse(String response) {
                         try {
                             objLoginActivity.initFranchiseNameSpinner(response);
+                            stopProgressBar();
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
+                            stopProgressBar();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                stopProgressBar();
+                Toast.makeText(objContext, strError, Toast.LENGTH_SHORT).show();
             }
         });
         objRequestQueue.add(objStringRequest);
@@ -326,17 +348,19 @@ public class WebServiceManager {
 
                             jsonobject = null;
                             jsonobject = new JSONObject(response);
-                            //strResult = jsonobject.getString("result");
                             objRegistrationFormActivity.isStudedntInfromationUpdated(jsonobject);
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
+                            stopProgressBar();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                stopProgressBar();
+                Toast.makeText(objContext, strError, Toast.LENGTH_SHORT).show();
             }
         }) {
             //Post method parameters
@@ -350,6 +374,7 @@ public class WebServiceManager {
 
     public void getFranchiseLogin(String strUrl, final String franchiseUserName, final String franchisePassword,final String franchiseId,final LoginActivity objLoginActivity ) {
 
+        showProgressBar(objLoginActivity);
         objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
         objStringRequest = new StringRequest(Request.Method.POST, strUrl,
                 new Response.Listener<String>() {
@@ -358,15 +383,19 @@ public class WebServiceManager {
                         try {
 
                             objLoginActivity.getResponseAndCallActivity(response);
+                            stopProgressBar();
 
                         } catch (Exception objException) {
                             objException.printStackTrace();
+                            stopProgressBar();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                stopProgressBar();
+                Toast.makeText(objContext, strError, Toast.LENGTH_SHORT).show();
             }
         }) {
             //Post method parameters
@@ -393,7 +422,9 @@ public class WebServiceManager {
     }
 
     public void stopProgressBar(){
-        objProgress.dismiss();
+        if(objProgress!=null) {
+            objProgress.dismiss();
+        }
     }
 
 }

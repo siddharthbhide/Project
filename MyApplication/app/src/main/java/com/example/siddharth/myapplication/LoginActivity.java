@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         objWebServiceManager = WebServiceManager.getInstance(getApplicationContext());
-        objWebServiceManager.showProgressBar(this);
         objWebServiceManager.getNetworkList(getString(R.string.url_network_list),this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
