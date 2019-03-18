@@ -37,7 +37,7 @@ public class ExamActivity extends AppCompatActivity {
     private RadioButton radioButtonStuAns;
 
     long longTest;
-    static int nCounter;
+    int nCounter = 0;
     boolean bIsPause = false;
     ArrayList<ExamQuestionDetails> listOfQuestions = new ArrayList<ExamQuestionDetails>();
     int nQuestionIndex = 0;
