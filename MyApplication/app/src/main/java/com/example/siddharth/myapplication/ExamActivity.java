@@ -155,6 +155,8 @@ public class ExamActivity extends AppCompatActivity {
                     if (dbOperationResult > 0)
                     {
                         //upload exam result to server on successful
+                        WebServiceManager.getInstance(getApplicationContext()).uploadResultToServer(getString(R.string.url_upload_result),result);
+                        //move result to history and mark it uploaded =1
                         showExamEmoji();
                     }
                 }

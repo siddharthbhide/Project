@@ -3,6 +3,9 @@ package com.example.siddharth.myapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ExamResultDetails implements Parcelable {
     private String id;
     private String CourseId;
@@ -17,6 +20,10 @@ public class ExamResultDetails implements Parcelable {
     private String WrongAnswere;
     private String StartDate;
     private String EndDate;
+    private String ExamType;
+    private String ExamName;
+    private String examId;
+    private int Uploaded;
 
     public String getStartDate()
     {
@@ -48,8 +55,6 @@ public class ExamResultDetails implements Parcelable {
         ExamType = examType;
     }
 
-    private String ExamType;
-
     public String getExamName()
     {
         return ExamName;
@@ -65,8 +70,6 @@ public class ExamResultDetails implements Parcelable {
         return CREATOR;
     }
 
-    private String ExamName;
-
     public String getExamId() {
         return examId;
     }
@@ -75,8 +78,6 @@ public class ExamResultDetails implements Parcelable {
         this.examId = examId;
     }
 
-    private String examId;
-
     public int getUploaded() {
         return Uploaded;
     }
@@ -84,8 +85,6 @@ public class ExamResultDetails implements Parcelable {
     public void setUploaded(int uploaded) {
         Uploaded = uploaded;
     }
-
-    private int Uploaded;
 
     public String getId() {
         return id;
@@ -225,4 +224,22 @@ public class ExamResultDetails implements Parcelable {
             return new ExamResultDetails[size];
         }
     };
+
+    Map<String, String> getParams()
+    {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("ExamId", this.examId);
+        params.put("ExamName", this.ExamName);
+        params.put("ExamType", this.ExamType);
+        params.put("Wrong", this.WrongAnswere);
+        params.put("Correct", this.CorrectAnswere);
+        params.put("NoAttempted", this.NoAttemptedQuestion);
+        params.put("Attempted", this.AttemptedQuestion);
+        params.put("TotalQuestion", this.TotalQuestion);
+        params.put("TotalTime", this.TotalTime);
+        params.put("ExamDate", this.ExamDate);
+        params.put("CourseLevel", this.CourseLevel);
+        params.put("CourseId", this.CourseId);
+        return params;
+    }
 }

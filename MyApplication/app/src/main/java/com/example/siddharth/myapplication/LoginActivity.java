@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     public void initFranchiseNameSpinner(String objCSDNetworkList) {
         JSONArray jsonarray = null;
         objCValidation.objHashMapOfFranchiseName.clear();
-        listOfFranchiseName.add("Select Item from List");
+        listOfFranchiseName.add("Select Franchise Name");
         try {
             jsonarray = new JSONArray(objCSDNetworkList);
             for (int i = 0; i < jsonarray.length(); i++) {
@@ -145,29 +145,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
-
     public void OnClickSend(View v) {
         CValidation objValidation = CValidation.getInstance();
         String strFranchiseName = spinnerOfFranchiseNameView.getSelectedItem().toString();
@@ -203,10 +180,15 @@ public class LoginActivity extends AppCompatActivity {
             strResult = jsonobject.getString("result");
             if (strResult.equalsIgnoreCase("1")) {
                 String strFranId = jsonobject.getString("id");
+                String frName = spinnerOfFranchiseNameView.getSelectedItem().toString();
+
                 /*Save data on globally */
                 prefs = getApplicationContext().getSharedPreferences(getString(R.string.preferences), 0);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(getString( R.string.shared_preferences_franchisee_id), strFranId);
+                editor.putString(getString( R.string.shared_preferences_franchisee_name), frName);
+                editor.putString(getString( R.string.shared_preferences_franchisee_user), editTextUserName.getText().toString());
+
                 editor.commit(); //important, otherwise it wouldn't save.
 
                 Intent objIntent = new Intent(this, RegistrationFormActivity.class);

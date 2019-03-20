@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class AboutUsActivity extends AppCompatActivity {
 
@@ -30,7 +32,7 @@ public class AboutUsActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
 
-
+        Utility.getInstance().setHeaderMenu(navigationView, getApplicationContext());
     }
 
 

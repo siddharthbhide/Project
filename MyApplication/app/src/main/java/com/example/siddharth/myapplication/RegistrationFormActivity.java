@@ -105,6 +105,8 @@ public class RegistrationFormActivity extends AppCompatActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener( this.navigationLitener);
+        Utility.getInstance().setHeaderMenu(navigationView, getApplicationContext());
+
         objValidation = CValidation.getInstance();
         initFields();
 
@@ -138,28 +140,6 @@ public class RegistrationFormActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.registration_form, menu);
-        return true;
-    }*/
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void OnClickSend(View view)
@@ -298,7 +278,7 @@ public class RegistrationFormActivity extends AppCompatActivity {
         datePickerAdmissionDate = (EditText) findViewById(R.id.dateAdmissionDate);
         datePickerDOB= (EditText) findViewById(R.id.dateDateOfBirth);
 
-        listOfSex.add("Select Item from List");
+        listOfSex.add("Select Sex");
         listOfSex.add("Male");
         listOfSex.add("Female");
         ArrayAdapter adapterOfSex = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfSex);
@@ -347,7 +327,7 @@ public class RegistrationFormActivity extends AppCompatActivity {
 
         try {
 
-            long intSpinnerSex = spinnerSex.getSelectedItemId()-1;
+            long intSpinnerSex = spinnerSex.getSelectedItemPosition();
             params.put("sex", Long.toString(intSpinnerSex));
 
             params.put("fatherName", editFatherName.getText().toString());
@@ -516,7 +496,7 @@ public class RegistrationFormActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     editStudentname.setText(studentDetails.getStudentName());
-                    //editRollno.setText(studentDetails.getRollNo());;
+                    editRollno.setText(studentDetails.getRollNo());;
                     editFatherName.setText(studentDetails.getFatherName());
                     editResidentialAddress.setText(studentDetails.getAddress());
                     editFatherOccupation.setText(studentDetails.getFatherOccupation());
@@ -526,11 +506,18 @@ public class RegistrationFormActivity extends AppCompatActivity {
                     editEmail.setText(studentDetails.getEmail());
                     editSchoolName.setText(studentDetails.getSchool());
                     editStandard.setText(studentDetails.getStd());
-                    spinnerCourseName.setSelection(Integer.parseInt(studentDetails.getCourseId()));
-                    int index = listOfCourseLevel.indexOf(studentDetails.getCourseLevel());
-                     spinnerCourseLevel.setSelection(index);
-                    // spinnerOfFranchiseNameView.setText(studentDetails.getStudentName());
-                     spinnerSex.setSelection(Integer.parseInt(studentDetails.getSex()));
+                    int index = Integer.parseInt(studentDetails.getCourseId());
+                    spinnerCourseName.setSelection(index+1);
+                    new Handler().postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            int levelIndex = listOfCourseLevel.indexOf(studentDetails.getCourseLevel());
+                            spinnerCourseLevel.setSelection(levelIndex);
+                        }
+                    },1000);
+                    spinnerSex.setSelection(Integer.parseInt(studentDetails.getSex()));
                     datePickerAdmissionDate.setText(studentDetails.getAdmissionDate());
                     datePickerDOB.setText(studentDetails.getDateOfBirth());
                 }

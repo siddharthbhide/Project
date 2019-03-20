@@ -41,10 +41,13 @@
     <string name="url_student_login">http://csdfoundation.co.in/online_exam/admin/webservices/validateLogin.php</string>
     <string name="url_validate_exam">http://csdfoundation.co.in/online_exam/admin/webservices/getExamDetails.php</string>
     <string name="url_get_questions">http://csdfoundation.co.in/online_exam/admin/webservices/getQuestionsForExam.php</string>
+    <string name="url_upload_result">http://csdfoundation.co.in/online_exam/admin/webservices/getQuestionsForExam.php</string>
 
     <string name="about_us_1">CSD Foundation is a children skills development organization, headquartered in Pune, India. Various programs offered by Foundation, have been developed after years of research &amp; testing and are of international standards. These programs focus on developing various skills in children. In the process of developing skills they improve the learning ability of the child. </string>
     <string name="about_us_2">CSD Foundation runs world class skill development programmes those make a significant impact on the mental potential of children. CSD Foundation is managed by a team of professionals. CSD Foundation include Abacus (fast/slow track), Smart handwriting (English - plain &amp; cursive, Devnagari), Smart English, Mid brain activation and Vedic Maths. These scientifically researched programmes, with world-class standards, have proved themselves over the years. </string>
     <string name="shared_preferences_franchisee_id">FranId</string>
+    <string name="shared_preferences_franchisee_name">FrName</string>
+    <string name="shared_preferences_franchisee_user">FrUser</string>
     <string name="shared_preferences_student_id">studId</string>
     <string name="shared_preferences_student_uname">studUserName</string>
     <string name="shared_preferences_student_passwd">studPasswd</string>

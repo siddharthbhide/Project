@@ -131,6 +131,7 @@ public class WebServiceManager {
                 StudentDetails studentDetails = new StudentDetails();
                 studentDetails.setId(jsonobject.getString("id"));
                 studentDetails.setStudentName(jsonobject.getString("name"));
+                studentDetails.setRollNo("001");
                 //studentDetails.setRollNo(jsonobject.getString("rollNo"));
                 studentDetails.setDateOfBirth(jsonobject.getString("dob"));
                 studentDetails.setAdmissionDate(jsonobject.getString("admissionDate"));
@@ -348,6 +349,7 @@ public class WebServiceManager {
 
                             jsonobject = null;
                             jsonobject = new JSONObject(response);
+                            //strResult = jsonobject.getString("result");
                             objRegistrationFormActivity.isStudedntInfromationUpdated(jsonobject);
 
                         } catch (Exception objException) {
@@ -426,6 +428,44 @@ public class WebServiceManager {
             objProgress.dismiss();
         }
     }
+
+
+    public void uploadResultToServer(String strUrl, final ExamResultDetails resultDetails) {
+
+        objRequestQueue = WebServiceManager.getInstance(objContext).getRequestQueue();
+        objStringRequest = new StringRequest(Request.Method.POST, strUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            jsonobject = null;
+                            jsonobject = new JSONObject(response);
+                            //move result to history
+                        } catch (Exception objException) {
+                            objException.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            //Post method parameters
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = null;
+                if (resultDetails != null)
+                {
+                    params = resultDetails.getParams();
+                }
+                return params;
+            }
+        };
+        objRequestQueue.add(objStringRequest);
+    }
+
 
 }
 

@@ -34,6 +34,7 @@ public class ReportActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
+        Utility.getInstance().setHeaderMenu(navigationView, getApplicationContext());
 
         setupView();
     }

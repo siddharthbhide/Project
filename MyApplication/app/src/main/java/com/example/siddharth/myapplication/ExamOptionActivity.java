@@ -44,6 +44,7 @@ public class ExamOptionActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this.navigationLitener);
+        Utility.getInstance().setHeaderMenu(navigationView, getApplicationContext());
 
         String examType = this.getIntent().getStringExtra("exam_type");
         this.examType = examType;
