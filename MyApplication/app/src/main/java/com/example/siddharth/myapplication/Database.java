@@ -284,7 +284,41 @@ public class Database extends SQLiteOpenHelper {
         return longRet;
     }
 
+    public ArrayList<String> getStudentName(String strSelectQuery) {
 
+        ArrayList<String> list = new ArrayList<String>();
+        String selectQuery = strSelectQuery;
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            try {
+
+                if (cursor.moveToFirst())
+                {
+                    do {
+                        String strStudentName;
+                        strStudentName = cursor.getString(0);
+                        list.add(strStudentName);
+                    } while (cursor.moveToNext());
+                }
+
+            } finally {
+                try {
+                    cursor.close();
+                } catch (Exception ignore) {
+                }
+            }
+
+        } finally {
+            try {
+                db.close();
+            } catch (Exception ignore) {
+            }
+        }
+
+        return list;
+    }
 
     //Create a empty database on the system
     public void createDatabase() throws IOException

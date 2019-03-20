@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dip"
+    android:background="@drawable/rounded_bg"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".StudentLoginActivity">
+
+    <TextView
+        android:id="@+id/textViewStudentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
+        android:text="Student Name"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size" />
+
+    <Spinner
+        android:id="@+id/spinnerOfStudentName"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@color/colorGrey"
+        android:textSize="@dimen/font_size" />
+
+    <TextView
+        android:id="@+id/textViewStudentPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/franchise_Password"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_below="@id/textViewFranchisePassword"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@color/colorGrey"
+        android:ems="10"
+        android:hint=" Password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_size" />
+
+
+
+    <Button
+        android:id="@+id/btnSend"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip"
+        android:background="@color/colorPrimary"
+        android:onClick="OnClickSend"
+        android:text="@string/LogIn"
+        android:textColor="#FFF"
+        android:textSize="@dimen/font_size" />
+
+    <Button
+        android:id="@+id/btnAddNewUser"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip"
+        android:background="@null"
+        android:drawableTop="@android:drawable/ic_menu_add"
+        android:onClick="OnClickAddNewUser"
+        android:text="Add New User"
+        android:textColor="#FFF"
+        android:textSize="@dimen/font_size"/>
+
+
+</LinearLayout>
